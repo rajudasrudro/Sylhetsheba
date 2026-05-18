@@ -1,0 +1,24 @@
+{
+  "name": "সেবাকোষ — সিলেট বিভাগ",
+  "short_name": "সেবাকোষ",
+  "description": "সিলেট বিভাগ পাবলিক সেবা ড্যাশবোর্ড",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef2f7",
+  "theme_color": "#0d5c9e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192x192/0d5c9e/ffffff?text=সেবা",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512x512/0d5c9e/ffffff?text=সেবা",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["government", "utilities"],
+  "lang": "bn"
+}
