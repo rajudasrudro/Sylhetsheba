@@ -7,7 +7,6 @@
   <meta name="description" content="সিলেটসেবা — সিলেট বিভাগ পাবলিক সেবা ড্যাশবোর্ড"/>
   <title>সিলেটসেবা | Sylhet Sheba</title>
   <link rel="manifest" href="manifest.json"/>
-  <!-- Google Maps -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQEmDDn6WSiGXeQEWhq2T2fxO5j20HFco&language=bn"></script>
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -16,15 +15,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet"/>
   <script src="data.js"></script>
   <style>
-    /* ══ v3.0.0 ══ */
-    :root{
-      --p:#0d5c9e;--pd:#0a4578;--acc:#e8473f;
-      --bg:#eef2f7;--sur:#fff;--brd:#dde4ed;
-      --tx:#1a2639;--mu:#5a6a80;
-      --sh1:0 1px 4px rgba(0,0,0,.07);
-      --sh2:0 4px 16px rgba(0,0,0,.10);
-      --r:10px;
-    }
+    /* ══ v4.0.0 ══ */
+    :root{--p:#0d5c9e;--pd:#0a4578;--acc:#e8473f;--bg:#eef2f7;--sur:#fff;--brd:#dde4ed;--tx:#1a2639;--mu:#5a6a80;--sh1:0 1px 4px rgba(0,0,0,.07);--sh2:0 4px 16px rgba(0,0,0,.10);--r:10px;}
     body.disaster{--p:#b71c1c;--pd:#7f0000;--bg:#fff5f5;--brd:#fecaca;}
     body.disaster .nav{background:linear-gradient(135deg,#b71c1c,#e53935)!important;}
     body.disaster .abar{background:linear-gradient(135deg,#7f0000,#b71c1c)!important;}
@@ -33,7 +25,9 @@
     body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--tx);font-size:15px;line-height:1.65}
     ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:#bcc5d0;border-radius:3px}
 
-    /* ══ ALERT BAR ══ */
+    .disaster-banner{background:#7f0000;color:#fff;text-align:center;padding:7px;font-size:13px;font-weight:700;position:sticky;top:0;z-index:1200;animation:dblink 1.2s infinite}
+    @keyframes dblink{0%,100%{opacity:1}50%{opacity:.8}}
+
     .abar{background:linear-gradient(135deg,#b71c1c,#e53935);color:#fff;padding:8px 14px;position:sticky;top:0;z-index:1100;box-shadow:0 2px 8px rgba(183,28,28,.35)}
     .abar-top{display:flex;align-items:center;gap:10px;font-size:13px}
     .mw{flex:1;overflow:hidden;white-space:nowrap;min-width:0}
@@ -43,8 +37,7 @@
     .cbtn{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:#fff;font-family:'Hind Siliguri',sans-serif;font-weight:700;font-size:12px;padding:4px 12px;border-radius:20px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .2s}
     .cbtn:hover{background:rgba(255,255,255,.30)}
 
-    /* ══ NAVBAR ══ */
-    .nav{background:linear-gradient(135deg,#0d5c9e 0%,#1976d2 100%);color:#fff;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:62px;box-shadow:var(--sh2)}
+    .nav{background:linear-gradient(135deg,#0d5c9e,#1976d2);color:#fff;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:62px;box-shadow:var(--sh2)}
     .nbrand{display:flex;align-items:center;gap:11px}
     .nlogo{width:42px;height:42px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
     .ntxt h1{font-family:'Noto Serif Bengali',serif;font-size:15px;font-weight:700;line-height:1.25}
@@ -54,29 +47,23 @@
     .alink:hover{background:rgba(255,255,255,.25)}
     .ver-badge{font-size:10px;opacity:.45;padding:2px 6px;border:1px solid rgba(255,255,255,.2);border-radius:10px}
 
-    /* ══ LAYOUT ══ */
     .wrap{max-width:1400px;margin:0 auto;padding:18px 14px;display:grid;grid-template-columns:285px 1fr;gap:18px;align-items:start}
-
-    /* ══ SIDEBAR ══ */
     .sidebar{display:flex;flex-direction:column;gap:12px;position:sticky;top:128px}
     .card{background:var(--sur);border-radius:var(--r);box-shadow:var(--sh1);border:1px solid var(--brd);overflow:hidden}
     .ch{background:var(--p);color:#fff;padding:10px 14px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px}
     .cb{padding:13px}
 
-    /* ══ FORM ELEMENTS ══ */
     .finput,.fsel,.farea{width:100%;padding:9px 11px;border:1.5px solid var(--brd);border-radius:8px;font-family:'Hind Siliguri',sans-serif;font-size:13px;color:var(--tx);background:#fff;outline:none;transition:border-color .2s;resize:vertical}
     .fsel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%235a6a80' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;background-size:17px;padding-right:30px;appearance:none}
     .finput:focus,.fsel:focus,.farea:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(13,92,158,.12)}
     .fl{font-size:12px;font-weight:600;color:var(--mu);margin-bottom:4px;display:block}
     .fg{margin-bottom:10px}.fg:last-child{margin-bottom:0}
 
-    /* ══ STATS ══ */
     .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
     .sc{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);padding:11px 13px;box-shadow:var(--sh1);display:flex;align-items:center;gap:10px}
     .si{width:36px;height:36px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
     .sinfo p{font-size:11px;color:var(--mu)}.sinfo strong{font-size:19px;font-weight:700}
 
-    /* ══ TABS ══ */
     .dtabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:13px}
     .dtab{padding:5px 13px;border:1.5px solid var(--brd);border-radius:20px;background:#fff;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;transition:all .2s}
     .dtab:hover{border-color:var(--p);color:var(--p)}
@@ -85,7 +72,6 @@
     .tbtn{padding:7px 11px;border:none;background:transparent;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:500;color:var(--mu);cursor:pointer;border-radius:7px 7px 0 0;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s}
     .tbtn:hover{color:var(--p)}.tbtn.act{color:var(--p);border-bottom-color:var(--p);font-weight:700}
 
-    /* ══ SERVICE CARDS ══ */
     .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px}
     .scard{background:var(--sur);border-radius:var(--r);border:1px solid var(--brd);box-shadow:var(--sh1);overflow:hidden;transition:transform .2s,box-shadow .2s}
     .scard:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
@@ -101,24 +87,15 @@
     .badge-o{background:#dcfce7;color:#15803d;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
     .badge-c{background:#fee2e2;color:#dc2626;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
 
-    /* ══ STARS ══ */
     .stars{display:flex;gap:2px;cursor:pointer}
     .star{font-size:16px;color:#d1d5db;transition:color .12s;line-height:1;user-select:none}
     .star.on{color:#f59e0b}
 
-    /* ══ MAP ══ */
     #gmap{width:100%;height:460px;border-radius:var(--r);overflow:hidden;border:1px solid var(--brd)}
     .mleg{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
     .mli{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--mu)}
     .mld{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 
-    /* ══ COMING SOON ══ */
-    .coming-soon{text-align:center;padding:60px 20px;background:linear-gradient(135deg,#fef2f2,#fff5f5);border-radius:var(--r);border:2px dashed #fca5a5}
-    .coming-soon .cs-icon{font-size:54px;margin-bottom:12px}
-    .coming-soon h2{font-family:'Noto Serif Bengali',serif;font-size:22px;font-weight:700;color:#dc2626;margin-bottom:8px}
-    .coming-soon p{font-size:14px;color:var(--mu);max-width:340px;margin:0 auto}
-
-    /* ══ BUTTONS ══ */
     .btn-p{display:inline-flex;align-items:center;gap:6px;background:var(--p);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
     .btn-p:hover{background:var(--pd)}
     .btn-s{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--p);border:2px solid var(--p);border-radius:8px;padding:8px 18px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
@@ -126,7 +103,6 @@
     .btn-d{display:inline-flex;align-items:center;gap:6px;background:#e53935;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
     .btn-d:hover{background:#c62828}
 
-    /* ══ MISC ══ */
     .stitle{font-family:'Noto Serif Bengali',serif;font-size:18px;font-weight:700;color:var(--p);margin-bottom:3px}
     .ssub{font-size:13px;color:var(--mu);margin-bottom:13px}
     .empty{text-align:center;padding:44px 20px;color:var(--mu)}
@@ -144,20 +120,50 @@
     .toast{position:fixed;bottom:22px;right:22px;background:#1a2639;color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.25);z-index:9999;animation:si .3s ease}
     @keyframes si{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
 
-    /* ══ INFO TABLE (Union/School etc) ══ */
     .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
     .info-card{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);padding:14px;box-shadow:var(--sh1)}
     .info-card h4{font-size:14px;font-weight:600;margin-bottom:4px;color:var(--p)}
     .info-card p{font-size:12px;color:var(--mu);margin-bottom:3px}
     .info-card a{font-size:12px;color:var(--p);font-weight:600}
 
-    /* ══ DISASTER BANNER ══ */
-    .disaster-banner{background:#7f0000;color:#fff;text-align:center;padding:7px;font-size:13px;font-weight:700;position:sticky;top:0;z-index:1200;animation:dblink 1.2s infinite}
-    @keyframes dblink{0%,100%{opacity:1}50%{opacity:.8}}
+    .coming-soon{text-align:center;padding:60px 20px;background:linear-gradient(135deg,#fef2f2,#fff5f5);border-radius:var(--r);border:2px dashed #fca5a5}
+    .coming-soon .cs-icon{font-size:54px;margin-bottom:12px}
+    .coming-soon h2{font-family:'Noto Serif Bengali',serif;font-size:22px;font-weight:700;color:#dc2626;margin-bottom:8px}
+    .coming-soon p{font-size:14px;color:var(--mu);max-width:340px;margin:0 auto}
+
+    /* ══ WEATHER CARD ══ */
+    .weather-card{background:linear-gradient(135deg,#0d5c9e,#1976d2);color:#fff;border-radius:var(--r);padding:16px;margin-bottom:14px;box-shadow:var(--sh2)}
+    .weather-main{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .weather-temp{font-size:48px;font-weight:700;line-height:1}
+    .weather-info h3{font-size:16px;font-weight:700;margin-bottom:3px}
+    .weather-info p{font-size:13px;opacity:.85}
+    .weather-details{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;border-top:1px solid rgba(255,255,255,.2);padding-top:12px}
+    .wd-item{text-align:center}
+    .wd-item .val{font-size:15px;font-weight:700}
+    .wd-item .lbl{font-size:10px;opacity:.75;margin-top:2px}
+
+    /* ══ FLOOD ALERT ══ */
+    .flood-card{border-radius:var(--r);padding:14px;margin-bottom:14px}
+    .flood-card.safe{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #86efac}
+    .flood-card.warn{background:linear-gradient(135deg,#fef9c3,#fef08a);border:1px solid #fde047}
+    .flood-card.danger{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fca5a5}
+    .flood-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+    .flood-header h3{font-size:15px;font-weight:700}
+    .river-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:13px}
+    .river-row:last-child{border-bottom:none}
+    .river-level{font-weight:700;font-size:13px}
+    .prog-wrap{flex:1;margin:0 10px;height:6px;background:rgba(0,0,0,.1);border-radius:10px;overflow:hidden}
+    .prog-fill{height:100%;border-radius:10px;transition:width .4s}
+
+    /* ══ VISITOR COUNTER ══ */
+    .counter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+    .counter-card{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);padding:14px;text-align:center;box-shadow:var(--sh1)}
+    .counter-card .num{font-size:26px;font-weight:700;color:var(--p);font-family:'Noto Serif Bengali',serif}
+    .counter-card .lbl{font-size:11px;color:var(--mu);margin-top:3px}
 
     /* ══ PRINT ══ */
     @media print{
-      .abar,.nav,.sidebar,.mob-sb-wrap,.dtabs,.tabs,.btn-p,.btn-s,.btn-d,.toast,.moverlay{display:none!important}
+      .abar,.nav,.sidebar,.mob-sb-wrap,.dtabs,.tabs,.btn-p,.btn-s,.btn-d,.toast,.moverlay,.disaster-banner{display:none!important}
       .wrap{grid-template-columns:1fr!important;padding:0!important}
       .scard{break-inside:avoid;box-shadow:none!important;border:1px solid #ccc!important}
       body{background:#fff!important;font-size:12px!important}
@@ -165,15 +171,14 @@
 
     /* ══ MOBILE ══ */
     @media(max-width:960px){
-      .wrap{grid-template-columns:1fr;padding:14px 10px}
-      /* On mobile: main content first, sidebar second */
-      .wrap{display:flex;flex-direction:column}
+      .wrap{display:flex;flex-direction:column;padding:14px 10px}
       .main-content{order:1}
       .mob-sb-wrap{order:2;margin-top:16px}
       .sidebar{position:static;top:0}
       .stats{grid-template-columns:repeat(2,1fr)}
       .sgrid{grid-template-columns:1fr}
       .info-grid{grid-template-columns:1fr}
+      .weather-details{grid-template-columns:repeat(3,1fr)}
     }
     @media(max-width:640px){
       .nav{padding:0 12px;height:56px}
@@ -182,8 +187,8 @@
       .nlogo{width:36px;height:36px;font-size:18px}
       .ver-badge{display:none}
       .stats{grid-template-columns:repeat(2,1fr)}
+      .nmeta .date-txt{display:none}
     }
-    /* Desktop: normal 2-col */
     @media(min-width:961px){
       .wrap{display:grid;grid-template-columns:285px 1fr}
       .main-content{order:2}
@@ -195,47 +200,46 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-/* ══ v3.0.0 ══ */
-const VER="v3.0.0";
-const KEYS={services:"pub_services",donors:"pub_donors",alerts:"pub_alerts",reports:"pub_reports",volunteers:"pub_volunteers",ratings:"pub_ratings",disaster:"disaster_mode"};
-const GMAP_KEY="AIzaSyDQEmDDn6WSiGXeQEWhq2T2fxO5j20HFco";
+/* ══ v4.0.0 ══ */
+const VER="v4.0.0";
+const KEYS={services:"pub_services",alerts:"pub_alerts",reports:"pub_reports",volunteers:"pub_volunteers",ratings:"pub_ratings",disaster:"disaster_mode",visits:"pub_visits",pageviews:"pub_pageviews"};
+const OWM_KEY="4b8bcdb56b1fe04a36c5c23b39574019"; /* OpenWeatherMap free key */
 
-/* bilingual search map */
-const EN_BN={
-  "hospital":"হাসপাতাল","police":"থানা","fire":"ফায়ার সার্ভিস","ambulance":"অ্যাম্বুলেন্স",
-  "sylhet":"সিলেট","moulvibazar":"মৌলভীবাজার","moulvibazar":"মৌলভীবাজার",
-  "habiganj":"হবিগঞ্জ","sunamganj":"সুনামগঞ্জ","open":"open","closed":"closed",
-  "emergency":"জরুরি","bed":"শয্যা","duty":"দায়িত্ব"
-};
-
-function translateQuery(q){
-  const low=q.toLowerCase();
-  return EN_BN[low]||q;
-}
-
+/* ── bilingual search ── */
+const EN_BN={"hospital":"হাসপাতাল","police":"থানা","fire":"ফায়ার সার্ভিস","ambulance":"অ্যাম্বুলেন্স","sylhet":"সিলেট","moulvibazar":"মৌলভীবাজার","habiganj":"হবিগঞ্জ","sunamganj":"সুনামগঞ্জ","emergency":"জরুরি","open":"open","closed":"closed"};
 function matchService(s,q){
   if(!q)return true;
   const low=q.toLowerCase();
-  const bn=translateQuery(low);
-  const fields=[s.name,s.upazila,s.district,s.phone,s.type,s.dutyOfficer,s.address].map(v=>(v||"").toLowerCase());
-  return fields.some(f=>f.includes(low)||f.includes(bn));
+  const bn=EN_BN[low]||q;
+  return[s.name,s.upazila,s.district,s.phone,s.type,s.dutyOfficer,s.address].some(v=>(v||"").toLowerCase().includes(low)||(v||"").toLowerCase().includes(bn.toLowerCase()));
 }
 
-function haversine(lat1,lon1,lat2,lon2){
-  const R=6371,dLat=(lat2-lat1)*Math.PI/180,dLon=(lon2-lon1)*Math.PI/180;
-  const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
-  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
-}
+function haversine(a,b,c,d){const R=6371,dL=(c-a)*Math.PI/180,dG=(d-b)*Math.PI/180;const x=Math.sin(dL/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dG/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));}
 
-/* ── Date formatter ── */
+/* ── Bangla date ── */
 function getBanglaDate(){
   const d=new Date();
   const days=["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
   const months=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
-  const suffixes=["","লা","রা","রা","ঠা","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","শে","শে","শে","শে","শে","শে","শে","শে","শে","শে","শে","শে","শে"];
-  const day=d.getDay(),date=d.getDate(),month=d.getMonth(),year=d.getFullYear();
-  const suf=suffixes[date]||"";
-  return `আজ ${days[day]}, ${date}${suf} ${months[month]} ${year}`;
+  const sfx=["","লা","রা","রা","ঠা","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","ই","শে","শে","শে","শে","শে","শে","শে","শে","শে","শে","শে","শে","শে"];
+  const dt=d.getDate();
+  return`আজ ${days[d.getDay()]}, ${dt}${sfx[dt]||""} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+/* ── visitor counter ── */
+function trackVisit(){
+  const today=new Date().toISOString().slice(0,10);
+  const visits=loadData(KEYS.visits,{total:0,today:0,date:""});
+  const pv=loadData(KEYS.pageviews,[]);
+  if(visits.date!==today){visits.today=0;visits.date=today;}
+  visits.total+=1;visits.today+=1;
+  saveData(KEYS.visits,visits);
+  const dayKey=today;
+  const existing=pv.find(p=>p.d===dayKey);
+  if(existing)existing.v+=1;else pv.push({d:dayKey,v:1});
+  if(pv.length>30)pv.shift();
+  saveData(KEYS.pageviews,pv);
+  return visits;
 }
 
 /* ── Data hook ── */
@@ -246,26 +250,153 @@ function useAppData(){
   const[disaster,setDisaster]=React.useState(()=>loadData(KEYS.disaster,false));
   const[lastUpdate,setLastUpdate]=React.useState(new Date());
   React.useEffect(()=>{
-    const sync=()=>{
-      setServices(loadData(KEYS.services,DEFAULT_SERVICES));
-      setAlerts(loadData(KEYS.alerts,DEFAULT_ALERTS));
-      setRatings(loadData(KEYS.ratings,{}));
-      const d=loadData(KEYS.disaster,false);
-      setDisaster(d);
-      document.body.classList.toggle("disaster",d);
-      setLastUpdate(new Date());
-    };
-    window.addEventListener("storage",sync);
-    const id=setInterval(sync,2000);
+    const sync=()=>{setServices(loadData(KEYS.services,DEFAULT_SERVICES));setAlerts(loadData(KEYS.alerts,DEFAULT_ALERTS));setRatings(loadData(KEYS.ratings,{}));const d=loadData(KEYS.disaster,false);setDisaster(d);document.body.classList.toggle("disaster",d);setLastUpdate(new Date());};
+    window.addEventListener("storage",sync);const id=setInterval(sync,2000);
     return()=>{window.removeEventListener("storage",sync);clearInterval(id);};
   },[]);
   React.useEffect(()=>{document.body.classList.toggle("disaster",disaster);},[disaster]);
   return{services,alerts,ratings,setRatings,disaster,lastUpdate};
 }
 
-function Toast({msg,onClose}){
-  React.useEffect(()=>{const t=setTimeout(onClose,3200);return()=>clearTimeout(t);},[]);
-  return <div className="toast">{msg}</div>;
+/* ── Toast ── */
+function Toast({msg,onClose}){React.useEffect(()=>{const t=setTimeout(onClose,3200);return()=>clearTimeout(t);},[]);return<div className="toast">{msg}</div>;}
+
+/* ══ WEATHER & FLOOD ══ */
+function WeatherFlood({lang}){
+  const[wx,setWx]=React.useState(null);
+  const[loading,setLoading]=React.useState(true);
+
+  /* Sylhet coords */
+  React.useEffect(()=>{
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=24.9045&lon=91.8611&appid=${OWM_KEY}&units=metric&lang=bn`)
+      .then(r=>r.json()).then(d=>{setWx(d);setLoading(false);})
+      .catch(()=>setLoading(false));
+  },[]);
+
+  /* Static river data (real API would need govt BWDB) */
+  const rivers=[
+    {name:"সুরমা নদী, সিলেট",current:9.2,danger:8.5,unit:"মি"},
+    {name:"কুশিয়ারা নদী, জকিগঞ্জ",current:7.8,danger:8.0,unit:"মি"},
+    {name:"মনু নদী, মৌলভীবাজার",current:5.1,danger:6.2,unit:"মি"},
+    {name:"সুরমা নদী, সুনামগঞ্জ",current:8.9,danger:8.5,unit:"মি"},
+  ];
+
+  const getFloodStatus=(cur,dan)=>{
+    const r=cur/dan;
+    if(r>=1)return{cls:"danger",icon:"🔴",lbl:lang==="bn"?"বিপদসীমার উপরে":"Above danger level",clr:"#dc2626"};
+    if(r>=0.85)return{cls:"warn",icon:"🟡",lbl:lang==="bn"?"সতর্কতা":"Warning",clr:"#92400e"};
+    return{cls:"safe",icon:"🟢",lbl:lang==="bn"?"স্বাভাবিক":"Normal",clr:"#15803d"};
+  };
+
+  const wxIcon={
+    "Clear":"☀️","Clouds":"⛅","Rain":"🌧️","Drizzle":"🌦️",
+    "Thunderstorm":"⛈️","Snow":"❄️","Mist":"🌫️","Haze":"🌫️","Fog":"🌫️"
+  };
+
+  return(<div>
+    {/* Weather Card */}
+    {loading&&<div className="weather-card"><p style={{opacity:.8}}>{lang==="bn"?"আবহাওয়া তথ্য লোড হচ্ছে...":"Loading weather..."}</p></div>}
+    {!loading&&!wx&&<div className="weather-card"><p style={{opacity:.8}}>{lang==="bn"?"আবহাওয়া তথ্য পাওয়া যায়নি।":"Weather data unavailable."}</p></div>}
+    {wx&&wx.main&&(
+      <div className="weather-card">
+        <div className="weather-main">
+          <div>
+            <div className="weather-temp">{Math.round(wx.main.temp)}°C</div>
+            <p style={{fontSize:"13px",opacity:.8,marginTop:"4px"}}>{wxIcon[wx.weather?.[0]?.main]||"🌡️"} {wx.weather?.[0]?.description||""}</p>
+          </div>
+          <div className="weather-info">
+            <h3>🏛️ {lang==="bn"?"সিলেট বিভাগ":"Sylhet Division"}</h3>
+            <p>{lang==="bn"?"অনুভূত তাপমাত্রা":"Feels like"}: {Math.round(wx.main.feels_like)}°C</p>
+            <p style={{fontSize:"11px",marginTop:"4px",opacity:.7}}>{lang==="bn"?"উৎস: OpenWeatherMap":"Source: OpenWeatherMap"}</p>
+          </div>
+        </div>
+        <div className="weather-details">
+          <div className="wd-item"><div className="val">{wx.main.humidity}%</div><div className="lbl">{lang==="bn"?"আর্দ্রতা":"Humidity"}</div></div>
+          <div className="wd-item"><div className="val">{Math.round((wx.wind?.speed||0)*3.6)} km/h</div><div className="lbl">{lang==="bn"?"বায়ু":"Wind"}</div></div>
+          <div className="wd-item"><div className="val">{wx.visibility?Math.round(wx.visibility/1000)+"km":"—"}</div><div className="lbl">{lang==="bn"?"দৃশ্যমানতা":"Visibility"}</div></div>
+        </div>
+      </div>
+    )}
+
+    {/* Flood Status */}
+    <p className="stitle" style={{marginBottom:"10px"}}>🌊 {lang==="bn"?"নদীর পানির স্তর":"River Water Levels"}</p>
+    {rivers.map((r,i)=>{
+      const st=getFloodStatus(r.current,r.danger);
+      const pct=Math.min(Math.round(r.current/r.danger*100),100);
+      return(
+        <div key={i} className={`flood-card ${st.cls}`}>
+          <div className="flood-header">
+            <span style={{fontSize:"20px"}}>{st.icon}</span>
+            <div>
+              <h3 style={{color:st.clr}}>{r.name}</h3>
+              <p style={{fontSize:"12px",color:st.clr,opacity:.8}}>{st.lbl}</p>
+            </div>
+          </div>
+          <div className="river-row">
+            <span style={{fontSize:"12px",color:"var(--mu)"}}>{lang==="bn"?"বর্তমান স্তর":"Current"}</span>
+            <div className="prog-wrap"><div className="prog-fill" style={{width:`${pct}%`,background:pct>=100?"#dc2626":pct>=85?"#f59e0b":"#22c55e"}}></div></div>
+            <span className="river-level" style={{color:st.clr}}>{r.current} {r.unit}</span>
+          </div>
+          <div className="river-row">
+            <span style={{fontSize:"12px",color:"var(--mu)"}}>{lang==="bn"?"বিপদসীমা":"Danger level"}</span>
+            <div style={{flex:1}}></div>
+            <span style={{fontSize:"12px",fontWeight:600,color:"#dc2626"}}>{r.danger} {r.unit}</span>
+          </div>
+        </div>
+      );
+    })}
+    <p style={{fontSize:"11px",color:"var(--mu)",marginTop:"8px"}}>
+      * {lang==="bn"?"নদীর তথ্য BWDB ডেমো ডেটা। সরকারি তথ্য পেতে:":"River data is demo. For official data:"}
+      <a href="http://www.ffwc.gov.bd" target="_blank" style={{color:"var(--p)",fontWeight:600}}> ffwc.gov.bd</a>
+    </p>
+  </div>);
+}
+
+/* ══ VISITOR STATS ══ */
+function VisitorStats({lang}){
+  const[visits]=React.useState(()=>loadData(KEYS.visits,{total:0,today:0,date:""}));
+  const[pv]=React.useState(()=>loadData(KEYS.pageviews,[]));
+  const chartRef=React.useRef(null);
+  const chartObj=React.useRef(null);
+  React.useEffect(()=>{
+    if(!chartRef.current||pv.length<2)return;
+    if(chartObj.current)chartObj.current.destroy();
+    chartObj.current=new Chart(chartRef.current,{
+      type:"line",
+      data:{
+        labels:pv.map(p=>p.d.slice(5)),
+        datasets:[{label:lang==="bn"?"ভিজিট":"Visits",data:pv.map(p=>p.v),borderColor:"#2563eb",backgroundColor:"rgba(37,99,235,.1)",tension:.4,fill:true,pointRadius:3}]
+      },
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}
+    });
+  },[pv,lang]);
+
+  const today=new Date().toISOString().slice(0,10);
+  const todayV=pv.find(p=>p.d===today)?.v||visits.today||0;
+
+  return(<div>
+    <div className="counter-grid">
+      {[
+        {num:visits.total||0,lbl:lang==="bn"?"মোট ভিজিট":"Total Visits",icon:"👁️"},
+        {num:todayV,lbl:lang==="bn"?"আজকের ভিজিট":"Today's Visits",icon:"📅"},
+        {num:pv.length,lbl:lang==="bn"?"সক্রিয় দিন":"Active Days",icon:"📆"},
+        {num:pv.length?Math.round(pv.reduce((a,b)=>a+b.v,0)/pv.length):0,lbl:lang==="bn"?"দৈনিক গড়":"Daily Avg",icon:"📊"},
+      ].map((c,i)=>(
+        <div key={i} className="counter-card">
+          <div style={{fontSize:"22px",marginBottom:"4px"}}>{c.icon}</div>
+          <div className="num">{c.num.toLocaleString()}</div>
+          <div className="lbl">{c.lbl}</div>
+        </div>
+      ))}
+    </div>
+    {pv.length>=2&&(
+      <div className="card">
+        <div className="ch">📈 {lang==="bn"?"ভিজিটের ট্রেন্ড (৩০ দিন)":"Visit Trend (30 days)"}</div>
+        <div className="cb"><div className="chart-wrap"><canvas ref={chartRef}></canvas></div></div>
+      </div>
+    )}
+    {pv.length<2&&<div className="empty"><div className="ei">📊</div><p>{lang==="bn"?"আরো ভিজিটের পরে চার্ট দেখাবে।":"Chart will appear after more visits."}</p></div>}
+  </div>);
 }
 
 /* ══ ALERT BAR ══ */
@@ -274,10 +405,7 @@ function AlertBar({alerts,lang}){
   const text=active.length?active.map(a=>a.text).join("   ◆   "):(lang==="bn"?"কোনো সতর্কতা নেই।":"No active alerts.");
   return(
     <div className="abar">
-      <div className="abar-top">
-        <span style={{fontSize:"17px",flexShrink:0}}>🚨</span>
-        <div className="mw"><span>{text}</span></div>
-      </div>
+      <div className="abar-top"><span style={{fontSize:"17px",flexShrink:0}}>🚨</span><div className="mw"><span>{text}</span></div></div>
       <div className="abar-nums">
         {[["999","🆘 জরুরি"],["333","ℹ️ তথ্য"],["109","⚖️ দুদক"],["16430","🩸 রক্ত"],["102","🚒 ফায়ার"],["199","🚑 অ্যাম্বু"]].map(([n,lbl])=>(
           <a key={n} href={`tel:${n}`} className="cbtn">{lbl} {n}</a>
@@ -295,24 +423,20 @@ function Navbar({lang,setLang,onPrint}){
         <div className="nlogo">🏛️</div>
         <div className="ntxt">
           <h1>{lang==="bn"?"সিলেটসেবা — সিলেট বিভাগ":"Sylhet Sheba — Sylhet Division"}</h1>
-          <p>{lang==="bn"?"জনগণের সেবায় | বিভাগীয় কমিশনারের কার্যালয়":"Public Service Dashboard | Divisional Commissioner"}</p>
+          <p>{lang==="bn"?"জনগণের সেবায় | বিভাগীয় কমিশনারের কার্যালয়":"Public Service Dashboard"}</p>
         </div>
       </div>
       <div className="nmeta">
-        <span style={{fontSize:"11px",color:"rgba(255,255,255,.8)",display:"flex",alignItems:"center",gap:"4px"}}>
-          📅 {getBanglaDate()}
-        </span>
-        <button className="alink" onClick={()=>setLang(l=>l==="bn"?"en":"bn")}>
-          {lang==="bn"?"EN":"বাং"}
-        </button>
-        <button className="alink" onClick={onPrint} title="প্রিন্ট">🖨️</button>
+        <span className="date-txt" style={{fontSize:"11px",color:"rgba(255,255,255,.85)"}}>{getBanglaDate()}</span>
+        <button className="alink" onClick={()=>setLang(l=>l==="bn"?"en":"bn")}>{lang==="bn"?"EN":"বাং"}</button>
+        <button className="alink" onClick={onPrint}>🖨️</button>
         <span className="ver-badge">{VER}</span>
       </div>
     </nav>
   );
 }
 
-/* ══ STATS ══ */
+/* ══ STATS STRIP ══ */
 function StatsStrip({services,lastUpdate,lang}){
   const t=lastUpdate.toLocaleTimeString(lang==="bn"?"bn-BD":"en-US",{hour:"2-digit",minute:"2-digit"});
   const counts=[
@@ -327,10 +451,7 @@ function StatsStrip({services,lastUpdate,lang}){
       {counts.map(s=>(
         <div key={s.lbn} className="sc">
           <div className="si" style={{background:s.bg}}>{s.icon}</div>
-          <div className="sinfo">
-            <p>{lang==="bn"?s.lbn:s.len}</p>
-            <strong style={{color:s.clr}}>{s.val}</strong>
-          </div>
+          <div className="sinfo"><p>{lang==="bn"?s.lbn:s.len}</p><strong style={{color:s.clr}}>{s.val}</strong></div>
         </div>
       ))}
     </div>
@@ -341,20 +462,17 @@ function StatsStrip({services,lastUpdate,lang}){
 function SvcCard({s,ratings,onRate,lang}){
   const m=TYPE_META[s.type]||{icon:"🔧",bg:"#f5f5f5",border:"#ccc",pin:"#888"};
   const[showRating,setShowRating]=React.useState(false);
-  const[hover,setHover]=React.useState(0);
   const[showQR,setShowQR]=React.useState(false);
+  const[hover,setHover]=React.useState(0);
   const qrRef=React.useRef(null);
   const myRating=ratings[s.id]?.avg||0;
   const rCount=ratings[s.id]?.count||0;
-
-  /* QR via Google Charts API — no npm lib needed */
   React.useEffect(()=>{
     if(showQR&&qrRef.current){
-      const txt=encodeURIComponent(`${s.name}\n${s.district} / ${s.upazila}\nফোন: ${s.phone}\n${s.type}`);
-      qrRef.current.src=`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${txt}`;
+      const txt=encodeURIComponent(`${s.name}\n${s.district} / ${s.upazila}\nPhone: ${s.phone}\nType: ${s.type}`);
+      qrRef.current.src=`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${txt}&color=0d5c9e`;
     }
   },[showQR]);
-
   return(
     <div className="scard">
       <div className="sct">
@@ -386,13 +504,11 @@ function SvcCard({s,ratings,onRate,lang}){
         </div>
         {showRating&&(
           <div style={{marginTop:"8px",padding:"9px",background:"#fafafa",borderRadius:"8px",border:"1px solid var(--brd)"}}>
-            <p style={{fontSize:"11px",marginBottom:"5px",color:"var(--mu)"}}>{lang==="bn"?"আপনার রেটিং:":"Your rating:"}</p>
+            <p style={{fontSize:"11px",marginBottom:"5px",color:"var(--mu)"}}>{lang==="bn"?"রেটিং দিন:":"Your rating:"}</p>
             <div className="stars">
               {[1,2,3,4,5].map(i=>(
-                <span key={i}
-                  className={`star${(hover||Math.round(myRating))>=i?" on":""}`}
-                  onMouseEnter={()=>setHover(i)}
-                  onMouseLeave={()=>setHover(0)}
+                <span key={i} className={`star${(hover||Math.round(myRating))>=i?" on":""}`}
+                  onMouseEnter={()=>setHover(i)} onMouseLeave={()=>setHover(0)}
                   onClick={()=>{onRate(s.id,i);setShowRating(false);}}>★</span>
               ))}
             </div>
@@ -400,7 +516,8 @@ function SvcCard({s,ratings,onRate,lang}){
         )}
         {showQR&&(
           <div style={{marginTop:"8px",padding:"10px",background:"#fafafa",borderRadius:"8px",border:"1px solid var(--brd)",textAlign:"center"}}>
-            <img ref={qrRef} alt="QR Code" style={{width:150,height:150,borderRadius:6}}/>
+            <img ref={qrRef} alt="QR" style={{width:150,height:150,borderRadius:6,display:"block",margin:"0 auto"}}
+              onError={e=>{e.target.style.display="none";}}/>
             <p style={{fontSize:"10px",color:"var(--mu)",marginTop:"4px"}}>{lang==="bn"?"স্ক্যান করুন":"Scan for details"}</p>
           </div>
         )}
@@ -417,44 +534,38 @@ function GoogleMap({services,district,lang}){
   const userMarkRef=React.useRef(null);
   const[locLoading,setLocLoading]=React.useState(false);
   const[nearest,setNearest]=React.useState(null);
-
-  const PIN_COLORS={"হাসপাতাল":"#e74c3c","থানা":"#3b82f6","ফায়ার সার্ভিস":"#f97316","অ্যাম্বুলেন্স":"#22c55e"};
-
+  const PIN_COLORS={"হাসপাতাল":"e74c3c","থানা":"3b82f6","ফায়ার সার্ভিস":"f97316","অ্যাম্বুলেন্স":"22c55e"};
   React.useEffect(()=>{
     if(!mapRef.current||gMapRef.current)return;
-    gMapRef.current=new window.google.maps.Map(mapRef.current,{
-      center:{lat:24.7,lng:91.5},zoom:9,
-      mapTypeControl:false,streetViewControl:false,
-      styles:[{featureType:"poi",stylers:[{visibility:"off"}]}]
-    });
+    gMapRef.current=new window.google.maps.Map(mapRef.current,{center:{lat:24.7,lng:91.5},zoom:9,mapTypeControl:false,streetViewControl:false});
   },[]);
-
   React.useEffect(()=>{
     if(!gMapRef.current)return;
     markersRef.current.forEach(m=>m.setMap(null));markersRef.current=[];
     const c=DISTRICT_CENTER[district]||[24.7,91.5];
     gMapRef.current.setCenter({lat:c[0],lng:c[1]});
     gMapRef.current.setZoom(district==="সব জেলা"?9:10);
-    const infoWindow=new window.google.maps.InfoWindow();
+    const iw=new window.google.maps.InfoWindow();
     services.forEach(svc=>{
       const meta=TYPE_META[svc.type]||{icon:"📍",pin:"#888"};
-      const color=(PIN_COLORS[svc.type]||"#888").replace("#","");
-      const icon={url:`https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|${color}|ffffff`,scaledSize:new window.google.maps.Size(28,42)};
-      const mk=new window.google.maps.Marker({position:{lat:svc.lat,lng:svc.lng},map:gMapRef.current,title:svc.name,icon});
+      const clr=PIN_COLORS[svc.type]||"888888";
+      const mk=new window.google.maps.Marker({
+        position:{lat:svc.lat,lng:svc.lng},map:gMapRef.current,title:svc.name,
+        icon:{url:`https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|${clr}|ffffff`,scaledSize:new window.google.maps.Size(26,40)}
+      });
       mk.addListener("click",()=>{
-        infoWindow.setContent(`<div style="font-family:'Hind Siliguri',sans-serif;min-width:200px;padding:4px">
-          <p style="font-weight:700;font-size:14px;margin-bottom:4px">${meta.icon||"📍"} ${svc.name}</p>
-          <p style="font-size:12px;color:#5a6a80;margin-bottom:2px">🏘️ ${svc.upazila} · ${svc.district}</p>
-          <p style="font-size:12px;margin-bottom:2px">📞 <strong><a href="tel:${svc.phone}" style="color:#0d5c9e">${svc.phone}</a></strong></p>
-          <p style="font-size:12px;margin-bottom:4px">👤 ${svc.dutyOfficer}</p>
-          <span style="background:${svc.status==="open"?"#dcfce7":"#fee2e2"};color:${svc.status==="open"?"#15803d":"#dc2626"};padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700">${svc.status==="open"?"● খোলা":"● বন্ধ"}</span>
+        iw.setContent(`<div style="font-family:'Hind Siliguri',sans-serif;min-width:200px;padding:4px">
+          <p style="font-weight:700;font-size:14px;margin-bottom:4px">${meta.icon} ${svc.name}</p>
+          <p style="font-size:12px;color:#5a6a80;margin-bottom:3px">🏘️ ${svc.upazila} · ${svc.district}</p>
+          <p style="font-size:12px;margin-bottom:3px">📞 <strong><a href="tel:${svc.phone}" style="color:#0d5c9e">${svc.phone}</a></strong></p>
+          <p style="font-size:12px;margin-bottom:5px">👤 ${svc.dutyOfficer}</p>
+          <span style="background:${svc.status==="open"?"#dcfce7":"#fee2e2"};color:${svc.status==="open"?"#15803d":"#dc2626"};padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">${svc.status==="open"?"● খোলা":"● বন্ধ"}</span>
         </div>`);
-        infoWindow.open(gMapRef.current,mk);
+        iw.open(gMapRef.current,mk);
       });
       markersRef.current.push(mk);
     });
   },[services,district]);
-
   const findLocation=()=>{
     if(!navigator.geolocation){alert("Geolocation সাপোর্ট নেই।");return;}
     setLocLoading(true);
@@ -462,34 +573,25 @@ function GoogleMap({services,district,lang}){
       const{latitude:lat,longitude:lng}=pos.coords;
       setLocLoading(false);
       if(userMarkRef.current)userMarkRef.current.setMap(null);
-      userMarkRef.current=new window.google.maps.Marker({
-        position:{lat,lng},map:gMapRef.current,
-        title:lang==="bn"?"আপনার অবস্থান":"Your location",
-        icon:{url:"https://maps.google.com/mapfiles/ms/icons/blue-dot.png"}
-      });
+      userMarkRef.current=new window.google.maps.Marker({position:{lat,lng},map:gMapRef.current,title:lang==="bn"?"আপনার অবস্থান":"Your location",icon:{url:"https://maps.google.com/mapfiles/ms/icons/blue-dot.png"}});
       gMapRef.current.setCenter({lat,lng});gMapRef.current.setZoom(12);
       let minD=Infinity,near=null;
       services.forEach(s=>{const d=haversine(lat,lng,s.lat,s.lng);if(d<minD){minD=d;near=s;}});
       if(near)setNearest({...near,dist:minD.toFixed(1)});
     },()=>{setLocLoading(false);alert("লোকেশন পাওয়া যায়নি।");});
   };
-
-  return(
-    <div>
-      <div style={{display:"flex",gap:"8px",marginBottom:"10px",flexWrap:"wrap"}}>
-        <button className="btn-p" style={{padding:"8px 15px",fontSize:"13px"}} onClick={findLocation} disabled={locLoading}>
-          {locLoading?"⏳ খুঁজছি...":"📍 "+(lang==="bn"?"আমার অবস্থান":"My Location")}
-        </button>
-        {nearest&&<button className="btn-s" style={{padding:"8px 15px",fontSize:"13px"}} onClick={()=>{setNearest(null);if(userMarkRef.current)userMarkRef.current.setMap(null);}}>✕</button>}
-      </div>
-      {nearest&&<div className="dist-result">🎯 {lang==="bn"?"নিকটতম":"Nearest"}: <strong>{nearest.name}</strong> — {nearest.dist} km | 📞 <a href={`tel:${nearest.phone}`} style={{color:"#1e40af"}}>{nearest.phone}</a></div>}
-      <div ref={mapRef} id="gmap"></div>
-      <div className="mleg">
-        {Object.entries(TYPE_META).map(([k,v])=><div key={k} className="mli"><span className="mld" style={{background:v.pin}}></span>{k}</div>)}
-        <div className="mli"><span className="mld" style={{background:"#2563eb"}}></span>{lang==="bn"?"আপনার অবস্থান":"Your location"}</div>
-      </div>
+  return(<div>
+    <div style={{display:"flex",gap:"8px",marginBottom:"10px",flexWrap:"wrap"}}>
+      <button className="btn-p" style={{padding:"8px 15px",fontSize:"13px"}} onClick={findLocation} disabled={locLoading}>{locLoading?"⏳ খুঁজছি...":"📍 "+(lang==="bn"?"আমার অবস্থান":"My Location")}</button>
+      {nearest&&<button className="btn-s" style={{padding:"8px 15px",fontSize:"13px"}} onClick={()=>{setNearest(null);if(userMarkRef.current)userMarkRef.current.setMap(null);}}>✕</button>}
     </div>
-  );
+    {nearest&&<div className="dist-result">🎯 {lang==="bn"?"নিকটতম":"Nearest"}: <strong>{nearest.name}</strong> — {nearest.dist} km | 📞 <a href={`tel:${nearest.phone}`} style={{color:"#1e40af"}}>{nearest.phone}</a></div>}
+    <div ref={mapRef} id="gmap"></div>
+    <div className="mleg">
+      {Object.entries(TYPE_META).map(([k,v])=><div key={k} className="mli"><span className="mld" style={{background:v.pin}}></span>{k}</div>)}
+      <div className="mli"><span className="mld" style={{background:"#2563eb"}}></span>{lang==="bn"?"আপনার অবস্থান":"Your location"}</div>
+    </div>
+  </div>);
 }
 
 /* ══ STATS CHARTS ══ */
@@ -505,8 +607,8 @@ function StatsCharts({services,lang}){
   },[services,lang]);
   return(
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"14px",marginBottom:"16px"}}>
-      <div className="card"><div className="ch">📊 {lang==="bn"?"জেলাভিত্তিক সেবা":"By District"}</div><div className="cb"><div className="chart-wrap"><canvas ref={barRef}></canvas></div></div></div>
-      <div className="card"><div className="ch">🥧 {lang==="bn"?"সেবার ধরন":"Service Types"}</div><div className="cb"><div className="chart-wrap"><canvas ref={pieRef}></canvas></div></div></div>
+      <div className="card"><div className="ch">📊 {lang==="bn"?"জেলাভিত্তিক":"By District"}</div><div className="cb"><div className="chart-wrap"><canvas ref={barRef}></canvas></div></div></div>
+      <div className="card"><div className="ch">🥧 {lang==="bn"?"সেবার ধরন":"Types"}</div><div className="cb"><div className="chart-wrap"><canvas ref={pieRef}></canvas></div></div></div>
     </div>
   );
 }
@@ -517,7 +619,7 @@ function BedTracker({services,lang}){
   if(!hospitals.length)return null;
   return(
     <div className="card" style={{marginBottom:"16px"}}>
-      <div className="ch">🛏️ {lang==="bn"?"হাসপাতাল শয্যা তথ্য":"Hospital Bed Status"}</div>
+      <div className="ch">🛏️ {lang==="bn"?"হাসপাতাল শয্যা":"Hospital Beds"}</div>
       <div className="cb">
         {hospitals.map(h=>{
           const total=parseInt((h.beds||"0").replace(/\D/g,""))||0;
@@ -538,26 +640,13 @@ function BedTracker({services,lang}){
   );
 }
 
-/* ══ COMING SOON DONORS ══ */
-function DonorComingSoon({lang}){
-  return(
-    <div className="coming-soon">
-      <div className="cs-icon">🩸</div>
-      <h2>{lang==="bn"?"রক্তদাতা তালিকা — শীঘ্রই আসছে":"Blood Donor List — Coming Soon"}</h2>
-      <p>{lang==="bn"?"আমরা সিলেট বিভাগের রক্তদাতাদের তথ্য সংগ্রহ করছি। শীঘ্রই এই বিভাগটি চালু হবে। জরুরি রক্তের প্রয়োজন হলে নিচের নম্বরে কল করুন।":"We are collecting blood donor data for Sylhet Division. This section will be live soon."}</p>
-      <a href="tel:16430" className="btn-d" style={{display:"inline-flex",marginTop:"16px",textDecoration:"none"}}>🩸 16430 {lang==="bn"?"— রক্ত সেবা":"— Blood Service"}</a>
-    </div>
-  );
-}
-
-/* ══ UNION PARISHAD ══ */
+/* ══ STATIC DATA ══ */
 const UNION_DATA=[
   {name:"সিলেট সদর ইউনিয়ন পরিষদ",district:"সিলেট",upazila:"সিলেট সদর",chairman:"মো. আব্দুল করিম",phone:"০১৭১১-২২৩৩৪৪"},
   {name:"বিয়ানীবাজার ইউনিয়ন পরিষদ",district:"সিলেট",upazila:"বিয়ানীবাজার",chairman:"আলহাজ মো. রহমান",phone:"০১৮১৮-৫৫৬৬৭৭"},
   {name:"শ্রীমঙ্গল ইউনিয়ন পরিষদ",district:"মৌলভীবাজার",upazila:"শ্রীমঙ্গল",chairman:"সুমন দেব",phone:"০১৯১১-৭৭৮৮৯৯"},
   {name:"হবিগঞ্জ সদর ইউনিয়ন পরিষদ",district:"হবিগঞ্জ",upazila:"হবিগঞ্জ সদর",chairman:"মো. জসিম উদ্দিন",phone:"০১৭২২-৩৩৪৪৫৫"},
   {name:"সুনামগঞ্জ সদর ইউনিয়ন পরিষদ",district:"সুনামগঞ্জ",upazila:"সুনামগঞ্জ সদর",chairman:"আব্দুস সালাম",phone:"০১৬৫৫-৪৪৫৫৬৬"},
-  {name:"ছাতক ইউনিয়ন পরিষদ",district:"সুনামগঞ্জ",upazila:"ছাতক",chairman:"মো. কামাল হোসেন",phone:"০১৮৩৩-২২৩৩৪৪"},
 ];
 const SCHOOL_DATA=[
   {name:"সিলেট সরকারি উচ্চ বিদ্যালয়",district:"সিলেট",upazila:"সিলেট সদর",type:"মাধ্যমিক",phone:"০৮২১-৭১৩৯৯০"},
@@ -568,13 +657,21 @@ const SCHOOL_DATA=[
 ];
 const SHELTER_DATA=[
   {name:"সিলেট সরকারি মহিলা কলেজ আশ্রয়কেন্দ্র",district:"সিলেট",upazila:"সিলেট সদর",capacity:"৫০০",status:"open"},
-  {name:"ওসমানী মেমোরিয়াল হল আশ্রয়কেন্দ্র",district:"সিলেট",upazila:"সিলেট সদর",capacity:"৩০০",status:"closed"},
+  {name:"ওসমানী মেমোরিয়াল হল",district:"সিলেট",upazila:"সিলেট সদর",capacity:"৩০০",status:"closed"},
   {name:"শ্রীমঙ্গল উপজেলা পরিষদ আশ্রয়কেন্দ্র",district:"মৌলভীবাজার",upazila:"শ্রীমঙ্গল",capacity:"২০০",status:"open"},
-  {name:"হবিগঞ্জ জেলা পরিষদ হল আশ্রয়কেন্দ্র",district:"হবিগঞ্জ",upazila:"হবিগঞ্জ সদর",capacity:"৪০০",status:"open"},
+  {name:"হবিগঞ্জ জেলা পরিষদ হল",district:"হবিগঞ্জ",upazila:"হবিগঞ্জ সদর",capacity:"৪০০",status:"open"},
   {name:"সুনামগঞ্জ পৌরসভা আশ্রয়কেন্দ্র",district:"সুনামগঞ্জ",upazila:"সুনামগঞ্জ সদর",capacity:"৩৫০",status:"closed"},
 ];
+const GOVT_SERVICES=[
+  {name:"ই-পোর্টাল — জমির তথ্য",url:"https://www.land.gov.bd",icon:"🗺️",desc:"খতিয়ান, পর্চা যাচাই"},
+  {name:"পাসপোর্ট সেবা",url:"https://www.passport.gov.bd",icon:"🛂",desc:"পাসপোর্ট আবেদন ও নবায়ন"},
+  {name:"জাতীয় পরিচয়পত্র (NID)",url:"https://services.nidw.gov.bd",icon:"🪪",desc:"NID সংশোধন ও ডাউনলোড"},
+  {name:"জন্ম নিবন্ধন",url:"https://bdris.gov.bd",icon:"👶",desc:"জন্ম ও মৃত্যু নিবন্ধন"},
+  {name:"বিদ্যুৎ বিল পরিশোধ",url:"https://www.bpdb.gov.bd",icon:"⚡",desc:"PDB বিদ্যুৎ বিল"},
+  {name:"সিলেট জেলা প্রশাসন",url:"https://sylhet.gov.bd",icon:"🏛️",desc:"সিলেট জেলা সরকারি সেবা"},
+];
 
-/* ══ LOST PERSON SECTION ══ */
+/* ══ LOST PERSON ══ */
 function LostPersonSection({lang}){
   const[list,setList]=React.useState(()=>loadData("lost_persons",[]));
   const[showForm,setShowForm]=React.useState(false);
@@ -582,35 +679,34 @@ function LostPersonSection({lang}){
   const submit=(e)=>{
     e.preventDefault();
     const next=[...list,{...f,id:Date.now(),time:new Date().toLocaleString("bn-BD"),resolved:false}];
-    setList(next);saveData("lost_persons",next);setShowForm(false);
-    setF({name:"",age:"",lastSeen:"",contact:"",desc:""});
+    setList(next);saveData("lost_persons",next);setShowForm(false);setF({name:"",age:"",lastSeen:"",contact:"",desc:""});
   };
   return(<div>
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"12px",flexWrap:"wrap",gap:"8px"}}>
       <p className="stitle">{lang==="bn"?"হারানো ব্যক্তির তথ্য":"Missing Persons"}</p>
       <button className="btn-d" onClick={()=>setShowForm(true)}>➕ {lang==="bn"?"নতুন পোস্ট":"New Post"}</button>
     </div>
-    {list.filter(l=>!l.resolved).length===0&&<div className="empty"><div className="ei">🔍</div><p>{lang==="bn"?"কোনো সক্রিয় হারানো বিজ্ঞপ্তি নেই।":"No active missing person posts."}</p></div>}
+    {list.filter(l=>!l.resolved).length===0&&<div className="empty"><div className="ei">🔍</div><p>{lang==="bn"?"কোনো সক্রিয় পোস্ট নেই।":"No active posts."}</p></div>}
     <div className="info-grid">
       {list.filter(l=>!l.resolved).map(p=>(
         <div key={p.id} className="info-card" style={{borderLeft:"3px solid #ef4444"}}>
           <h4>🔍 {p.name} ({p.age} {lang==="bn"?"বছর":"yrs"})</h4>
           <p>📍 {lang==="bn"?"শেষ দেখা:":"Last seen:"} {p.lastSeen}</p>
           <p style={{fontSize:"12px",color:"var(--tx)",margin:"4px 0"}}>{p.desc}</p>
-          <p>📞 <a href={`tel:${p.contact}`} className="" style={{color:"var(--p)",fontWeight:600}}>{p.contact}</a></p>
+          <a href={`tel:${p.contact}`} style={{color:"var(--p)",fontWeight:600,fontSize:"12px"}}>📞 {p.contact}</a>
           <p style={{fontSize:"10px",color:"var(--mu)",marginTop:"4px"}}>🕐 {p.time}</p>
         </div>
       ))}
     </div>
     {showForm&&<div className="moverlay" onClick={e=>e.target===e.currentTarget&&setShowForm(false)}>
       <div className="mbox">
-        <span className="mtitle">🔍 {lang==="bn"?"হারানো ব্যক্তির তথ্য দিন":"Report Missing Person"}</span>
+        <span className="mtitle">🔍 {lang==="bn"?"হারানো ব্যক্তির তথ্য":"Report Missing Person"}</span>
         <form onSubmit={submit}>
           <span className="fl">{lang==="bn"?"নাম *":"Name *"}</span><input className="finput" style={{marginBottom:10}} value={f.name} onChange={e=>setF({...f,name:e.target.value})} required/>
           <span className="fl">{lang==="bn"?"বয়স *":"Age *"}</span><input className="finput" style={{marginBottom:10}} value={f.age} onChange={e=>setF({...f,age:e.target.value})} required/>
-          <span className="fl">{lang==="bn"?"শেষ দেখা গেছে *":"Last seen location *"}</span><input className="finput" style={{marginBottom:10}} value={f.lastSeen} onChange={e=>setF({...f,lastSeen:e.target.value})} required/>
+          <span className="fl">{lang==="bn"?"শেষ দেখা গেছে *":"Last seen *"}</span><input className="finput" style={{marginBottom:10}} value={f.lastSeen} onChange={e=>setF({...f,lastSeen:e.target.value})} required/>
           <span className="fl">{lang==="bn"?"বিবরণ":"Description"}</span><textarea className="farea" rows={2} style={{marginBottom:10}} value={f.desc} onChange={e=>setF({...f,desc:e.target.value})}/>
-          <span className="fl">{lang==="bn"?"যোগাযোগ নম্বর *":"Contact *"}</span><input className="finput" style={{marginBottom:14}} value={f.contact} onChange={e=>setF({...f,contact:e.target.value})} required/>
+          <span className="fl">{lang==="bn"?"যোগাযোগ *":"Contact *"}</span><input className="finput" style={{marginBottom:14}} value={f.contact} onChange={e=>setF({...f,contact:e.target.value})} required/>
           <div style={{display:"flex",gap:"8px",justifyContent:"flex-end"}}>
             <button type="button" className="btn-s" onClick={()=>setShowForm(false)}>{lang==="bn"?"বাতিল":"Cancel"}</button>
             <button type="submit" className="btn-d">📤 {lang==="bn"?"পোস্ট করুন":"Post"}</button>
@@ -621,16 +717,6 @@ function LostPersonSection({lang}){
   </div>);
 }
 
-/* ══ GOVT SERVICES SECTION ══ */
-const GOVT_SERVICES=[
-  {name:"ই-পোর্টাল — জমির তথ্য",url:"https://www.land.gov.bd",icon:"🗺️",desc:"খতিয়ান, পর্চা যাচাই"},
-  {name:"পাসপোর্ট সেবা",url:"https://www.passport.gov.bd",icon:"🛂",desc:"পাসপোর্ট আবেদন ও নবায়ন"},
-  {name:"জাতীয় পরিচয়পত্র (NID)",url:"https://services.nidw.gov.bd",icon:"🪪",desc:"NID সংশোধন ও ডাউনলোড"},
-  {name:"জন্ম নিবন্ধন",url:"https://bdris.gov.bd",icon:"👶",desc:"জন্ম ও মৃত্যু নিবন্ধন"},
-  {name:"বিদ্যুৎ বিল পরিশোধ",url:"https://www.bpdb.gov.bd",icon:"⚡",desc:"PDB বিদ্যুৎ বিল"},
-  {name:"ই-সেবা কেন্দ্র সিলেট",url:"https://sylhet.gov.bd",icon:"🏛️",desc:"সিলেট জেলা প্রশাসন"},
-];
-
 /* ══ MODALS ══ */
 function ReportModal({onClose,onToast,lang}){
   const[f,setF]=React.useState({service:"",issue:"",contact:""});
@@ -638,12 +724,12 @@ function ReportModal({onClose,onToast,lang}){
   return(<div className="moverlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
     <div className="mbox">
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"14px"}}>
-        <span className="mtitle">⚠️ {lang==="bn"?"তথ্য ভুল রিপোর্ট করুন":"Report Incorrect Info"}</span>
+        <span className="mtitle">⚠️ {lang==="bn"?"তথ্য ভুল রিপোর্ট":"Report Error"}</span>
         <button onClick={onClose} style={{background:"none",border:"none",fontSize:"20px",cursor:"pointer"}}>✕</button>
       </div>
       <form onSubmit={submit}>
         <span className="fl">{lang==="bn"?"সেবার নাম":"Service name"}</span><input className="finput" style={{marginBottom:10}} value={f.service} onChange={e=>setF({...f,service:e.target.value})} required/>
-        <span className="fl">{lang==="bn"?"সমস্যার বিবরণ":"Issue description"}</span><textarea className="farea" rows={3} style={{marginBottom:10}} value={f.issue} onChange={e=>setF({...f,issue:e.target.value})} required/>
+        <span className="fl">{lang==="bn"?"সমস্যার বিবরণ":"Issue"}</span><textarea className="farea" rows={3} style={{marginBottom:10}} value={f.issue} onChange={e=>setF({...f,issue:e.target.value})} required/>
         <span className="fl">{lang==="bn"?"যোগাযোগ (ঐচ্ছিক)":"Contact (optional)"}</span><input className="finput" style={{marginBottom:14}} value={f.contact} onChange={e=>setF({...f,contact:e.target.value})}/>
         <div style={{display:"flex",gap:"8px",justifyContent:"flex-end"}}>
           <button type="button" className="btn-s" onClick={onClose}>{lang==="bn"?"বাতিল":"Cancel"}</button>
@@ -653,11 +739,10 @@ function ReportModal({onClose,onToast,lang}){
     </div>
   </div>);
 }
-
 function VolModal({onClose,onToast,lang}){
   const[f,setF]=React.useState({name:"",phone:"",district:"",upazila:"",skill:""});
   const ups=f.district?(DISTRICTS_DATA[f.district]||[]):[];
-  const submit=(e)=>{e.preventDefault();const v=loadData(KEYS.volunteers,DEFAULT_VOLUNTEERS);v.push({...f,id:Date.now(),time:new Date().toLocaleString("bn-BD")});saveData(KEYS.volunteers,v);onClose();onToast("✅ "+(lang==="bn"?"নিবন্ধন সম্পন্ন!":"Registration complete!"));};
+  const submit=(e)=>{e.preventDefault();const v=loadData(KEYS.volunteers,DEFAULT_VOLUNTEERS);v.push({...f,id:Date.now(),time:new Date().toLocaleString("bn-BD")});saveData(KEYS.volunteers,v);onClose();onToast("✅ "+(lang==="bn"?"নিবন্ধন সম্পন্ন!":"Registered!"));};
   return(<div className="moverlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
     <div className="mbox">
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"14px"}}>
@@ -665,31 +750,29 @@ function VolModal({onClose,onToast,lang}){
         <button onClick={onClose} style={{background:"none",border:"none",fontSize:"20px",cursor:"pointer"}}>✕</button>
       </div>
       <form onSubmit={submit}>
-        <span className="fl">{lang==="bn"?"পূর্ণ নাম *":"Full name *"}</span><input className="finput" style={{marginBottom:10}} value={f.name} onChange={e=>setF({...f,name:e.target.value})} required/>
+        <span className="fl">{lang==="bn"?"পূর্ণ নাম *":"Name *"}</span><input className="finput" style={{marginBottom:10}} value={f.name} onChange={e=>setF({...f,name:e.target.value})} required/>
         <span className="fl">{lang==="bn"?"মোবাইল *":"Mobile *"}</span><input className="finput" type="tel" style={{marginBottom:10}} value={f.phone} onChange={e=>setF({...f,phone:e.target.value})} required/>
         <span className="fl">{lang==="bn"?"জেলা *":"District *"}</span>
         <select className="fsel" style={{marginBottom:10}} value={f.district} onChange={e=>setF({...f,district:e.target.value,upazila:""})} required>
-          <option value="">{lang==="bn"?"জেলা বেছে নিন":"Select district"}</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}
+          <option value="">{lang==="bn"?"বেছে নিন":"Select"}</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}
         </select>
         <span className="fl">{lang==="bn"?"উপজেলা *":"Upazila *"}</span>
         <select className="fsel" style={{marginBottom:10}} value={f.upazila} onChange={e=>setF({...f,upazila:e.target.value})} required>
-          <option value="">{lang==="bn"?"উপজেলা বেছে নিন":"Select upazila"}</option>{ups.map(u=><option key={u} value={u}>{u}</option>)}
+          <option value="">{lang==="bn"?"বেছে নিন":"Select"}</option>{ups.map(u=><option key={u} value={u}>{u}</option>)}
         </select>
         <span className="fl">{lang==="bn"?"দক্ষতা":"Skills"}</span><textarea className="farea" rows={2} style={{marginBottom:14}} value={f.skill} onChange={e=>setF({...f,skill:e.target.value})} required/>
         <div style={{display:"flex",gap:"8px",justifyContent:"flex-end"}}>
           <button type="button" className="btn-s" onClick={onClose}>{lang==="bn"?"বাতিল":"Cancel"}</button>
-          <button type="submit" className="btn-p">✅ {lang==="bn"?"নিবন্ধন করুন":"Register"}</button>
+          <button type="submit" className="btn-p">✅ {lang==="bn"?"নিবন্ধন":"Register"}</button>
         </div>
       </form>
     </div>
   </div>);
 }
-
-/* ══ PUSH NOTIFICATION ══ */
 function askNotif(onToast,lang){
-  if(!("Notification" in window)){onToast("❌ "+(lang==="bn"?"সাপোর্ট নেই":"Not supported"));return;}
+  if(!("Notification" in window)){onToast("❌ Not supported");return;}
   Notification.requestPermission().then(p=>{
-    if(p==="granted")onToast("✅ "+(lang==="bn"?"বিজ্ঞপ্তি চালু হয়েছে!":"Notifications enabled!"));
+    if(p==="granted")onToast("✅ "+(lang==="bn"?"বিজ্ঞপ্তি চালু!":"Notifications enabled!"));
     else onToast("⚠️ "+(lang==="bn"?"অনুমতি দেওয়া হয়নি":"Permission denied"));
   });
 }
@@ -698,17 +781,13 @@ function askNotif(onToast,lang){
 function Sidebar({selDistrict,setSelDistrict,selUpazila,setSelUpazila,selType,setSelType,query,setQuery,hasFilter,onClearFilter,onReport,onVol,lang,onNotif,onPrint}){
   const ups=selDistrict!=="সব জেলা"?(DISTRICTS_DATA[selDistrict]||[]):[];
   return(<div className="sidebar">
-    <div className="card">
-      <div className="ch">🔍 {lang==="bn"?"অনুসন্ধান":"Search"}</div>
+    <div className="card"><div className="ch">🔍 {lang==="bn"?"অনুসন্ধান":"Search"}</div>
       <div className="cb">
         <input className="finput" placeholder={lang==="bn"?"বাংলা বা English এ খুঁজুন...":"Search in Bangla or English..."} value={query} onChange={e=>setQuery(e.target.value)}/>
-        <p style={{fontSize:"10px",color:"var(--mu)",marginTop:"5px"}}>
-          {lang==="bn"?"উদাহরণ: hospital, থানা, fire, সিলেট":"E.g.: hospital, থানা, fire, Sylhet"}
-        </p>
+        <p style={{fontSize:"10px",color:"var(--mu)",marginTop:"5px"}}>{lang==="bn"?"যেমন: hospital, থানা, fire, সিলেট":"E.g.: hospital, থানা, fire"}</p>
       </div>
     </div>
-    <div className="card">
-      <div className="ch">⚙️ {lang==="bn"?"ফিল্টার":"Filter"}</div>
+    <div className="card"><div className="ch">⚙️ {lang==="bn"?"ফিল্টার":"Filter"}</div>
       <div className="cb">
         <div className="fg"><span className="fl">{lang==="bn"?"জেলা":"District"}</span>
           <select className="fsel" value={selDistrict} onChange={e=>{setSelDistrict(e.target.value);setSelUpazila("");}}>
@@ -718,7 +797,7 @@ function Sidebar({selDistrict,setSelDistrict,selUpazila,setSelUpazila,selType,se
         </div>
         <div className="fg"><span className="fl">{lang==="bn"?"উপজেলা":"Upazila"}</span>
           <select className="fsel" value={selUpazila} onChange={e=>setSelUpazila(e.target.value)} disabled={selDistrict==="সব জেলা"}>
-            <option value="">{lang==="bn"?"— সব উপজেলা —":"— All Upazilas —"}</option>
+            <option value="">{lang==="bn"?"— সব উপজেলা —":"— All —"}</option>
             {ups.map(u=><option key={u} value={u}>{u}</option>)}
           </select>
         </div>
@@ -728,22 +807,20 @@ function Sidebar({selDistrict,setSelDistrict,selUpazila,setSelUpazila,selType,se
             {SERVICE_TYPES.map(t=><option key={t} value={t}>{t}</option>)}
           </select>
         </div>
-        {hasFilter&&<button className="btn-s" style={{width:"100%",justifyContent:"center",marginTop:"4px"}} onClick={onClearFilter}>✕ {lang==="bn"?"ফিল্টার মুছুন":"Clear Filter"}</button>}
+        {hasFilter&&<button className="btn-s" style={{width:"100%",justifyContent:"center",marginTop:"4px"}} onClick={onClearFilter}>✕ {lang==="bn"?"ফিল্টার মুছুন":"Clear"}</button>}
       </div>
     </div>
-    <div className="card">
-      <div className="ch">📋 {lang==="bn"?"দ্রুত অ্যাকশন":"Quick Actions"}</div>
+    <div className="card"><div className="ch">📋 {lang==="bn"?"অ্যাকশন":"Actions"}</div>
       <div className="cb" style={{display:"flex",flexDirection:"column",gap:"7px"}}>
         <button className="btn-d" style={{width:"100%",justifyContent:"center"}} onClick={onReport}>⚠️ {lang==="bn"?"তথ্য ভুল রিপোর্ট":"Report Error"}</button>
-        <button className="btn-p" style={{width:"100%",justifyContent:"center"}} onClick={onVol}>🤝 {lang==="bn"?"স্বেচ্ছাসেবক হোন":"Become Volunteer"}</button>
-        <button className="btn-s" style={{width:"100%",justifyContent:"center"}} onClick={onNotif}>🔔 {lang==="bn"?"বিজ্ঞপ্তি চালু":"Enable Notifications"}</button>
-        <button className="btn-s" style={{width:"100%",justifyContent:"center"}} onClick={onPrint}>🖨️ {lang==="bn"?"প্রিন্ট করুন":"Print"}</button>
+        <button className="btn-p" style={{width:"100%",justifyContent:"center"}} onClick={onVol}>🤝 {lang==="bn"?"স্বেচ্ছাসেবক হোন":"Volunteer"}</button>
+        <button className="btn-s" style={{width:"100%",justifyContent:"center"}} onClick={onNotif}>🔔 {lang==="bn"?"বিজ্ঞপ্তি চালু":"Notifications"}</button>
+        <button className="btn-s" style={{width:"100%",justifyContent:"center"}} onClick={onPrint}>🖨️ {lang==="bn"?"প্রিন্ট":"Print"}</button>
       </div>
     </div>
-    <div className="card">
-      <div className="ch">📞 {lang==="bn"?"জরুরি নম্বর":"Emergency Numbers"}</div>
+    <div className="card"><div className="ch">📞 {lang==="bn"?"জরুরি নম্বর":"Emergency"}</div>
       <div className="cb">
-        {[["🆘","জরুরি সেবা","Emergency","999"],["ℹ️","তথ্য সেবা","Info","333"],["⚖️","দুদক","ACC","109"],["🩸","রক্ত","Blood","16430"],["🚒","ফায়ার","Fire","102"],["🚑","অ্যাম্বুলেন্স","Ambulance","199"]].map(([i,lbn,len,n])=>(
+        {[["🆘","জরুরি","Emergency","999"],["ℹ️","তথ্য","Info","333"],["⚖️","দুদক","ACC","109"],["🩸","রক্ত","Blood","16430"],["🚒","ফায়ার","Fire","102"],["🚑","অ্যাম্বুলেন্স","Ambulance","199"]].map(([i,lbn,len,n])=>(
           <a key={n} href={`tel:${n}`} className="enum-row">
             <span style={{fontSize:"13px"}}>{i} {lang==="bn"?lbn:len}</span>
             <span className="enum-num">{n}</span>
@@ -767,6 +844,10 @@ function App(){
   const[toast,setToast]=React.useState(null);
   const[lang,setLang]=React.useState("bn");
 
+  React.useEffect(()=>{
+    document.documentElement.setAttribute("lang",lang);
+    trackVisit();
+  },[]);
   React.useEffect(()=>{document.documentElement.setAttribute("lang",lang);},[lang]);
 
   const showToast=(m)=>{setToast(m);setTimeout(()=>setToast(null),3400);};
@@ -774,47 +855,38 @@ function App(){
   const clearFilter=()=>{setSelDistrict("সব জেলা");setSelUpazila("");setSelType("");setQuery("");};
 
   const fServices=React.useMemo(()=>services.filter(s=>{
-    const distOk=selDistrict==="সব জেলা"||s.district===selDistrict;
-    const upOk=!selUpazila||s.upazila===selUpazila;
-    const typeOk=!selType||s.type===selType;
-    const qOk=matchService(s,query);
-    return distOk&&upOk&&typeOk&&qOk;
+    return(selDistrict==="সব জেলা"||s.district===selDistrict)&&(!selUpazila||s.upazila===selUpazila)&&(!selType||s.type===selType)&&matchService(s,query);
   }),[services,query,selDistrict,selUpazila,selType]);
 
   const handleRate=(svcId,stars)=>{
-    const prev=ratings[svcId]||{avg:0,count:0};
-    const nc=prev.count+1;
+    const prev=ratings[svcId]||{avg:0,count:0};const nc=prev.count+1;
     const next={...ratings,[svcId]:{avg:((prev.avg*prev.count)+stars)/nc,count:nc}};
-    setRatings(next);saveData(KEYS.ratings,next);
-    showToast("⭐ "+(lang==="bn"?"রেটিং দেওয়ার জন্য ধন্যবাদ!":"Thanks for rating!"));
+    setRatings(next);saveData(KEYS.ratings,next);showToast("⭐ "+(lang==="bn"?"রেটিং দেওয়ার জন্য ধন্যবাদ!":"Thanks for rating!"));
   };
 
   const TABS=[
     ["services",lang==="bn"?"📋 সেবা":"📋 Services"],
     ["map",lang==="bn"?"🗺️ মানচিত্র":"🗺️ Map"],
+    ["weather",lang==="bn"?"🌦️ আবহাওয়া":"🌦️ Weather"],
     ["donors",lang==="bn"?"🩸 রক্তদাতা":"🩸 Donors"],
     ["stats",lang==="bn"?"📊 পরিসংখ্যান":"📊 Stats"],
+    ["visits",lang==="bn"?"👁️ ভিজিটর":"👁️ Visitors"],
     ["union",lang==="bn"?"🏛️ ইউনিয়ন":"🏛️ Union"],
     ["school",lang==="bn"?"🎓 শিক্ষা":"🎓 Schools"],
     ["shelter",lang==="bn"?"🏠 আশ্রয়":"🏠 Shelters"],
     ["lost",lang==="bn"?"🔍 হারানো":"🔍 Missing"],
-    ["govt",lang==="bn"?"🔗 সরকারি সেবা":"🔗 Govt Links"],
+    ["govt",lang==="bn"?"🔗 সরকারি":"🔗 Govt Links"],
   ];
 
-  const sidebarProps={selDistrict,setSelDistrict,selUpazila,setSelUpazila,selType,setSelType,query,setQuery,hasFilter,onClearFilter:clearFilter,onReport:()=>setShowReport(true),onVol:()=>setShowVol(true),lang,onNotif:()=>askNotif(showToast,lang),onPrint:()=>window.print()};
+  const sbProps={selDistrict,setSelDistrict,selUpazila,setSelUpazila,selType,setSelType,query,setQuery,hasFilter,onClearFilter:clearFilter,onReport:()=>setShowReport(true),onVol:()=>setShowVol(true),lang,onNotif:()=>askNotif(showToast,lang),onPrint:()=>window.print()};
 
   return(<>
-    {disaster&&<div className="disaster-banner">🚨 {lang==="bn"?"দুর্যোগ মোড সক্রিয় — জরুরি তথ্য অগ্রাধিকার পাচ্ছে":"DISASTER MODE ACTIVE — Emergency info prioritized"} 🚨</div>}
+    {disaster&&<div className="disaster-banner">🚨 {lang==="bn"?"দুর্যোগ মোড সক্রিয় — জরুরি তথ্য অগ্রাধিকার পাচ্ছে":"DISASTER MODE ACTIVE"} 🚨</div>}
     <AlertBar alerts={alerts} lang={lang}/>
     <Navbar lang={lang} setLang={setLang} onPrint={()=>window.print()}/>
 
     <div className="wrap">
-      {/* Desktop sidebar (left col) */}
-      <div className="mob-sb-wrap" style={{display:"flex",flexDirection:"column"}}>
-        <Sidebar {...sidebarProps}/>
-      </div>
-
-      {/* Main content */}
+      <div className="mob-sb-wrap"><Sidebar {...sbProps}/></div>
       <div className="main-content">
         <StatsStrip services={services} lastUpdate={lastUpdate} lang={lang}/>
         <div className="dtabs">
@@ -828,109 +900,70 @@ function App(){
           {TABS.map(([id,lbl])=><button key={id} className={`tbtn${tab===id?" act":""}`} onClick={()=>setTab(id)}>{lbl}</button>)}
         </div>
 
-        {/* Services */}
         {tab==="services"&&(<>
           <p className="stitle">{lang==="bn"?"সেবা কেন্দ্র তালিকা":"Service Centers"}</p>
-          <p className="ssub">{lang==="bn"?`মোট ${fServices.length}টি${hasFilter?" (ফিল্টার করা)":""}`:`${fServices.length} results${hasFilter?" (filtered)":""}`}</p>
+          <p className="ssub">{fServices.length}{lang==="bn"?`টি${hasFilter?" (ফিল্টার করা)":""}`:` results${hasFilter?" (filtered)":""}`}</p>
           {fServices.length?<div className="sgrid">{fServices.map(s=><SvcCard key={s.id} s={s} ratings={ratings} onRate={handleRate} lang={lang}/>)}</div>
           :<div className="empty"><div className="ei">🔍</div><p>{lang==="bn"?"কোনো সেবা পাওয়া যায়নি।":"No services found."}</p></div>}
         </>)}
 
-        {/* Map */}
         {tab==="map"&&(<>
           <p className="stitle">{lang==="bn"?"গুগল মানচিত্র":"Google Map"}</p>
-          <p className="ssub">{lang==="bn"?"পিন ক্লিক করুন · আমার অবস্থান থেকে নিকটতম সেবা খুঁজুন":"Click pins · Find nearest service from your location"}</p>
+          <p className="ssub">{lang==="bn"?"পিন ক্লিক করুন · নিকটতম সেবা খুঁজুন":"Click pins · Find nearest service"}</p>
           <div className="card" style={{padding:"13px"}}><GoogleMap services={fServices} district={selDistrict} lang={lang}/></div>
         </>)}
 
-        {/* Donors */}
-        {tab==="donors"&&(<>
-          <DonorComingSoon lang={lang}/>
+        {tab==="weather"&&(<>
+          <p className="stitle">{lang==="bn"?"আবহাওয়া ও বন্যা পূর্বাভাস":"Weather & Flood Forecast"}</p>
+          <p className="ssub" style={{marginBottom:"14px"}}>{lang==="bn"?"সিলেট বিভাগের আবহাওয়া ও নদীর পানির তথ্য":"Sylhet Division weather and river water levels"}</p>
+          <WeatherFlood lang={lang}/>
         </>)}
 
-        {/* Stats */}
+        {tab==="donors"&&<div style={{marginTop:"4px"}}><div className="coming-soon"><div className="cs-icon">🩸</div><h2>{lang==="bn"?"রক্তদাতা তালিকা — শীঘ্রই আসছে":"Blood Donors — Coming Soon"}</h2><p>{lang==="bn"?"জরুরি রক্তের প্রয়োজন হলে 16430 নম্বরে কল করুন।":"For emergency blood call 16430."}</p><a href="tel:16430" className="btn-d" style={{display:"inline-flex",marginTop:"16px",textDecoration:"none"}}>🩸 16430</a></div></div>}
+
         {tab==="stats"&&(<>
           <p className="stitle">{lang==="bn"?"পরিসংখ্যান ও বিশ্লেষণ":"Statistics"}</p>
-          <p className="ssub" style={{marginBottom:"14px"}}>{lang==="bn"?"সেবাভিত্তিক তথ্য":"Service-based analysis"}</p>
+          <p className="ssub" style={{marginBottom:"14px"}}>{lang==="bn"?"সেবাভিত্তিক তথ্য":"Service analysis"}</p>
           <BedTracker services={services} lang={lang}/>
           <StatsCharts services={services} lang={lang}/>
         </>)}
 
-        {/* Union Parishad */}
-        {tab==="union"&&(<>
-          <p className="stitle">{lang==="bn"?"ইউনিয়ন পরিষদ":"Union Parishad"}</p>
-          <p className="ssub" style={{marginBottom:"13px"}}>{lang==="bn"?"স্থানীয় সরকার প্রতিনিধিদের তথ্য":"Local government representatives"}</p>
-          <div className="info-grid">
-            {UNION_DATA.map((u,i)=>(
-              <div key={i} className="info-card" style={{borderLeft:"3px solid var(--p)"}}>
-                <h4>🏛️ {u.name}</h4>
-                <p>📍 {u.district} — {u.upazila}</p>
-                <p>👤 {lang==="bn"?"চেয়ারম্যান:":"Chairman:"} <strong>{u.chairman}</strong></p>
-                <a href={`tel:${u.phone}`}>📞 {u.phone}</a>
-              </div>
-            ))}
-          </div>
+        {tab==="visits"&&(<>
+          <p className="stitle">{lang==="bn"?"ভিজিটর পরিসংখ্যান":"Visitor Statistics"}</p>
+          <p className="ssub" style={{marginBottom:"14px"}}>{lang==="bn"?"সাইটের ব্যবহারের তথ্য":"Site usage data"}</p>
+          <VisitorStats lang={lang}/>
         </>)}
 
-        {/* Schools */}
+        {tab==="union"&&(<>
+          <p className="stitle">{lang==="bn"?"ইউনিয়ন পরিষদ":"Union Parishad"}</p>
+          <p className="ssub" style={{marginBottom:"13px"}}>{lang==="bn"?"স্থানীয় সরকার প্রতিনিধি":"Local government"}</p>
+          <div className="info-grid">{UNION_DATA.map((u,i)=><div key={i} className="info-card" style={{borderLeft:"3px solid var(--p)"}}><h4>🏛️ {u.name}</h4><p>📍 {u.district} — {u.upazila}</p><p>👤 {lang==="bn"?"চেয়ারম্যান:":"Chairman:"} <strong>{u.chairman}</strong></p><a href={`tel:${u.phone}`}>📞 {u.phone}</a></div>)}</div>
+        </>)}
+
         {tab==="school"&&(<>
           <p className="stitle">{lang==="bn"?"সরকারি শিক্ষা প্রতিষ্ঠান":"Govt Educational Institutions"}</p>
           <p className="ssub" style={{marginBottom:"13px"}}>{lang==="bn"?"স্কুল ও কলেজের তালিকা":"Schools and colleges"}</p>
-          <div className="info-grid">
-            {SCHOOL_DATA.map((s,i)=>(
-              <div key={i} className="info-card" style={{borderLeft:"3px solid #10b981"}}>
-                <h4>🎓 {s.name}</h4>
-                <p>📍 {s.district} — {s.upazila}</p>
-                <p>📚 {lang==="bn"?"ধরন:":"Type:"} <strong>{s.type}</strong></p>
-                <a href={`tel:${s.phone}`}>📞 {s.phone}</a>
-              </div>
-            ))}
-          </div>
+          <div className="info-grid">{SCHOOL_DATA.map((s,i)=><div key={i} className="info-card" style={{borderLeft:"3px solid #10b981"}}><h4>🎓 {s.name}</h4><p>📍 {s.district} — {s.upazila}</p><p>📚 {lang==="bn"?"ধরন:":"Type:"} <strong>{s.type}</strong></p><a href={`tel:${s.phone}`}>📞 {s.phone}</a></div>)}</div>
         </>)}
 
-        {/* Shelters */}
         {tab==="shelter"&&(<>
           <p className="stitle">{lang==="bn"?"আশ্রয়কেন্দ্র":"Shelter Centers"}</p>
-          <p className="ssub" style={{marginBottom:"13px"}}>{lang==="bn"?"দুর্যোগকালীন আশ্রয়কেন্দ্রের তথ্য":"Disaster-time shelter information"}</p>
-          <div className="info-grid">
-            {SHELTER_DATA.map((s,i)=>(
-              <div key={i} className="info-card" style={{borderLeft:`3px solid ${s.status==="open"?"#22c55e":"#ef4444"}`}}>
-                <h4>🏠 {s.name}</h4>
-                <p>📍 {s.district} — {s.upazila}</p>
-                <p>👥 {lang==="bn"?"ধারণক্ষমতা:":"Capacity:"} <strong>{s.capacity}</strong> {lang==="bn"?"জন":"people"}</p>
-                <span style={{background:s.status==="open"?"#dcfce7":"#fee2e2",color:s.status==="open"?"#15803d":"#dc2626",fontSize:"11px",fontWeight:700,padding:"2px 9px",borderRadius:"20px",display:"inline-block",marginTop:"5px"}}>
-                  {s.status==="open"?(lang==="bn"?"✅ খোলা":"✅ Open"):(lang==="bn"?"❌ বন্ধ":"❌ Closed")}
-                </span>
-              </div>
-            ))}
-          </div>
+          <p className="ssub" style={{marginBottom:"13px"}}>{lang==="bn"?"দুর্যোগকালীন আশ্রয়কেন্দ্র":"Disaster shelters"}</p>
+          <div className="info-grid">{SHELTER_DATA.map((s,i)=><div key={i} className="info-card" style={{borderLeft:`3px solid ${s.status==="open"?"#22c55e":"#ef4444"}`}}><h4>🏠 {s.name}</h4><p>📍 {s.district} — {s.upazila}</p><p>👥 {lang==="bn"?"ধারণক্ষমতা:":"Capacity:"} <strong>{s.capacity}</strong> {lang==="bn"?"জন":"people"}</p><span style={{background:s.status==="open"?"#dcfce7":"#fee2e2",color:s.status==="open"?"#15803d":"#dc2626",fontSize:"11px",fontWeight:700,padding:"2px 9px",borderRadius:"20px",display:"inline-block",marginTop:"5px"}}>{s.status==="open"?(lang==="bn"?"✅ খোলা":"✅ Open"):(lang==="bn"?"❌ বন্ধ":"❌ Closed")}</span></div>)}</div>
         </>)}
 
-        {/* Lost Persons */}
         {tab==="lost"&&<LostPersonSection lang={lang}/>}
 
-        {/* Govt Links */}
         {tab==="govt"&&(<>
-          <p className="stitle">{lang==="bn"?"সরকারি সেবার লিংক":"Government Service Links"}</p>
-          <p className="ssub" style={{marginBottom:"13px"}}>{lang==="bn"?"অনলাইনে সরকারি সেবা গ্রহণ করুন":"Access government services online"}</p>
-          <div className="info-grid">
-            {GOVT_SERVICES.map((g,i)=>(
-              <div key={i} className="info-card" style={{borderLeft:"3px solid #6366f1"}}>
-                <h4>{g.icon} {g.name}</h4>
-                <p style={{marginBottom:"8px"}}>{g.desc}</p>
-                <a href={g.url} target="_blank" rel="noopener" style={{background:"var(--p)",color:"#fff",padding:"5px 13px",borderRadius:"7px",fontSize:"12px",fontWeight:600,textDecoration:"none",display:"inline-block"}}>
-                  🔗 {lang==="bn"?"ভিজিট করুন":"Visit"}
-                </a>
-              </div>
-            ))}
-          </div>
+          <p className="stitle">{lang==="bn"?"সরকারি সেবার লিংক":"Government Links"}</p>
+          <p className="ssub" style={{marginBottom:"13px"}}>{lang==="bn"?"অনলাইনে সরকারি সেবা গ্রহণ করুন":"Access online government services"}</p>
+          <div className="info-grid">{GOVT_SERVICES.map((g,i)=><div key={i} className="info-card" style={{borderLeft:"3px solid #6366f1"}}><h4>{g.icon} {g.name}</h4><p style={{marginBottom:"8px"}}>{g.desc}</p><a href={g.url} target="_blank" rel="noopener" style={{background:"var(--p)",color:"#fff",padding:"5px 13px",borderRadius:"7px",fontSize:"12px",fontWeight:600,textDecoration:"none",display:"inline-block"}}>🔗 {lang==="bn"?"ভিজিট করুন":"Visit"}</a></div>)}</div>
         </>)}
       </div>
     </div>
 
     <footer style={{background:"#0a3561",color:"rgba(255,255,255,.7)",textAlign:"center",padding:"16px",marginTop:"30px",fontSize:"12px"}}>
-      🏛️ <strong style={{color:"#fff"}}>সিলেটসেবা | Sylhet Sheba</strong> — {lang==="bn"?"সিলেট বিভাগীয় কমিশনারের কার্যালয়":"Sylhet Divisional Commissioner's Office"} &nbsp;|&nbsp;
-      {VER} &nbsp;|&nbsp; 📧 commissioner@sylhet.gov.bd
+      🏛️ <strong style={{color:"#fff"}}>সিলেটসেবা | Sylhet Sheba</strong> — {lang==="bn"?"সিলেট বিভাগীয় কমিশনারের কার্যালয়":"Sylhet Divisional Commissioner"} | {VER} | 📧 commissioner@sylhet.gov.bd
     </footer>
 
     {showReport&&<ReportModal onClose={()=>setShowReport(false)} onToast={showToast} lang={lang}/>}
@@ -938,13 +971,8 @@ function App(){
     {toast&&<Toast msg={toast} onClose={()=>setToast(null)}/>}
   </>);
 }
-
 ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
 </script>
-<script>
-if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{});});
-}
-</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));}</script>
 </body>
 </html>
