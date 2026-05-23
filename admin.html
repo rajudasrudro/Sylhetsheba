@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Admin — সিলেটসেবা v6.0.0</title>
+<title>Admin — সিলেটসেবা v7.0.0</title>
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -11,21 +11,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
 <script src="data.js"></script>
 <style>
-/* ══ Admin v6.0.0 ══ */
+/* ══ Admin v7.0.0 ══ */
 :root{
-  --sb:#16213e;--sb2:#1a2d4f;--sbh:#e94560;
+  --sb:#16213e;--sbh:#e94560;
   --p:#0f3460;--pd:#0a2744;--acc:#e94560;
   --bg:#f4f6fb;--sur:#ffffff;--brd:#e2e8f4;
   --tx:#1e293b;--mu:#64748b;
   --sh1:0 2px 8px rgba(15,52,96,.08);
   --sh2:0 8px 24px rgba(15,52,96,.12);
   --r:12px;--sb-w:248px;
+  --grad:linear-gradient(135deg,#16213e,#e94560);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
 body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:2px;}
-
 .admin-shell{display:flex;min-height:100vh;}
 
 /* ══ SIDEBAR ══ */
@@ -42,9 +42,7 @@ body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--tx)
 .sb-item .ic{font-size:15px;flex-shrink:0;width:20px;text-align:center;}
 .sb-bdg{margin-left:auto;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;}
 .sb-bdg.r{background:#dc2626;animation:pulse 1.5s infinite;}
-.sb-bdg.b{background:#2563eb;}
-.sb-bdg.g{background:#16a34a;}
-.sb-bdg.y{background:#d97706;}
+.sb-bdg.b{background:#2563eb;}.sb-bdg.g{background:#16a34a;}.sb-bdg.y{background:#d97706;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
 .sb-footer{padding:12px 14px;border-top:1px solid rgba(255,255,255,.07);margin-top:auto;flex-shrink:0;}
 .sb-flink{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:12px;padding:6px 4px;border-radius:6px;transition:all .18s;cursor:pointer;margin-bottom:3px;text-decoration:none;}
@@ -64,12 +62,12 @@ body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--tx)
 /* ══ CARDS ══ */
 .card{background:var(--sur);border-radius:var(--r);box-shadow:var(--sh1);border:1px solid var(--brd);overflow:hidden;margin-bottom:16px;}
 .card:last-child{margin-bottom:0;}
-.ch{background:linear-gradient(135deg,var(--p),#e94560);color:#fff;padding:10px 14px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.ch{background:var(--grad);color:#fff;padding:10px 14px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .ch-l{display:flex;align-items:center;gap:7px;}
 .cb{padding:14px;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 
-/* ══ STAT GRID ══ */
+/* ══ STATS ══ */
 .sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;margin-bottom:16px;}
 .sc{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);padding:12px 13px;box-shadow:var(--sh1);display:flex;align-items:center;gap:10px;transition:transform .18s;}
 .sc:hover{transform:translateY(-1px);}
@@ -93,9 +91,11 @@ tr:hover td{background:#fafbfd;}
 .fg{margin-bottom:10px;}.fg:last-child{margin-bottom:0;}
 .fg2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.field-section{background:#f8fafc;border:1px solid var(--brd);border-radius:9px;padding:12px;margin-bottom:10px;}
+.field-section-title{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
 
 /* ══ BUTTONS ══ */
-.bp{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--p),var(--acc));color:#fff;border:none;border-radius:8px;padding:8px 16px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
+.bp{display:inline-flex;align-items:center;gap:5px;background:var(--grad);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
 .bp:hover{opacity:.9;}
 .bp:disabled{opacity:.5;cursor:not-allowed;}
 .bs{display:inline-flex;align-items:center;gap:5px;background:#fff;color:var(--p);border:1.5px solid var(--p);border-radius:8px;padding:7px 14px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .2s;}
@@ -104,12 +104,12 @@ tr:hover td{background:#fafbfd;}
 .bd:hover{background:#fef2f2;border-color:#dc2626;}
 .be{display:inline-flex;align-items:center;gap:4px;background:#fff;color:var(--p);border:1.5px solid #bfdbfe;border-radius:7px;padding:5px 11px;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
 .be:hover{background:#eff6ff;}
-.bg{display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#15803d;border:1px solid #86efac;border-radius:7px;padding:4px 10px;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
-.br{display:inline-flex;align-items:center;gap:4px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:7px;padding:4px 10px;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.bg-btn{display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#15803d;border:1px solid #86efac;border-radius:7px;padding:4px 10px;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.br-btn{display:inline-flex;align-items:center;gap:4px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:7px;padding:4px 10px;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
 
 /* ══ MODAL ══ */
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:7000;display:flex;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(3px);}
-.mb{background:#fff;border-radius:14px;max-width:600px;width:100%;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,.22);max-height:92vh;overflow-y:auto;}
+.mb{background:#fff;border-radius:14px;max-width:640px;width:100%;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,.22);max-height:92vh;overflow-y:auto;}
 .mt{font-family:'Noto Serif Bengali',serif;font-size:15px;font-weight:700;color:var(--p);margin-bottom:14px;display:flex;align-items:center;gap:7px;}
 
 /* ══ MISC ══ */
@@ -139,8 +139,7 @@ tr:hover td{background:#fafbfd;}
 .tab-btn{padding:7px 12px;border:none;background:transparent;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;}
 .tab-btn:hover{color:var(--p);}
 .tab-btn.act{color:var(--acc);border-bottom-color:var(--acc);font-weight:700;}
-
-/* type badge */
+.img-preview{width:100%;height:120px;border-radius:8px;object-fit:cover;border:2px solid white;box-shadow:var(--sh1);display:block;margin-top:8px;}
 .type-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid;}
 
 /* ── Login ── */
@@ -174,13 +173,13 @@ tr:hover td{background:#fafbfd;}
 <body>
 <div id="root"></div>
 <script type="text/babel">
-/* ══ Admin v6.0.0 ══ */
-const VER="v6.0.0";
-const A_USER="admin",A_PASS="sylhet2025";
+/* ══ Admin v7.0.0 ══ */
+const VER="v7.0.0";
 const KS={
   services:"pub_services",donors:"pub_donors",alerts:"pub_alerts",
   reports:"pub_reports",volunteers:"pub_volunteers",
-  log:"admin_log",disaster:"disaster_mode",svcTypes:"pub_svc_types"
+  log:"admin_log",disaster:"disaster_mode",svcTypes:"pub_svc_types",
+  adminHash:"admin_pass_hash"
 };
 const DEFAULT_SVC_TYPES_OBJ=[
   {name:"হাসপাতাল",icon:"🏥",color:"#e74c3c"},
@@ -189,122 +188,160 @@ const DEFAULT_SVC_TYPES_OBJ=[
   {name:"অ্যাম্বুলেন্স",icon:"🚑",color:"#22c55e"},
 ];
 
+/* Simple hash (NOT cryptographic — for basic obfuscation) */
+function simpleHash(str){
+  let hash=0;
+  for(let i=0;i<str.length;i++){hash=((hash<<5)-hash)+str.charCodeAt(i);hash|=0;}
+  return hash.toString(36);
+}
+
+/* Default password hash stored at first load */
+const DEFAULT_PASS="sylhet2025";
+function getStoredHash(){
+  const h=localStorage.getItem(KS.adminHash);
+  if(!h){
+    const dh=simpleHash(DEFAULT_PASS);
+    localStorage.setItem(KS.adminHash,dh);
+    return dh;
+  }
+  return h;
+}
+
 function addLog(a,d){try{const l=loadData(KS.log,[]);l.unshift({id:Date.now(),action:a,detail:d,time:new Date().toLocaleString("bn-BD")});if(l.length>200)l.splice(200);saveData(KS.log,l);}catch(e){}}
 
 function Toast({msg,onClose}){React.useEffect(()=>{const t=setTimeout(onClose,3200);return()=>clearTimeout(t);},[]);return<div className="toast">{msg}</div>;}
 function Confirm({msg,onYes,onNo}){return(<div className="ov"><div className="confirm-box"><p style={{fontSize:"16px",fontWeight:700,marginBottom:"8px"}}>⚠️ নিশ্চিত করুন</p><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"18px",lineHeight:1.6}}>{msg}</p><div style={{display:"flex",gap:"8px",justifyContent:"flex-end"}}><button className="bs" onClick={onNo}>বাতিল</button><button className="bp" style={{background:"#dc2626"}} onClick={onYes}>হ্যাঁ, নিশ্চিত</button></div></div></div>);}
 
-/* ══ LOGIN ══ */
-function Login({onLogin}){
-  const[u,setU]=React.useState("");const[p,setP]=React.useState("");const[err,setErr]=React.useState("");const[ld,setLd]=React.useState(false);
-  const submit=(e)=>{e.preventDefault();setLd(true);setTimeout(()=>{if(u===A_USER&&p===A_PASS){sessionStorage.setItem("admin_auth","1");addLog("লগইন","Admin প্যানেলে প্রবেশ");onLogin();}else{setErr("❌ ভুল ইউজারনেম বা পাসওয়ার্ড!");setLd(false);}},500);};
-  return(<div className="login-wrap"><div className="login-box"><div className="login-logo">🔐</div><p className="login-title">অ্যাডমিন প্যানেল</p><p className="login-sub">সিলেটসেবা {VER}</p>{err&&<div className="login-err">{err}</div>}<form onSubmit={submit}><div className="fg"><span className="fl">ইউজারনেম</span><input className="fi" placeholder="admin" value={u} onChange={e=>setU(e.target.value)} required autoFocus/></div><div className="fg"><span className="fl">পাসওয়ার্ড</span><input className="fi" type="password" placeholder="••••••••" value={p} onChange={e=>setP(e.target.value)} required/></div><button type="submit" className="bp" style={{width:"100%",justifyContent:"center",padding:"11px",marginTop:"8px"}} disabled={ld}>{ld?"⏳ যাচাই...":"🔓 লগইন"}</button></form><p style={{fontSize:"11px",color:"var(--mu)",textAlign:"center",marginTop:"13px"}}>admin / sylhet2025</p></div></div>);
+/* Time-based status check */
+function isOpenNow(openTime,closeTime){
+  if(!openTime||!closeTime)return null;
+  const now=new Date();
+  const[oh,om]=openTime.split(":").map(Number);
+  const[ch,cm]=closeTime.split(":").map(Number);
+  const cur=now.getHours()*60+now.getMinutes();
+  const open=oh*60+om;const close=ch*60+cm;
+  if(close>open)return cur>=open&&cur<close;
+  return cur>=open||cur<close;
+}
+function getEffectiveStatus(s){
+  if(s.openTime&&s.closeTime){const r=isOpenNow(s.openTime,s.closeTime);if(r===true)return"open";if(r===false)return"closed";}
+  return s.status||"open";
 }
 
-/* ══ CUSTOM SERVICE TYPE MANAGER ══ */
+/* ══ LOGIN ══ */
+function Login({onLogin}){
+  const[p,setP]=React.useState("");
+  const[err,setErr]=React.useState("");
+  const[ld,setLd]=React.useState(false);
+  const submit=(e)=>{
+    e.preventDefault();setLd(true);
+    setTimeout(()=>{
+      const storedHash=getStoredHash();
+      if(simpleHash(p)===storedHash){
+        sessionStorage.setItem("admin_auth","1");
+        addLog("লগইন","Admin প্যানেলে প্রবেশ");
+        onLogin();
+      } else {
+        setErr("❌ পাসওয়ার্ড সঠিক নয়।");setLd(false);
+      }
+    },500);
+  };
+  return(
+    <div className="login-wrap">
+      <div className="login-box">
+        <div className="login-logo">🔐</div>
+        <p className="login-title">Admin লগইন</p>
+        <p className="login-sub">সিলেটসেবা {VER}</p>
+        {err&&<div className="login-err">{err}</div>}
+        <form onSubmit={submit}>
+          <div className="fg">
+            <span className="fl">পাসওয়ার্ড</span>
+            <input className="fi" type="password" placeholder="পাসওয়ার্ড লিখুন" value={p} onChange={e=>setP(e.target.value)} required autoFocus/>
+          </div>
+          <button type="submit" className="bp" style={{width:"100%",justifyContent:"center",padding:"11px",marginTop:"10px"}} disabled={ld}>
+            {ld?"⏳ যাচাই হচ্ছে...":"🔓 লগইন করুন"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+/* ══ SERVICE TYPE MANAGER ══ */
 function SvcTypeMgr({svcTypes,setSvcTypes,showToast}){
   const[showF,setShowF]=React.useState(false);
   const[form,setForm]=React.useState({name:"",icon:"🔧",color:"#6366f1"});
   const[confirmId,setConfirmId]=React.useState(null);
-
+  const DEFAULT_NAMES=["হাসপাতাল","থানা","ফায়ার সার্ভিস","অ্যাম্বুলেন্স"];
   const save=(next,msg)=>{setSvcTypes(next);saveData(KS.svcTypes,next);if(msg)showToast(msg);};
-  const del=(name)=>{
-    if(["হাসপাতাল","থানা","ফায়ার সার্ভিস","অ্যাম্বুলেন্স"].includes(name)){showToast("❌ ডিফল্ট সেবার ধরন মুছা যাবে না।");setConfirmId(null);return;}
-    save(svcTypes.filter(t=>t.name!==name),"🗑️ সেবার ধরন মুছে ফেলা হয়েছে।");
-    addLog("সেবার ধরন মুছে ফেলা",name);setConfirmId(null);
-  };
-  const submit=(e)=>{
-    e.preventDefault();
-    if(!form.name.trim()){showToast("❌ নাম দিতে হবে।");return;}
-    if(svcTypes.find(t=>t.name===form.name)){showToast("❌ এই নামে ধরন ইতোমধ্যে আছে।");return;}
-    save([...svcTypes,{name:form.name.trim(),icon:form.icon||"🔧",color:form.color||"#6366f1"}],"✅ নতুন সেবার ধরন যোগ হয়েছে!");
-    addLog("নতুন সেবার ধরন",form.name);setShowF(false);setForm({name:"",icon:"🔧",color:"#6366f1"});
-  };
-
+  const del=(name)=>{if(DEFAULT_NAMES.includes(name)){showToast("❌ ডিফল্ট ধরন মুছা যাবে না।");setConfirmId(null);return;}save(svcTypes.filter(t=>t.name!==name),"🗑️ মুছে ফেলা হয়েছে।");addLog("সেবার ধরন মুছে ফেলা",name);setConfirmId(null);};
+  const submit=(e)=>{e.preventDefault();if(!form.name.trim()){showToast("❌ নাম দিতে হবে।");return;}if(svcTypes.find(t=>t.name===form.name)){showToast("❌ এই নামে ইতোমধ্যে আছে।");return;}save([...svcTypes,{name:form.name.trim(),icon:form.icon||"🔧",color:form.color||"#6366f1"}],"✅ নতুন ধরন যোগ হয়েছে!");addLog("নতুন সেবার ধরন",form.name);setShowF(false);setForm({name:"",icon:"🔧",color:"#6366f1"});};
   return(<div>
     <div style={{display:"flex",gap:"8px",marginBottom:"12px",alignItems:"center",flexWrap:"wrap"}}>
-      <p style={{fontSize:"13px",color:"var(--mu)",flex:1}}>মোট {svcTypes.length}টি সেবার ধরন সংজ্ঞায়িত আছে।</p>
+      <p style={{fontSize:"13px",color:"var(--mu)",flex:1}}>মোট {svcTypes.length}টি সেবার ধরন।</p>
       <button className="bp" onClick={()=>setShowF(true)}>➕ নতুন ধরন তৈরি</button>
     </div>
-    <div className="card">
-      <div className="ch"><div className="ch-l">🏷️ সেবার ধরন তালিকা</div></div>
-      <div className="tbl">
-        <table>
-          <thead><tr><th>#</th><th>আইকন</th><th>নাম</th><th>রঙ</th><th>ডিফল্ট?</th><th>অ্যাকশন</th></tr></thead>
-          <tbody>
-            {svcTypes.map((t,i)=>{
-              const isDefault=["হাসপাতাল","থানা","ফায়ার সার্ভিস","অ্যাম্বুলেন্স"].includes(t.name);
-              return(<tr key={t.name}>
-                <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
-                <td style={{fontSize:"22px",textAlign:"center"}}>{t.icon||"🔧"}</td>
-                <td style={{fontWeight:600}}>{t.name}</td>
-                <td><span style={{display:"inline-block",width:22,height:22,borderRadius:"50%",background:t.color||"#888",border:"2px solid #fff",boxShadow:"0 1px 4px rgba(0,0,0,.15)"}}></span></td>
-                <td><span style={{fontSize:"11px",fontWeight:600,color:isDefault?"#15803d":"var(--mu)"}}>{isDefault?"✅ ডিফল্ট":"কাস্টম"}</span></td>
-                <td>{!isDefault&&<button className="bd" onClick={()=>setConfirmId(t.name)}>🗑️ মুছুন</button>}</td>
-              </tr>);
-            })}
-          </tbody>
-        </table>
-      </div>
+    <div className="card"><div className="ch"><div className="ch-l">🏷️ সেবার ধরন তালিকা</div></div>
+      <div className="tbl"><table><thead><tr><th>#</th><th>আইকন</th><th>নাম</th><th>রঙ</th><th>ধরন</th><th>অ্যাকশন</th></tr></thead>
+      <tbody>{svcTypes.map((t,i)=>{const isD=DEFAULT_NAMES.includes(t.name);return(<tr key={t.name}>
+        <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
+        <td style={{fontSize:"22px",textAlign:"center"}}>{t.icon||"🔧"}</td>
+        <td style={{fontWeight:600}}>{t.name}</td>
+        <td><span style={{display:"inline-block",width:22,height:22,borderRadius:"50%",background:t.color||"#888",border:"2px solid #fff",boxShadow:"0 1px 4px rgba(0,0,0,.15)"}}></span></td>
+        <td><span style={{fontSize:"11px",fontWeight:600,color:isD?"#15803d":"var(--mu)"}}>{isD?"✅ ডিফল্ট":"কাস্টম"}</span></td>
+        <td>{!isD&&<button className="bd" onClick={()=>setConfirmId(t.name)}>🗑️</button>}</td>
+      </tr>);})}
+      </tbody></table></div>
     </div>
-    {showF&&(<div className="ov" onClick={e=>e.target===e.currentTarget&&setShowF(false)}>
-      <div className="mb" style={{maxWidth:420}}>
-        <div className="mt">➕ নতুন সেবার ধরন তৈরি করুন</div>
-        <form onSubmit={submit}>
-          <div className="fg"><span className="fl">সেবার ধরনের নাম (বাংলায়) *</span><input className="fi" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required placeholder="যেমন: ক্লিনিক, ব্যাংক, বিদ্যালয়"/></div>
-          <div className="fg2">
-            <div className="fg"><span className="fl">আইকন (ইমোজি)</span><input className="fi" value={form.icon} onChange={e=>setForm({...form,icon:e.target.value})} placeholder="🔧" maxLength={4}/></div>
-            <div className="fg"><span className="fl">রঙ (color)</span>
-              <div style={{display:"flex",gap:"8px",alignItems:"center"}}>
-                <input type="color" value={form.color||"#6366f1"} onChange={e=>setForm({...form,color:e.target.value})} style={{width:44,height:36,borderRadius:8,border:"1.5px solid var(--brd)",cursor:"pointer",padding:2}}/>
-                <input className="fi" value={form.color} onChange={e=>setForm({...form,color:e.target.value})} placeholder="#6366f1" style={{flex:1}}/>
-              </div>
+    {showF&&(<div className="ov" onClick={e=>e.target===e.currentTarget&&setShowF(false)}><div className="mb" style={{maxWidth:420}}>
+      <div className="mt">➕ নতুন সেবার ধরন</div>
+      <form onSubmit={submit}>
+        <div className="fg"><span className="fl">নাম (বাংলায়) *</span><input className="fi" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required placeholder="যেমন: ক্লিনিক, ডায়াগনস্টিক সেন্টার"/></div>
+        <div className="fg2">
+          <div className="fg"><span className="fl">আইকন (ইমোজি)</span><input className="fi" value={form.icon} onChange={e=>setForm({...form,icon:e.target.value})} placeholder="🔧" maxLength={4}/></div>
+          <div className="fg"><span className="fl">রঙ</span>
+            <div style={{display:"flex",gap:"8px",alignItems:"center"}}>
+              <input type="color" value={form.color||"#6366f1"} onChange={e=>setForm({...form,color:e.target.value})} style={{width:44,height:34,borderRadius:8,border:"1.5px solid var(--brd)",cursor:"pointer",padding:2}}/>
+              <input className="fi" value={form.color} onChange={e=>setForm({...form,color:e.target.value})} placeholder="#6366f1" style={{flex:1}}/>
             </div>
           </div>
-          <div style={{background:"#eff6ff",border:"1px solid #bfdbfe",borderRadius:"8px",padding:"10px 12px",marginBottom:"10px",fontSize:"12px",color:"#1e40af"}}>
-            💡 নতুন ধরন তৈরি করলে সেবা যোগ করার সময় এই ধরনটি দেখা যাবে।
-          </div>
-          <div style={{display:"flex",gap:"8px",justifyContent:"flex-end"}}>
-            <button type="button" className="bs" onClick={()=>setShowF(false)}>বাতিল</button>
-            <button type="submit" className="bp">➕ তৈরি করুন</button>
-          </div>
-        </form>
-      </div>
-    </div>)}
-    {confirmId&&<Confirm msg={`"${confirmId}" সেবার ধরনটি মুছে যাবে। নিশ্চিত?`} onYes={()=>del(confirmId)} onNo={()=>setConfirmId(null)}/>}
+        </div>
+        <div style={{display:"flex",gap:"8px",justifyContent:"flex-end"}}><button type="button" className="bs" onClick={()=>setShowF(false)}>বাতিল</button><button type="submit" className="bp">➕ তৈরি করুন</button></div>
+      </form>
+    </div></div>)}
+    {confirmId&&<Confirm msg={`"${confirmId}" মুছে যাবে। নিশ্চিত?`} onYes={()=>del(confirmId)} onNo={()=>setConfirmId(null)}/>}
   </div>);
 }
 
-/* ══ SERVICE MANAGER (type-aware fields) ══ */
+/* ══ SERVICE MANAGER (with image, time-based, no required) ══ */
 function ServiceMgr({services,setSvcs,showToast,svcTypes}){
-  const[q,setQ]=React.useState("");
-  const[fD,setFD]=React.useState("");const[fT,setFT]=React.useState("");const[fS,setFS]=React.useState("");
-  const[showF,setShowF]=React.useState(false);
-  const[editing,setEditing]=React.useState(null);
-  const[confirmId,setConfirmId]=React.useState(null);
+  const[q,setQ]=React.useState("");const[fD,setFD]=React.useState("");const[fT,setFT]=React.useState("");const[fS,setFS]=React.useState("");
+  const[showF,setShowF]=React.useState(false);const[editing,setEditing]=React.useState(null);const[confirmId,setConfirmId]=React.useState(null);
+  const[imgPreview,setImgPreview]=React.useState("");
   const E={district:"",upazila:"",type:"হাসপাতাল",status:"open",lat:"",lng:"",emergency:false,
-    /* shared */name:"",address:"",mobilePhone:"",phone:"",email:"",dutyOfficer:"",
-    /* hospital */beds:"",
-    /* police */unitName:"",
-    /* fire */stationName:"",
-    /* ambulance */ambulanceName:"",currentLocation:"",driverPhone:""};
+    imageUrl:"",name:"",address:"",mobilePhone:"",phone:"",email:"",dutyOfficer:"",beds:"",
+    unitName:"",stationName:"",ambulanceName:"",currentLocation:"",driverPhone:"",
+    openTime:"",closeTime:""};
   const[form,setForm]=React.useState({...E});
-  const ups=(DISTRICTS_DATA[form.district]||[]);
   const allTypeNames=svcTypes.map(t=>t.name);
+  const ups=(DISTRICTS_DATA[form.district]||[]);
+
+  /* Is this type time-based? Diagnostic or custom types */
+  const isTimeBased=!["হাসপাতাল","থানা","ফায়ার সার্ভিস","অ্যাম্বুলেন্স"].includes(form.type)||form.type==="ডায়াগনস্টিক সেন্টার";
 
   const filtered=services.filter(s=>{
     const lo=q.toLowerCase();
     const nm=s.name||s.unitName||s.stationName||s.ambulanceName||"";
     const mq=!lo||[nm,s.upazila,s.district,s.type,s.mobilePhone,s.phone,s.dutyOfficer].some(v=>(v||"").toLowerCase().includes(lo));
-    return mq&&(!fD||s.district===fD)&&(!fT||s.type===fT)&&(!fS||s.status===fS);
+    return mq&&(!fD||s.district===fD)&&(!fT||s.type===fT)&&(!fS||getEffectiveStatus(s)===fS);
   });
 
   const save=(next,msg)=>{setSvcs(next);saveData(KS.services,next);if(msg)showToast(msg);};
   const del=(id)=>{const s=services.find(x=>x.id===id);save(services.filter(x=>x.id!==id),"🗑️ মুছে ফেলা হয়েছে।");addLog("সেবা মুছে ফেলা",s?.name||s?.unitName||s?.stationName||"");setConfirmId(null);};
   const toggle=(id)=>{const next=services.map(s=>s.id===id?{...s,status:s.status==="open"?"closed":"open"}:s);save(next,"✅ স্ট্যাটাস পরিবর্তিত।");};
 
-  const openEdit=(s)=>{setEditing(s.id);setForm({...E,...s,lat:s.lat||"",lng:s.lng||""});setShowF(true);};
-  const openAdd=()=>{setEditing(null);setForm({...E});setShowF(true);};
+  const openEdit=(s)=>{setEditing(s.id);const f={...E,...s,lat:s.lat||"",lng:s.lng||""};setForm(f);setImgPreview(s.imageUrl||"");setShowF(true);};
+  const openAdd=()=>{setEditing(null);setForm({...E});setImgPreview("");setShowF(true);};
 
   const submit=(e)=>{
     e.preventDefault();
@@ -315,52 +352,19 @@ function ServiceMgr({services,setSvcs,showToast,svcTypes}){
     setShowF(false);
   };
 
-  /* Type-specific form fields */
   const renderTypeFields=()=>{
     const T=form.type;
-    const input=(key,label,placeholder="",type="text")=>(
-      <div className="fg" key={key}>
-        <span className="fl">{label}</span>
+    const inp=(key,label,placeholder="",type="text")=>(
+      <div className="fg" key={key}><span className="fl">{label}</span>
         <input className="fi" type={type} value={form[key]||""} onChange={e=>setForm({...form,[key]:e.target.value})} placeholder={placeholder}/>
       </div>
     );
-    if(T==="হাসপাতাল")return(<>
-      {input("name","প্রতিষ্ঠানের নাম *","পূর্ণ নাম")}
-      {input("address","ঠিকানা *","মহল্লা, রোড, শহর")}
-      {input("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}
-      {input("phone","টেলিফোন নম্বর","০৮XX-XXXXXX","tel")}
-      {input("beds","শয্যা সংখ্যা","যেমন: ১০০")}
-      {input("dutyOfficer","দায়িত্বরত চিকিৎসক","ডা. নাম")}
-    </>);
-    if(T==="থানা")return(<>
-      {input("unitName","ইউনিট/থানার নাম *","থানার নাম")}
-      {input("dutyOfficer","দায়িত্বপ্রাপ্ত কর্মকর্তা","ওসি/ইন্সপেক্টর নাম")}
-      {input("address","ঠিকানা *","মহল্লা, রোড")}
-      {input("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}
-      {input("phone","টেলিফোন নম্বর","০৮XX-XXXXXX","tel")}
-      {input("email","ইমেইল","name@police.gov.bd","email")}
-    </>);
-    if(T==="ফায়ার সার্ভিস")return(<>
-      {input("stationName","স্টেশনের নাম *","ফায়ার স্টেশনের নাম")}
-      {input("address","ঠিকানা *","মহল্লা, রোড")}
-      {input("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}
-      {input("phone","টেলিফোন নম্বর","০৮XX-XXXXXX","tel")}
-      {input("email","ইমেইল","name@fireservice.gov.bd","email")}
-    </>);
-    if(T==="অ্যাম্বুলেন্স")return(<>
-      {input("ambulanceName","অ্যাম্বুলেন্সের নাম *","অ্যাম্বুলেন্স নাম/নম্বর")}
-      {input("currentLocation","বর্তমান স্থান","যেমন: ওসমানী হাসপাতাল")}
-      {input("driverPhone","চালকের মোবাইল নম্বর","০১XXXXXXXXX","tel")}
-    </>);
-    /* Custom type */
-    return(<>
-      {input("name","নাম *","সেবার নাম")}
-      {input("address","ঠিকানা","মহল্লা, রোড")}
-      {input("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}
-      {input("phone","টেলিফোন","০৮XX-XXXXXX","tel")}
-      {input("email","ইমেইল","","email")}
-      {input("dutyOfficer","দায়িত্বরত","নাম")}
-    </>);
+    if(T==="হাসপাতাল")return<>{inp("name","প্রতিষ্ঠানের নাম","পূর্ণ নাম")}{inp("address","ঠিকানা","মহল্লা, রোড")}{inp("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}{inp("phone","টেলিফোন","০৮XX-XXXXXX","tel")}{inp("beds","শয্যা সংখ্যা","যেমন: ১০০")}{inp("dutyOfficer","দায়িত্বরত চিকিৎসক","ডা. নাম")}</>;
+    if(T==="থানা")return<>{inp("unitName","ইউনিট/থানার নাম","থানার নাম")}{inp("dutyOfficer","দায়িত্বপ্রাপ্ত কর্মকর্তা","ওসি/ইন্সপেক্টর")}{inp("address","ঠিকানা","মহল্লা, রোড")}{inp("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}{inp("phone","টেলিফোন","০৮XX-XXXXXX","tel")}{inp("email","ইমেইল","","email")}</>;
+    if(T==="ফায়ার সার্ভিস")return<>{inp("stationName","স্টেশনের নাম","ফায়ার স্টেশন")}{inp("address","ঠিকানা","মহল্লা, রোড")}{inp("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}{inp("phone","টেলিফোন","০৮XX-XXXXXX","tel")}{inp("email","ইমেইল","","email")}</>;
+    if(T==="অ্যাম্বুলেন্স")return<>{inp("ambulanceName","অ্যাম্বুলেন্সের নাম","নাম/নম্বর")}{inp("currentLocation","বর্তমান স্থান","যেমন: ওসমানী হাসপাতাল")}{inp("driverPhone","চালকের মোবাইল","০১XXXXXXXXX","tel")}</>;
+    /* Custom/Diagnostic */
+    return<>{inp("name","নাম","প্রতিষ্ঠানের নাম")}{inp("address","ঠিকানা","মহল্লা, রোড")}{inp("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}{inp("phone","টেলিফোন","০৮XX-XXXXXX","tel")}{inp("email","ইমেইল","","email")}{inp("dutyOfficer","দায়িত্বরত","নাম")}</>;
   };
 
   const getDisplayName=(s)=>s.name||s.unitName||s.stationName||s.ambulanceName||"—";
@@ -373,20 +377,29 @@ function ServiceMgr({services,setSvcs,showToast,svcTypes}){
       <select className="fs" style={{width:"auto",minWidth:"100px"}} value={fS} onChange={e=>setFS(e.target.value)}><option value="">সব স্ট্যাটাস</option><option value="open">খোলা</option><option value="closed">বন্ধ</option></select>
       <button className="bp" onClick={openAdd}>➕ নতুন সেবা</button>
     </div>
-    <div className="card">
-      <div className="ch"><div className="ch-l">🏢 সেবা তালিকা</div><span style={{fontSize:"11px",opacity:.85}}>{filtered.length}/{services.length}টি</span></div>
+    <div className="card"><div className="ch"><div className="ch-l">🏢 সেবা তালিকা</div><span style={{fontSize:"11px",opacity:.85}}>{filtered.length}/{services.length}টি</span></div>
       <div className="tbl">
-        {filtered.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>কোনো সেবা পাওয়া যায়নি।</div>:
-        <table><thead><tr><th>#</th><th>নাম</th><th>জেলা/উপজেলা</th><th>ধরন</th><th>ফোন</th><th>স্ট্যাটাস</th><th>অ্যাকশন</th></tr></thead>
+        {filtered.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>কোনো সেবা নেই।</div>:
+        <table><thead><tr><th>#</th><th>ছবি</th><th>নাম</th><th>জেলা/উপজেলা</th><th>ধরন</th><th>ফোন</th><th>স্ট্যাটাস</th><th>অ্যাকশন</th></tr></thead>
         <tbody>{filtered.map((s,i)=>{
           const meta=svcTypes.find(t=>t.name===s.type)||{icon:"🔧",color:"#888"};
+          const eff=getEffectiveStatus(s);
           return(<tr key={s.id}>
             <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
-            <td style={{fontWeight:600,maxWidth:160,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{getDisplayName(s)}</td>
+            <td>
+              {s.imageUrl
+                ?<img src={s.imageUrl} alt="" style={{width:40,height:40,borderRadius:8,objectFit:"cover",border:"2px solid white",boxShadow:"0 1px 4px rgba(0,0,0,.12)"}} onError={e=>e.target.style.display="none"}/>
+                :<span style={{fontSize:"22px"}}>{meta.icon||"🔧"}</span>}
+            </td>
+            <td style={{fontWeight:600,maxWidth:150,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{getDisplayName(s)}</td>
             <td style={{fontSize:"12px"}}>{s.district}<br/><span style={{color:"var(--mu)"}}>{s.upazila}</span></td>
-            <td><span className="type-chip" style={{background:`${meta.color}18`,color:meta.color,borderColor:`${meta.color}44`}}>{meta.icon||"🔧"} {s.type}</span></td>
+            <td><span className="type-chip" style={{background:`${meta.color||"#888"}18`,color:meta.color||"#888",borderColor:`${meta.color||"#888"}44`}}>{meta.icon||"🔧"} {s.type}</span></td>
             <td style={{fontSize:"12px"}}>{s.mobilePhone||s.phone||s.driverPhone||"—"}</td>
-            <td><button className={s.status==="open"?"bg":"br"} onClick={()=>toggle(s.id)}>{s.status==="open"?"✓ খোলা":"✗ বন্ধ"}</button></td>
+            <td>
+              {s.openTime&&s.closeTime
+                ?<span style={{fontSize:"11px",fontWeight:600,color:eff==="open"?"#15803d":"#dc2626"}}>{eff==="open"?"🟢 খোলা":"🔴 বন্ধ"}<br/><span style={{fontSize:"10px",color:"var(--mu)",fontWeight:400}}>{s.openTime}–{s.closeTime}</span></span>
+                :<button className={eff==="open"?"bg-btn":"br-btn"} onClick={()=>toggle(s.id)}>{eff==="open"?"✓ খোলা":"✗ বন্ধ"}</button>}
+            </td>
             <td><div style={{display:"flex",gap:"4px"}}><button className="be" onClick={()=>openEdit(s)}>✏️</button><button className="bd" onClick={()=>setConfirmId(s.id)}>🗑️</button></div></td>
           </tr>);
         })}</tbody></table>}
@@ -397,39 +410,68 @@ function ServiceMgr({services,setSvcs,showToast,svcTypes}){
       <div className="mb">
         <div className="mt">{editing?"✏️ সেবা সম্পাদনা":"➕ নতুন সেবা যোগ"}</div>
         <form onSubmit={submit}>
-          <div className="fg2">
-            <div className="fg"><span className="fl">জেলা *</span><select className="fs" value={form.district} onChange={e=>setForm({...form,district:e.target.value,upazila:""})} required><option value="">বেছে নিন</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div>
-            <div className="fg"><span className="fl">উপজেলা *</span><select className="fs" value={form.upazila} onChange={e=>setForm({...form,upazila:e.target.value})} required><option value="">বেছে নিন</option>{(DISTRICTS_DATA[form.district]||[]).map(u=><option key={u} value={u}>{u}</option>)}</select></div>
-          </div>
-          <div className="fg2">
-            <div className="fg"><span className="fl">সেবার ধরন *</span>
-              <select className="fs" value={form.type} onChange={e=>setForm({...form,type:e.target.value})}>
-                {allTypeNames.map(t=><option key={t} value={t}>{t}</option>)}
-              </select>
+          {/* Basic info */}
+          <div className="field-section">
+            <div className="field-section-title">📋 মৌলিক তথ্য</div>
+            <div className="fg2">
+              <div className="fg"><span className="fl">জেলা</span><select className="fs" value={form.district} onChange={e=>setForm({...form,district:e.target.value,upazila:""})}><option value="">বেছে নিন</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div>
+              <div className="fg"><span className="fl">উপজেলা</span><select className="fs" value={form.upazila} onChange={e=>setForm({...form,upazila:e.target.value})}><option value="">বেছে নিন</option>{(DISTRICTS_DATA[form.district]||[]).map(u=><option key={u} value={u}>{u}</option>)}</select></div>
             </div>
-            <div className="fg"><span className="fl">স্ট্যাটাস</span><select className="fs" value={form.status} onChange={e=>setForm({...form,status:e.target.value})}><option value="open">খোলা</option><option value="closed">বন্ধ</option></select></div>
+            <div className="fg2">
+              <div className="fg"><span className="fl">সেবার ধরন</span><select className="fs" value={form.type} onChange={e=>setForm({...form,type:e.target.value})}>{allTypeNames.map(t=><option key={t} value={t}>{t}</option>)}</select></div>
+              <div className="fg"><span className="fl">স্ট্যাটাস</span><select className="fs" value={form.status} onChange={e=>setForm({...form,status:e.target.value})}><option value="open">খোলা</option><option value="closed">বন্ধ</option></select></div>
+            </div>
           </div>
 
           {/* Type-specific fields */}
-          <div style={{background:"#f8fafc",border:"1px solid var(--brd)",borderRadius:"9px",padding:"12px",marginBottom:"10px"}}>
-            <p style={{fontSize:"11px",fontWeight:700,color:"var(--mu)",marginBottom:"10px",textTransform:"uppercase",letterSpacing:.5}}>📋 {form.type} সংক্রান্ত তথ্য</p>
+          <div className="field-section">
+            <div className="field-section-title">📝 {form.type} সংক্রান্ত তথ্য</div>
             {renderTypeFields()}
           </div>
 
-          {/* Map coordinates */}
-          <div style={{background:"#f8fafc",border:"1px solid var(--brd)",borderRadius:"9px",padding:"12px",marginBottom:"10px"}}>
-            <p style={{fontSize:"11px",fontWeight:700,color:"var(--mu)",marginBottom:"10px",textTransform:"uppercase",letterSpacing:.5}}>🗺️ মানচিত্র অবস্থান</p>
+          {/* Time-based (for diagnostic/custom) */}
+          {isTimeBased&&(
+            <div className="field-section" style={{borderLeft:"3px solid var(--acc)"}}>
+              <div className="field-section-title">🕐 খোলা/বন্ধের সময় (স্বয়ংক্রিয়)</div>
+              <p style={{fontSize:"12px",color:"var(--mu)",marginBottom:"10px"}}>এই সময় দিলে ব্যবহারকারীর মোবাইলের সময় অনুযায়ী খোলা/বন্ধ দেখাবে। ম্যানুয়ালি পরিবর্তন করা যাবে না।</p>
+              <div className="fg2">
+                <div className="fg"><span className="fl">খোলার সময় (24H)</span><input className="fi" type="time" value={form.openTime||""} onChange={e=>setForm({...form,openTime:e.target.value})} placeholder="09:00"/></div>
+                <div className="fg"><span className="fl">বন্ধের সময় (24H)</span><input className="fi" type="time" value={form.closeTime||""} onChange={e=>setForm({...form,closeTime:e.target.value})} placeholder="17:00"/></div>
+              </div>
+              {form.openTime&&form.closeTime&&(
+                <div style={{background:"#f0fdf4",border:"1px solid #86efac",borderRadius:"8px",padding:"8px 11px",fontSize:"12px",color:"#15803d",marginTop:"6px"}}>
+                  ✅ স্বয়ংক্রিয় সময়: {form.openTime} থেকে {form.closeTime} পর্যন্ত খোলা।
+                  {isOpenNow(form.openTime,form.closeTime)===true?" এখন খোলা আছে।":isOpenNow(form.openTime,form.closeTime)===false?" এখন বন্ধ আছে।":""}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Map */}
+          <div className="field-section">
+            <div className="field-section-title">🗺️ মানচিত্র অবস্থান</div>
             <div className="fg2">
               <div className="fg"><span className="fl">Latitude</span><input className="fi" type="number" step="any" value={form.lat} onChange={e=>setForm({...form,lat:e.target.value})} placeholder="24.8978"/></div>
               <div className="fg"><span className="fl">Longitude</span><input className="fi" type="number" step="any" value={form.lng} onChange={e=>setForm({...form,lng:e.target.value})} placeholder="91.8688"/></div>
             </div>
-            <p style={{fontSize:"11px",color:"var(--mu)"}}>💡 Google Maps-এ সার্চ করে Lat/Lng নিন: maps.google.com → ডান ক্লিক → "এই স্থান কী?"</p>
+            <p style={{fontSize:"11px",color:"var(--mu)"}}>💡 Google Maps → ডান ক্লিক → "এই স্থান কী?" → Lat/Lng কপি করুন</p>
           </div>
 
+          {/* Image */}
+          <div className="field-section">
+            <div className="field-section-title">🖼️ প্রতিষ্ঠানের ছবি</div>
+            <span className="fl">ছবির URL (Imgur, Google Drive public link, etc.)</span>
+            <input className="fi" value={form.imageUrl||""} onChange={e=>{setForm({...form,imageUrl:e.target.value});setImgPreview(e.target.value);}} placeholder="https://i.imgur.com/example.jpg"/>
+            {imgPreview&&<img src={imgPreview} className="img-preview" alt="প্রিভিউ" onError={e=>e.target.style.display="none"} style={{display:"block"}}/>}
+            <p style={{fontSize:"11px",color:"var(--mu)",marginTop:"6px"}}>💡 ছবি আপলোড করতে <a href="https://imgur.com" target="_blank" rel="noopener" style={{color:"var(--p)"}}>imgur.com</a> বা Google Drive ব্যবহার করুন</p>
+          </div>
+
+          {/* Emergency */}
           <div className="fg" style={{display:"flex",alignItems:"center",gap:"8px"}}>
             <input type="checkbox" id="emg" checked={!!form.emergency} onChange={e=>setForm({...form,emergency:e.target.checked})} style={{width:15,height:15,cursor:"pointer"}}/>
             <label htmlFor="emg" style={{fontSize:"13px",cursor:"pointer"}}>⚡ জরুরি সেবা (২৪/৭)</label>
           </div>
+
           <div style={{display:"flex",gap:"8px",justifyContent:"flex-end",marginTop:"12px",paddingTop:"12px",borderTop:"1px solid var(--brd)"}}>
             <button type="button" className="bs" onClick={()=>setShowF(false)}>বাতিল</button>
             <button type="submit" className="bp">{editing?"💾 সংরক্ষণ":"➕ যোগ করুন"}</button>
@@ -451,7 +493,7 @@ function DonorMgr({donors,setDonors,showToast}){
   const save=(next,msg)=>{setDonors(next);saveData(KS.donors,next);if(msg)showToast(msg);};
   const del=(id)=>{const d=donors.find(x=>x.id===id);save(donors.filter(x=>x.id!==id),"🗑️ মুছে ফেলা হয়েছে।");addLog("দাতা মুছে ফেলা",d?.name||"");setConfirmId(null);};
   const toggle=(id)=>{save(donors.map(d=>d.id===id?{...d,available:!d.available}:d),"✅ পরিবর্তিত।");};
-  const submit=(e)=>{e.preventDefault();if(editing){save(donors.map(d=>d.id===editing?{...form,id:editing}:d),"✅ আপডেট!");addLog("দাতা সম্পাদনা",form.name);}else{save([...donors,{...form,id:Date.now()}],"✅ যোগ হয়েছে!");addLog("নতুন দাতা",form.name);}setShowF(false);};
+  const submit=(e)=>{e.preventDefault();if(editing){save(donors.map(d=>d.id===editing?{...form,id:editing}:d),"✅ আপডেট হয়েছে!");addLog("দাতা সম্পাদনা",form.name);}else{save([...donors,{...form,id:Date.now()}],"✅ যোগ হয়েছে!");addLog("নতুন দাতা",form.name);}setShowF(false);};
   return(<div>
     <div style={{display:"flex",gap:"7px",flexWrap:"wrap",marginBottom:"12px",alignItems:"center"}}>
       <div className="sbar"><span>🔍</span><input placeholder="নাম, ফোন..." value={q} onChange={e=>setQ(e.target.value)}/>{q&&<button onClick={()=>setQ("")} style={{background:"none",border:"none",cursor:"pointer",color:"var(--mu)",fontSize:"16px",lineHeight:1}}>×</button>}</div>
@@ -469,16 +511,16 @@ function DonorMgr({donors,setDonors,showToast}){
         <td style={{fontSize:"12px"}}>{d.district}<br/><span style={{color:"var(--mu)"}}>{d.upazila}</span></td>
         <td style={{fontSize:"12px"}}>{d.phone}</td>
         <td style={{fontSize:"11px",color:"var(--mu)"}}>{d.lastDonation||"—"}</td>
-        <td><button className={d.available?"bg":"br"} onClick={()=>toggle(d.id)}>{d.available?"✓ উপলব্ধ":"✗ বিরতি"}</button></td>
+        <td><button className={d.available?"bg-btn":"br-btn"} onClick={()=>toggle(d.id)}>{d.available?"✓ উপলব্ধ":"✗ বিরতি"}</button></td>
         <td><div style={{display:"flex",gap:"4px"}}><button className="be" onClick={()=>{setEditing(d.id);setForm({...d});setShowF(true);}}>✏️</button><button className="bd" onClick={()=>setConfirmId(d.id)}>🗑️</button></div></td>
       </tr>)}</tbody></table>}</div>
     </div>
     {showF&&(<div className="ov" onClick={e=>e.target===e.currentTarget&&setShowF(false)}><div className="mb" style={{maxWidth:480}}>
       <div className="mt">{editing?"✏️ দাতা সম্পাদনা":"➕ নতুন দাতা"}</div>
       <form onSubmit={submit}>
-        <div className="fg2"><div className="fg"><span className="fl">নাম *</span><input className="fi" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required/></div><div className="fg"><span className="fl">মোবাইল *</span><input className="fi" type="tel" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required/></div></div>
-        <div className="fg2"><div className="fg"><span className="fl">রক্তের গ্রুপ *</span><select className="fs" value={form.bloodGroup} onChange={e=>setForm({...form,bloodGroup:e.target.value})} required>{BLOOD_GROUPS.map(b=><option key={b} value={b}>{b}</option>)}</select></div><div className="fg"><span className="fl">শেষ দানের তারিখ</span><input className="fi" value={form.lastDonation} onChange={e=>setForm({...form,lastDonation:e.target.value})} placeholder="১ মে ২০২৫"/></div></div>
-        <div className="fg2"><div className="fg"><span className="fl">জেলা *</span><select className="fs" value={form.district} onChange={e=>setForm({...form,district:e.target.value,upazila:""})} required><option value="">বেছে নিন</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div><div className="fg"><span className="fl">উপজেলা *</span><select className="fs" value={form.upazila} onChange={e=>setForm({...form,upazila:e.target.value})} required><option value="">বেছে নিন</option>{(DISTRICTS_DATA[form.district]||[]).map(u=><option key={u} value={u}>{u}</option>)}</select></div></div>
+        <div className="fg2"><div className="fg"><span className="fl">নাম</span><input className="fi" value={form.name} onChange={e=>setForm({...form,name:e.target.value})}/></div><div className="fg"><span className="fl">মোবাইল</span><input className="fi" type="tel" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}/></div></div>
+        <div className="fg2"><div className="fg"><span className="fl">রক্তের গ্রুপ</span><select className="fs" value={form.bloodGroup} onChange={e=>setForm({...form,bloodGroup:e.target.value})}>{BLOOD_GROUPS.map(b=><option key={b} value={b}>{b}</option>)}</select></div><div className="fg"><span className="fl">শেষ দানের তারিখ</span><input className="fi" value={form.lastDonation} onChange={e=>setForm({...form,lastDonation:e.target.value})} placeholder="১ মে ২০২৫"/></div></div>
+        <div className="fg2"><div className="fg"><span className="fl">জেলা</span><select className="fs" value={form.district} onChange={e=>setForm({...form,district:e.target.value,upazila:""})}><option value="">বেছে নিন</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div><div className="fg"><span className="fl">উপজেলা</span><select className="fs" value={form.upazila} onChange={e=>setForm({...form,upazila:e.target.value})}><option value="">বেছে নিন</option>{(DISTRICTS_DATA[form.district]||[]).map(u=><option key={u} value={u}>{u}</option>)}</select></div></div>
         <div className="fg" style={{display:"flex",alignItems:"center",gap:"8px"}}><input type="checkbox" id="avail" checked={!!form.available} onChange={e=>setForm({...form,available:e.target.checked})} style={{width:15,height:15,cursor:"pointer"}}/><label htmlFor="avail" style={{fontSize:"13px",cursor:"pointer"}}>✅ এখন দান দিতে সক্ষম</label></div>
         <div style={{display:"flex",gap:"8px",justifyContent:"flex-end",marginTop:"10px",paddingTop:"10px",borderTop:"1px solid var(--brd)"}}><button type="button" className="bs" onClick={()=>setShowF(false)}>বাতিল</button><button type="submit" className="bp">{editing?"💾 সংরক্ষণ":"➕ যোগ"}</button></div>
       </form>
@@ -487,7 +529,7 @@ function DonorMgr({donors,setDonors,showToast}){
   </div>);
 }
 
-/* ══ ALERT & DISASTER ══ */
+/* ══ ALERT MANAGER ══ */
 function AlertMgr({alerts,setAlerts,showToast,disaster,setDisaster}){
   const[newTxt,setNewTxt]=React.useState("");const[confirmId,setConfirmId]=React.useState(null);
   const add=()=>{if(!newTxt.trim())return;const next=[...alerts,{id:Date.now(),text:newTxt.trim(),active:true,time:new Date().toLocaleString("bn-BD")}];setAlerts(next);saveData(KS.alerts,next);setNewTxt("");showToast("✅ সতর্কতা যোগ হয়েছে!");addLog("সতর্কতা যোগ",newTxt.slice(0,50));};
@@ -526,8 +568,16 @@ function ReportsMgr({reports,setReports,showToast}){
     {reports.length>0&&<div style={{marginBottom:"12px"}}><button className="bd" onClick={()=>setCa(true)}>🗑️ সব মুছুন ({reports.length}টি)</button></div>}
     <div className="card"><div className="ch"><div className="ch-l">📨 রিপোর্ট ({reports.length}টি)</div></div>
       <div className="tbl">{reports.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>📭 কোনো রিপোর্ট নেই।</div>:
-      <table><thead><tr><th>#</th><th>সেবার নাম</th><th>সমস্যা</th><th>যোগাযোগ</th><th>সময়</th><th>অ্যাকশন</th></tr></thead>
-      <tbody>{reports.map((r,i)=><tr key={r.id}><td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td><td style={{fontWeight:500}}>{r.service||"—"}</td><td style={{maxWidth:180,fontSize:"12px"}}>{r.issue||"—"}</td><td style={{fontSize:"12px"}}>{r.contact||"—"}</td><td style={{fontSize:"11px",color:"var(--mu)",whiteSpace:"nowrap"}}>{r.time}</td><td><button className="bd" onClick={()=>del(r.id)}>🗑️</button></td></tr>)}</tbody></table>}
+      <table><thead><tr><th>#</th><th>সেবার নাম</th><th>সমস্যা</th><th>উৎস</th><th>যোগাযোগ</th><th>সময়</th><th>অ্যাকশন</th></tr></thead>
+      <tbody>{reports.map((r,i)=><tr key={r.id}>
+        <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
+        <td style={{fontWeight:500}}>{r.service||"—"}</td>
+        <td style={{maxWidth:160,fontSize:"12px",lineHeight:1.4}}>{r.issue||"—"}</td>
+        <td><span style={{fontSize:"10px",background:r.source==="card_popup"?"#eff6ff":"#f8fafc",color:r.source==="card_popup"?"var(--p)":"var(--mu)",padding:"2px 7px",borderRadius:"20px",fontWeight:600}}>{r.source==="card_popup"?"📋 কার্ড":"🖊️ সাধারণ"}</span></td>
+        <td style={{fontSize:"12px"}}>{r.contact||"—"}</td>
+        <td style={{fontSize:"11px",color:"var(--mu)",whiteSpace:"nowrap"}}>{r.time}</td>
+        <td><button className="bd" onClick={()=>del(r.id)}>🗑️</button></td>
+      </tr>)}</tbody></table>}
       </div>
     </div>
     {ca&&<Confirm msg={`সব ${reports.length}টি রিপোর্ট মুছে যাবে। নিশ্চিত?`} onYes={clearAll} onNo={()=>setCa(false)}/>}
@@ -546,32 +596,69 @@ function LogMgr({actLogs,setActLogs,showToast}){
 
 /* ══ BULK IMPORT ══ */
 function BulkImport({services,setSvcs,donors,setDonors,showToast,svcTypes}){
-  const[tab,setTab]=React.useState("services");
-  const[csv,setCsv]=React.useState("");const[preview,setPreview]=React.useState([]);const[err,setErr]=React.useState("");
-  const TMPL={services:"district,upazila,type,name,address,mobilePhone,phone,dutyOfficer,status,lat,lng,beds,emergency\nসিলেট,সিলেট সদর,হাসপাতাল,উদাহরণ হাসপাতাল,হাসপাতাল রোড,০১৭১১-১২৩৪৫৬,০৮২১-১২৩৪৫৬,ডা. করিম,open,24.8978,91.8688,100,true",donors:"name,phone,bloodGroup,district,upazila,lastDonation,available\nমো. রাহেল,০১৭১১-৪৪৫৫৬৬,A+,সিলেট,সিলেট সদর,১ মে ২০২৫,true"};
-  const parse=()=>{setErr("");setPreview([]);const lines=csv.trim().split("\n").filter(l=>l.trim());if(lines.length<2){setErr("কমপক্ষে ১টি ডেটা সারি থাকতে হবে।");return;}const headers=lines[0].split(",").map(h=>h.trim());const req=tab==="services"?["district","upazila","type","name"]:["name","phone","bloodGroup","district"];const miss=req.filter(r=>!headers.includes(r));if(miss.length){setErr(`এই কলামগুলো নেই: ${miss.join(", ")}`);return;}const rows=lines.slice(1).map((line,i)=>{const vals=line.split(",");const obj={};headers.forEach((h,j)=>{obj[h]=(vals[j]||"").trim();});if(tab==="services")return{...obj,id:Date.now()+i,lat:parseFloat(obj.lat)||0,lng:parseFloat(obj.lng)||0,emergency:obj.emergency==="true"};return{...obj,id:Date.now()+i,available:obj.available!=="false"};}).filter(r=>r.name);if(!rows.length){setErr("কোনো বৈধ ডেটা পাওয়া যায়নি।");return;}setPreview(rows);};
+  const[tab,setTab]=React.useState("services");const[csv,setCsv]=React.useState("");const[preview,setPreview]=React.useState([]);const[err,setErr]=React.useState("");
+  const TMPL={services:"district,upazila,type,name,address,mobilePhone,phone,status,lat,lng,imageUrl,openTime,closeTime\nসিলেট,সিলেট সদর,হাসপাতাল,উদাহরণ হাসপাতাল,হাসপাতাল রোড,০১৭১১-১২৩৪৫৬,০৮২১-১২৩৪৫৬,open,24.8978,91.8688,,,"  ,donors:"name,phone,bloodGroup,district,upazila,lastDonation,available\nমো. রাহেল,০১৭১১-৪৪৫৫৬৬,A+,সিলেট,সিলেট সদর,১ মে ২০২৫,true"};
+  const parse=()=>{setErr("");setPreview([]);const lines=csv.trim().split("\n").filter(l=>l.trim());if(lines.length<2){setErr("কমপক্ষে ১টি ডেটা সারি থাকতে হবে।");return;}const headers=lines[0].split(",").map(h=>h.trim());const rows=lines.slice(1).map((line,i)=>{const vals=line.split(",");const obj={};headers.forEach((h,j)=>{obj[h]=(vals[j]||"").trim();});if(tab==="services")return{...obj,id:Date.now()+i,lat:parseFloat(obj.lat)||0,lng:parseFloat(obj.lng)||0};return{...obj,id:Date.now()+i,available:obj.available!=="false"};}).filter(r=>r.name||r.unitName||r.stationName);if(!rows.length){setErr("কোনো বৈধ ডেটা পাওয়া যায়নি।");return;}setPreview(rows);};
   const doImport=()=>{if(tab==="services"){const next=[...services,...preview];setSvcs(next);saveData(KS.services,next);}else{const next=[...donors,...preview];setDonors(next);saveData(KS.donors,next);}showToast(`✅ ${preview.length}টি ডেটা ইম্পোর্ট হয়েছে!`);addLog(`বাল্ক ইম্পোর্ট`,`${tab}: ${preview.length}টি`);setCsv("");setPreview([]);};
   const dl=()=>{const blob=new Blob([TMPL[tab]],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`${tab}_template.csv`;a.click();URL.revokeObjectURL(url);};
   return(<div>
     <div className="tab-nav"><button className={`tab-btn${tab==="services"?" act":""}`} onClick={()=>{setTab("services");setPreview([]);setCsv("");setErr("");}}>🏢 সেবা ইম্পোর্ট</button><button className={`tab-btn${tab==="donors"?" act":""}`} onClick={()=>{setTab("donors");setPreview([]);setCsv("");setErr("");}}>🩸 দাতা ইম্পোর্ট</button></div>
     <div className="card"><div className="ch"><div className="ch-l">📥 CSV টেমপ্লেট</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"10px"}}>টেমপ্লেট ডাউনলোড করুন, পূরণ করুন, তারপর নিচে পেস্ট করুন।</p><button className="bs" onClick={dl}>📥 Template.csv ডাউনলোড</button></div></div>
     <div className="card"><div className="ch"><div className="ch-l">📤 CSV পেস্ট করুন</div></div><div className="cb"><textarea className="fa" rows={6} value={csv} onChange={e=>setCsv(e.target.value)} placeholder={TMPL[tab]} style={{marginBottom:8,fontFamily:"monospace",fontSize:"12px"}}/>{err&&<p style={{color:"#dc2626",fontSize:"12px",marginBottom:"8px"}}>❌ {err}</p>}<div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}><button className="bp" onClick={parse} disabled={!csv.trim()}>🔍 যাচাই</button>{preview.length>0&&<button className="bp" style={{background:"#16a34a"}} onClick={doImport}>✅ {preview.length}টি ইম্পোর্ট</button>}</div></div></div>
-    {preview.length>0&&<div className="card"><div className="ch"><div className="ch-l">👁️ প্রিভিউ</div></div><div className="tbl"><table><thead><tr><th>নাম</th><th>জেলা</th><th>{tab==="services"?"ধরন":"গ্রুপ"}</th></tr></thead><tbody>{preview.slice(0,6).map((r,i)=><tr key={i}><td style={{fontWeight:500}}>{r.name}</td><td style={{fontSize:"12px"}}>{r.district}</td><td>{tab==="services"?r.type:r.bloodGroup}</td></tr>)}</tbody></table>{preview.length>6&&<p style={{padding:"7px 10px",fontSize:"12px",color:"var(--mu)"}}>...এবং আরও {preview.length-6}টি।</p>}</div></div>}
+    {preview.length>0&&<div className="card"><div className="ch"><div className="ch-l">👁️ প্রিভিউ</div></div><div className="tbl"><table><thead><tr><th>নাম</th><th>জেলা</th><th>{tab==="services"?"ধরন":"গ্রুপ"}</th></tr></thead><tbody>{preview.slice(0,6).map((r,i)=><tr key={i}><td style={{fontWeight:500}}>{r.name||r.unitName||r.stationName}</td><td style={{fontSize:"12px"}}>{r.district}</td><td>{tab==="services"?r.type:r.bloodGroup}</td></tr>)}</tbody></table>{preview.length>6&&<p style={{padding:"7px 10px",fontSize:"12px",color:"var(--mu)"}}>...এবং আরও {preview.length-6}টি।</p>}</div></div>}
   </div>);
 }
 
-/* ══ REPORT GENERATOR ══ */
-function ReportGen({services,reports,volunteers,donors}){
-  const[rType,setRType]=React.useState("daily");const[dist,setDist]=React.useState("");
-  const gen=()=>{
-    const now=new Date();const filtered=dist?services.filter(s=>s.district===dist):services;const open=filtered.filter(s=>s.status==="open").length;
-    const content=["সিলেটসেবা — "+(rType==="daily"?"দৈনিক":"সাপ্তাহিক")+" প্রতিবেদন","তারিখ: "+now.toLocaleDateString("bn-BD",{weekday:"long",year:"numeric",month:"long",day:"numeric"}),"তৈরি: "+now.toLocaleTimeString("bn-BD"),dist?"জেলা: "+dist:"জেলা: সকল","=".repeat(55),"","📊 সেবা: মোট "+filtered.length+"টি | চালু "+open+"টি | বন্ধ "+(filtered.length-open)+"টি","👥 রক্তদাতা: "+donors.length+"জন | রিপোর্ট: "+reports.length+"টি | স্বেচ্ছাসেবক: "+volunteers.length+"জন","","=".repeat(55),"এই প্রতিবেদন সিলেটসেবা Admin থেকে তৈরি।"].join("\n");
-    const blob=new Blob([content],{type:"text/plain;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`sylhetsheba_${rType}_${now.toISOString().slice(0,10)}.txt`;a.click();URL.revokeObjectURL(url);addLog("প্রতিবেদন তৈরি",rType+" — "+(dist||"সকল"));
+/* ══ SETTINGS (password change + essential) ══ */
+function Settings({showToast,onLogout}){
+  const[currPass,setCurrPass]=React.useState("");
+  const[newPass,setNewPass]=React.useState("");
+  const[confirmPass,setConfirmPass]=React.useState("");
+  const[passMsg,setPassMsg]=React.useState(null);
+
+  const changePassword=(e)=>{
+    e.preventDefault();
+    const storedHash=getStoredHash();
+    if(simpleHash(currPass)!==storedHash){setPassMsg({type:"err",text:"❌ বর্তমান পাসওয়ার্ড সঠিক নয়।"});return;}
+    if(newPass.length<6){setPassMsg({type:"err",text:"❌ নতুন পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।"});return;}
+    if(newPass!==confirmPass){setPassMsg({type:"err",text:"❌ নতুন পাসওয়ার্ড ও নিশ্চিতকরণ মিলছে না।"});return;}
+    const newHash=simpleHash(newPass);
+    localStorage.setItem(KS.adminHash,newHash);
+    setPassMsg({type:"ok",text:"✅ পাসওয়ার্ড সফলভাবে পরিবর্তিত হয়েছে!"});
+    setCurrPass("");setNewPass("");setConfirmPass("");
+    addLog("পাসওয়ার্ড পরিবর্তন","সফলভাবে পরিবর্তিত");
+    showToast("✅ পাসওয়ার্ড পরিবর্তিত হয়েছে!");
   };
-  return(<div className="card"><div className="ch"><div className="ch-l">📄 প্রতিবেদন তৈরি</div></div><div className="cb">
-    <div className="fg2" style={{maxWidth:400,marginBottom:12}}><div className="fg"><span className="fl">ধরন</span><select className="fs" value={rType} onChange={e=>setRType(e.target.value)}><option value="daily">দৈনিক</option><option value="weekly">সাপ্তাহিক</option></select></div><div className="fg"><span className="fl">জেলা (ঐচ্ছিক)</span><select className="fs" value={dist} onChange={e=>setDist(e.target.value)}><option value="">সকল জেলা</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div></div>
-    <button className="bp" onClick={gen}>📥 প্রতিবেদন ডাউনলোড (.txt)</button>
-  </div></div>);
+
+  return(<div>
+    <div className="card">
+      <div className="ch"><div className="ch-l">🔐 পাসওয়ার্ড পরিবর্তন করুন</div></div>
+      <div className="cb" style={{maxWidth:440}}>
+        {passMsg&&<div style={{background:passMsg.type==="err"?"#fef2f2":"#f0fdf4",border:`1px solid ${passMsg.type==="err"?"#fca5a5":"#86efac"}`,color:passMsg.type==="err"?"#dc2626":"#15803d",borderRadius:"8px",padding:"9px 12px",fontSize:"13px",marginBottom:"12px"}}>{passMsg.text}</div>}
+        <form onSubmit={changePassword}>
+          <div className="fg"><span className="fl">বর্তমান পাসওয়ার্ড</span><input className="fi" type="password" value={currPass} onChange={e=>setCurrPass(e.target.value)} required placeholder="বর্তমান পাসওয়ার্ড"/></div>
+          <div className="fg"><span className="fl">নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)</span><input className="fi" type="password" value={newPass} onChange={e=>setNewPass(e.target.value)} required placeholder="নতুন পাসওয়ার্ড"/></div>
+          <div className="fg"><span className="fl">নতুন পাসওয়ার্ড নিশ্চিত করুন</span><input className="fi" type="password" value={confirmPass} onChange={e=>setConfirmPass(e.target.value)} required placeholder="আবার লিখুন"/></div>
+          <button type="submit" className="bp" style={{marginTop:"6px"}}>🔐 পাসওয়ার্ড পরিবর্তন করুন</button>
+        </form>
+      </div>
+    </div>
+    <div className="card">
+      <div className="ch"><div className="ch-l">🚪 সেশন ব্যবস্থাপনা</div></div>
+      <div className="cb">
+        <p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"12px",lineHeight:1.6}}>বর্তমান ব্রাউজার সেশন থেকে লগআউট করুন।</p>
+        <button className="bd" style={{background:"#fef2f2"}} onClick={onLogout}>🚪 লগআউট করুন</button>
+      </div>
+    </div>
+    <div className="card">
+      <div className="ch"><div className="ch-l">ℹ️ সিস্টেম তথ্য</div></div>
+      <div className="cb">
+        {[["ভার্সন",VER],["মোট জেলা",`${Object.keys(DISTRICTS_DATA).length}টি`],["মোট উপজেলা",`${Object.values(DISTRICTS_DATA).flat().length}টি`],["LocalStorage",`${(JSON.stringify(localStorage).length/1024).toFixed(1)} KB`]].map(([k,v])=>(
+          <div key={k} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:"1px solid #f1f5f9",fontSize:"13px"}}><span style={{color:"var(--mu)"}}>🔹 {k}</span><strong>{v}</strong></div>
+        ))}
+      </div>
+    </div>
+  </div>);
 }
 
 /* ══ DATA MANAGER ══ */
@@ -582,27 +669,15 @@ function DataMgr({showToast}){
   const reset=()=>{Object.values(KS).forEach(k=>localStorage.removeItem(k));showToast("✅ রিসেট সম্পন্ন। লোড হচ্ছে...");setTimeout(()=>window.location.reload(),1300);setCr(false);};
   return(<div>
     <div className="g2"><div className="card"><div className="ch"><div className="ch-l">📤 এক্সপোর্ট</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px"}}>সমস্ত ডেটা JSON-এ ডাউনলোড করুন।</p><button className="bp" onClick={exp}>📥 JSON ব্যাকআপ</button></div></div>
-    <div className="card"><div className="ch"><div className="ch-l">📥 ইম্পোর্ট</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px"}}>ব্যাকআপ থেকে পুনরুদ্ধার।</p><label className="bs" style={{cursor:"pointer",display:"inline-flex"}}>📂 JSON ফাইল নির্বাচন<input type="file" accept=".json" style={{display:"none"}} onChange={imp}/></label></div></div></div>
+    <div className="card"><div className="ch"><div className="ch-l">📥 ইম্পোর্ট</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px"}}>ব্যাকআপ থেকে পুনরুদ্ধার।</p><label className="bs" style={{cursor:"pointer",display:"inline-flex"}}>📂 JSON ফাইল<input type="file" accept=".json" style={{display:"none"}} onChange={imp}/></label></div></div></div>
     <div className="card" style={{marginTop:"14px"}}><div className="ch" style={{background:"#dc2626"}}><div className="ch-l">⚠️ রিসেট</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px"}}>সমস্ত কাস্টম ডেটা মুছে ডিফল্টে ফিরে যাবে।</p><button className="bd" style={{background:"#fef2f2"}} onClick={()=>setCr(true)}>🔄 রিসেট করুন</button></div></div>
-    <div className="card" style={{marginTop:"14px"}}><div className="ch"><div className="ch-l">ℹ️ সিস্টেম তথ্য</div></div><div className="cb">{[["ভার্সন",VER],["মোট জেলা",`${Object.keys(DISTRICTS_DATA).length}টি`],["মোট উপজেলা",`${Object.values(DISTRICTS_DATA).flat().length}টি`],["LocalStorage",`${(JSON.stringify(localStorage).length/1024).toFixed(1)} KB`]].map(([k,v])=><div key={k} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:"1px solid #f1f5f9",fontSize:"13px"}}><span style={{color:"var(--mu)"}}>🔹 {k}</span><strong>{v}</strong></div>)}</div></div>
     {cr&&<Confirm msg="সব কাস্টম ডেটা মুছে ডিফল্টে ফিরে যাবে। নিশ্চিত?" onYes={reset} onNo={()=>setCr(false)}/>}
-  </div>);
-}
-
-/* ══ SETTINGS ══ */
-function Settings(){
-  const copy=(t)=>{navigator.clipboard.writeText(t).catch(()=>{});};
-  const ifc=`<iframe src="./index.html" width="100%" height="950" frameborder="0" style="border:none;border-radius:12px" loading="lazy"></iframe>`;
-  return(<div>
-    <div className="card"><div className="ch"><div className="ch-l">🔐 Admin URL</div></div><div className="cb"><div style={{background:"#f0fdf4",border:"1px solid #86efac",borderRadius:"8px",padding:"11px 13px",fontSize:"13px",color:"#15803d",fontWeight:600,marginBottom:"8px"}}>📌 Admin URL: <code style={{background:"rgba(0,0,0,.07)",padding:"1px 6px",borderRadius:"4px"}}>yoursite.com/sylhetsheba/admin.html</code></div><p style={{fontSize:"12px",color:"var(--mu)"}}>এই URL শুধুমাত্র বিশ্বস্ত ব্যক্তিদের শেয়ার করুন।</p></div></div>
-    <div className="card"><div className="ch"><div className="ch-l">🌐 iframe কোড</div></div><div className="cb"><div style={{background:"#0d1b2e",color:"#a5f3fc",padding:"12px 14px",borderRadius:"8px",fontFamily:"monospace",fontSize:"11px",marginBottom:"8px",wordBreak:"break-all"}}>{ifc}</div><button className="bs" style={{fontSize:"12px"}} onClick={()=>copy(ifc)}>📋 কপি করুন</button></div></div>
-    <div className="card"><div className="ch"><div className="ch-l">🗺️ Google Maps API সুরক্ষা</div></div><div className="cb"><div style={{background:"#0d1b2e",color:"#a5f3fc",padding:"12px 14px",borderRadius:"8px",fontFamily:"monospace",fontSize:"11px",marginBottom:"8px"}}>{"yoursite.com/*\nwww.yoursite.com/*\n*.netlify.app/*"}</div><p style={{fontSize:"12px",color:"#dc2626",fontWeight:600}}>⚠️ API key পাবলিকলি শেয়ার করবেন না।</p></div></div>
   </div>);
 }
 
 /* ══ OVERVIEW ══ */
 function Overview({services,donors,alerts,reports,volunteers,actLogs,svcTypes}){
-  const open=services.filter(s=>s.status==="open").length;
+  const open=services.filter(s=>getEffectiveStatus(s)==="open").length;
   const byDist=Object.keys(DISTRICTS_DATA).map(d=>({d,c:services.filter(s=>s.district===d).length}));
   const maxC=Math.max(...byDist.map(x=>x.c),1);
   const stats=[
@@ -614,16 +689,16 @@ function Overview({services,donors,alerts,reports,volunteers,actLogs,svcTypes}){
     {ic:"❌",l:"বন্ধ সেবা",v:services.length-open,bg:"#fef2f2",clr:"#dc2626"},
     {ic:"🩸",l:"রক্তদাতা",v:donors.length,bg:"#fdf4ff",clr:"#9333ea"},
     {ic:"📨",l:"রিপোর্ট",v:reports.length,bg:"#fef9c3",clr:"#a16207"},
-    {ic:"🤝",l:"স্বেচ্ছাসেবক",v:volunteers.length,bg:"#eff6ff",clr:"#1d4ed8"},
     {ic:"🏷️",l:"সেবার ধরন",v:svcTypes.length,bg:"#f5f3ff",clr:"#7c3aed"},
+    {ic:"🤝",l:"স্বেচ্ছাসেবক",v:volunteers.length,bg:"#eff6ff",clr:"#1d4ed8"},
   ];
   return(<div>
     <div className="sg">{stats.map(s=><div key={s.l} className="sc"><div className="sc-ic" style={{background:s.bg}}>{s.ic}</div><div className="sc-inf"><p>{s.l}</p><strong style={{color:s.clr}}>{s.v}</strong></div></div>)}</div>
     <div className="g2">
-      <div className="card"><div className="ch"><div className="ch-l">📊 জেলাভিত্তিক</div></div><div className="cb">{byDist.map(({d,c})=><div key={d} style={{marginBottom:"11px"}}><div style={{display:"flex",justifyContent:"space-between",fontSize:"12px",marginBottom:"3px"}}><span style={{fontWeight:500}}>{d}</span><span style={{color:"var(--mu)"}}>{c}টি</span></div><div className="prog"><div className="prog-f" style={{width:`${Math.round(c/maxC*100)}%`,background:c>0?"linear-gradient(90deg,#0f3460,#e94560)":"#e2e8f0"}}></div></div></div>)}</div></div>
+      <div className="card"><div className="ch"><div className="ch-l">📊 জেলাভিত্তিক</div></div><div className="cb">{byDist.map(({d,c})=><div key={d} style={{marginBottom:"11px"}}><div style={{display:"flex",justifyContent:"space-between",fontSize:"12px",marginBottom:"3px"}}><span style={{fontWeight:500}}>{d}</span><span style={{color:"var(--mu)"}}>{c}টি</span></div><div className="prog"><div className="prog-f" style={{width:`${Math.round(c/maxC*100)}%`,background:"linear-gradient(90deg,#16213e,#e94560)"}}></div></div></div>)}</div></div>
       <div className="card"><div className="ch"><div className="ch-l">📋 সাম্প্রতিক লগ</div></div><div className="cb" style={{maxHeight:230,overflowY:"auto"}}>{actLogs.length===0&&<p style={{fontSize:"13px",color:"var(--mu)"}}>কোনো কার্যক্রম নেই।</p>}{actLogs.slice(0,10).map(l=><div key={l.id} className="log-item"><div className="log-d"></div><div style={{flex:1}}><p style={{fontSize:"13px",fontWeight:600}}>{l.action}</p><p style={{fontSize:"12px",color:"var(--mu)"}}>{l.detail}</p><p style={{fontSize:"10px",color:"#94a3b8",marginTop:"2px"}}>🕐 {l.time}</p></div></div>)}</div></div>
     </div>
-    {reports.length>0&&<div className="card" style={{marginTop:"14px"}}><div className="ch"><div className="ch-l">📨 সাম্প্রতিক রিপোর্ট</div></div><div className="tbl"><table><thead><tr><th>সেবার নাম</th><th>সমস্যা</th><th>সময়</th></tr></thead><tbody>{reports.slice(-5).reverse().map(r=><tr key={r.id}><td style={{fontWeight:500}}>{r.service||"—"}</td><td style={{fontSize:"12px",maxWidth:200}}>{r.issue||"—"}</td><td style={{fontSize:"11px",color:"var(--mu)",whiteSpace:"nowrap"}}>{r.time}</td></tr>)}</tbody></table></div></div>}
+    {reports.length>0&&<div className="card" style={{marginTop:"14px"}}><div className="ch"><div className="ch-l">📨 সাম্প্রতিক রিপোর্ট</div></div><div className="tbl"><table><thead><tr><th>সেবার নাম</th><th>সমস্যা</th><th>উৎস</th><th>সময়</th></tr></thead><tbody>{reports.slice(-5).reverse().map(r=><tr key={r.id}><td style={{fontWeight:500}}>{r.service||"—"}</td><td style={{fontSize:"12px",maxWidth:200}}>{r.issue||"—"}</td><td><span style={{fontSize:"10px",background:r.source==="card_popup"?"#eff6ff":"#f8fafc",color:r.source==="card_popup"?"var(--p)":"var(--mu)",padding:"2px 7px",borderRadius:"20px"}}>{r.source==="card_popup"?"📋 কার্ড":"🖊️ সাধারণ"}</span></td><td style={{fontSize:"11px",color:"var(--mu)",whiteSpace:"nowrap"}}>{r.time}</td></tr>)}</tbody></table></div></div>}
   </div>);
 }
 
@@ -654,11 +729,11 @@ function AdminApp(){
   const MENU=[
     {sec:"প্রধান",items:[{id:"overview",ic:"📊",lbl:"ওভারভিউ"},{id:"services",ic:"🏢",lbl:"সেবা ব্যবস্থাপনা"},{id:"svctypes",ic:"🏷️",lbl:"সেবার ধরন",badge:svcTypes.length,bc:"y"},{id:"donors",ic:"🩸",lbl:"রক্তদাতা"}]},
     {sec:"বিজ্ঞপ্তি",items:[{id:"alerts",ic:"🚨",lbl:"সতর্কতা ও দুর্যোগ",badge:disaster?"🔴":null,bc:"r"},{id:"reports",ic:"📨",lbl:"রিপোর্ট",badge:reports.length||null}]},
-    {sec:"টুলস",items:[{id:"log",ic:"📋",lbl:"কার্যক্রম লগ",badge:actLogs.length||null,bc:"g"},{id:"bulk",ic:"📥",lbl:"বাল্ক ইম্পোর্ট"},{id:"reportgen",ic:"📄",lbl:"প্রতিবেদন"}]},
+    {sec:"টুলস",items:[{id:"log",ic:"📋",lbl:"কার্যক্রম লগ",badge:actLogs.length||null,bc:"g"},{id:"bulk",ic:"📥",lbl:"বাল্ক ইম্পোর্ট"}]},
     {sec:"সিস্টেম",items:[{id:"data",ic:"💾",lbl:"ডেটা ম্যানেজমেন্ট"},{id:"settings",ic:"⚙️",lbl:"সেটিংস"}]},
   ];
-  const TITLES={overview:"ওভারভিউ",services:"সেবা ব্যবস্থাপনা",svctypes:"সেবার ধরন",donors:"রক্তদাতা",alerts:"সতর্কতা ও দুর্যোগ",reports:"রিপোর্ট",log:"কার্যক্রম লগ",bulk:"বাল্ক ইম্পোর্ট",reportgen:"প্রতিবেদন",data:"ডেটা ম্যানেজমেন্ট",settings:"সেটিংস"};
-  const ICONS={overview:"📊",services:"🏢",svctypes:"🏷️",donors:"🩸",alerts:"🚨",reports:"📨",log:"📋",bulk:"📥",reportgen:"📄",data:"💾",settings:"⚙️"};
+  const TITLES={overview:"ওভারভিউ",services:"সেবা ব্যবস্থাপনা",svctypes:"সেবার ধরন",donors:"রক্তদাতা",alerts:"সতর্কতা ও দুর্যোগ",reports:"রিপোর্ট",log:"কার্যক্রম লগ",bulk:"বাল্ক ইম্পোর্ট",data:"ডেটা ম্যানেজমেন্ট",settings:"সেটিংস"};
+  const ICONS={overview:"📊",services:"🏢",svctypes:"🏷️",donors:"🩸",alerts:"🚨",reports:"📨",log:"📋",bulk:"📥",data:"💾",settings:"⚙️"};
 
   return(<div style={{display:"flex",minHeight:"100vh"}}>
     <div className={`sb-overlay${mobSb?" open":""}`} onClick={()=>setMobSb(false)}></div>
@@ -672,11 +747,10 @@ function AdminApp(){
         </div>)}
       </React.Fragment>)}
       <div className="sb-footer">
-        <a href="index.html" target="_blank" className="sb-flink">🌐 পাবলিক সাইট দেখুন ↗</a>
+        <a href="index.html" target="_blank" className="sb-flink">🌐 পাবলিক সাইট ↗</a>
         <div className="sb-flink" onClick={logout}>🚪 লগআউট</div>
       </div>
     </div>
-
     <div className="admin-main">
       <div className="topbar">
         <div className="topbar-l"><button className="ham" onClick={()=>setMobSb(o=>!o)}>☰</button><p className="topbar-title">{ICONS[page]} {TITLES[page]}</p></div>
@@ -695,9 +769,8 @@ function AdminApp(){
         {page==="reports"   &&<ReportsMgr reports={reports} setReports={setReports} showToast={showToast}/>}
         {page==="log"       &&<LogMgr actLogs={actLogs} setActLogs={setActLogs} showToast={showToast}/>}
         {page==="bulk"      &&<BulkImport services={services} setSvcs={setSvcs} donors={donors} setDonors={setDonors} showToast={showToast} svcTypes={svcTypes}/>}
-        {page==="reportgen" &&<ReportGen services={services} reports={reports} volunteers={volunteers} donors={donors}/>}
         {page==="data"      &&<DataMgr showToast={showToast}/>}
-        {page==="settings"  &&<Settings/>}
+        {page==="settings"  &&<Settings showToast={showToast} onLogout={logout}/>}
       </div>
     </div>
     {toast&&<Toast msg={toast} onClose={()=>setToast(null)}/>}
