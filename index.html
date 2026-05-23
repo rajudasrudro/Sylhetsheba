@@ -751,7 +751,7 @@ function App(){
   const[q,setQ]=React.useState("");
   const[tab,setTab]=React.useState("services");
   const[selectedSvc,setSelectedSvc]=React.useState(null);
-  const[reportSvc,setReportSvc]=React.useState(null);
+  const[reportSvc,setReportSvc]=React.useState(false);
   const[toast,setToast]=React.useState(null);
   const[showDrop,setShowDrop]=React.useState(false);
   const searchRef=React.useRef(null);
@@ -775,8 +775,8 @@ function App(){
   },[]);
 
   const openReport=(svc)=>{
-    if(selectedSvc)setSelectedSvc(null); // close popup first
-    setReportSvc(svc);
+    setSelectedSvc(null);
+    setReportSvc(svc||true);
   };
 
   const TABS=[["services","📋 সেবা তালিকা"],["map","🗺️ মানচিত্র"],["donors","🩸 রক্তদাতা"]];
@@ -869,8 +869,8 @@ function App(){
       <a href="https://rajudasrudro.com" target="_blank" rel="noopener">Raju Das Rudro</a>
     </footer>
 
-    {selectedSvc&&<SvcPopup s={selectedSvc} onClose={()=>setSelectedSvc(null)} svcTypes={svcTypes} onReport={(svc)=>{setSelectedSvc(null);setReportSvc(svc);}}/>}
-    {reportSvc!==null&&<ReportModal onClose={()=>setReportSvc(null)} onToast={showToast} prefillService={reportSvc?.(reportSvc.name||reportSvc.unitName||reportSvc.stationName||reportSvc.ambulanceName||""):""} />}
+    {selectedSvc&&<SvcPopup s={selectedSvc} onClose={()=>setSelectedSvc(null)} svcTypes={svcTypes} onReport={(svc)=>{setSelectedSvc(null);setReportSvc(svc||true);}}/>}
+    {reportSvc&&<ReportModal onClose={()=>setReportSvc(false)} onToast={showToast} prefillService={typeof reportSvc==="object"?(reportSvc.name||reportSvc.unitName||reportSvc.stationName||reportSvc.ambulanceName||""):""} />}
     {toast&&<Toast msg={toast} onClose={()=>setToast(null)}/>}
   </>);
 }
