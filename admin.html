@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Admin — সিলেটসেবা v5.0.0</title>
+<title>Admin — সিলেটসেবা v6.0.0</title>
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -11,35 +11,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
 <script src="data.js"></script>
 <style>
-/* ══ Admin v5.0.0 ══ */
+/* ══ Admin v6.0.0 ══ */
 :root{
-  --sb:#0d1b2e;--sb2:#152338;--sbh:#2563eb;
-  --p:#2563eb;--pd:#1d4ed8;--acc:#e53935;
-  --bg:#f0f4f9;--sur:#fff;--brd:#dde4ed;
-  --tx:#1a2639;--mu:#5a6a80;
-  --sh1:0 1px 4px rgba(0,0,0,.07);
-  --sh2:0 4px 16px rgba(0,0,0,.10);
-  --r:10px;--sb-w:245px;
+  --sb:#16213e;--sb2:#1a2d4f;--sbh:#e94560;
+  --p:#0f3460;--pd:#0a2744;--acc:#e94560;
+  --bg:#f4f6fb;--sur:#ffffff;--brd:#e2e8f4;
+  --tx:#1e293b;--mu:#64748b;
+  --sh1:0 2px 8px rgba(15,52,96,.08);
+  --sh2:0 8px 24px rgba(15,52,96,.12);
+  --r:12px;--sb-w:248px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
 body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;}
-a{text-decoration:none;}
-button{font-family:'Hind Siliguri',sans-serif;}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-thumb{background:#b0bec5;border-radius:2px;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:2px;}
+
+.admin-shell{display:flex;min-height:100vh;}
 
 /* ══ SIDEBAR ══ */
-.admin-sb{
-  width:var(--sb-w);background:var(--sb);color:#fff;
-  display:flex;flex-direction:column;
-  position:fixed;top:0;left:0;height:100vh;
-  z-index:1000;overflow-y:auto;
-  transition:transform .28s cubic-bezier(.4,0,.2,1);
-}
+.admin-sb{width:var(--sb-w);background:var(--sb);color:#fff;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:1000;overflow-y:auto;transition:transform .28s cubic-bezier(.4,0,.2,1);}
 .sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;}
-.sb-brand{padding:15px 14px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.sb-logo{width:34px;height:34px;background:var(--sbh);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.sb-brand{padding:16px 14px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.sb-logo{width:36px;height:36px;background:var(--sbh);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
 .sb-brand h2{font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:700;color:#fff;line-height:1.3;}
 .sb-brand p{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px;}
 .sb-sec{padding:10px 14px 3px;font-size:9px;font-weight:700;color:rgba(255,255,255,.28);letter-spacing:.8px;text-transform:uppercase;margin-top:4px;}
@@ -47,13 +40,14 @@ button{font-family:'Hind Siliguri',sans-serif;}
 .sb-item:hover{background:rgba(255,255,255,.07);color:#fff;}
 .sb-item.act{background:var(--sbh);color:#fff;font-weight:600;}
 .sb-item .ic{font-size:15px;flex-shrink:0;width:20px;text-align:center;}
-.sb-bdg{margin-left:auto;background:var(--acc);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;}
-.sb-bdg.b{background:var(--sbh);}
+.sb-bdg{margin-left:auto;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;}
+.sb-bdg.r{background:#dc2626;animation:pulse 1.5s infinite;}
+.sb-bdg.b{background:#2563eb;}
 .sb-bdg.g{background:#16a34a;}
-.sb-bdg.r{background:#b91c1c;animation:pulse 1.5s infinite;}
+.sb-bdg.y{background:#d97706;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
 .sb-footer{padding:12px 14px;border-top:1px solid rgba(255,255,255,.07);margin-top:auto;flex-shrink:0;}
-.sb-flink{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:12px;padding:6px 4px;border-radius:6px;transition:all .18s;cursor:pointer;margin-bottom:3px;}
+.sb-flink{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:12px;padding:6px 4px;border-radius:6px;transition:all .18s;cursor:pointer;margin-bottom:3px;text-decoration:none;}
 .sb-flink:hover{color:#fff;background:rgba(255,255,255,.06);}
 
 /* ══ MAIN ══ */
@@ -70,15 +64,15 @@ button{font-family:'Hind Siliguri',sans-serif;}
 /* ══ CARDS ══ */
 .card{background:var(--sur);border-radius:var(--r);box-shadow:var(--sh1);border:1px solid var(--brd);overflow:hidden;margin-bottom:16px;}
 .card:last-child{margin-bottom:0;}
-.ch{background:var(--p);color:#fff;padding:10px 14px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.ch{background:linear-gradient(135deg,var(--p),#e94560);color:#fff;padding:10px 14px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .ch-l{display:flex;align-items:center;gap:7px;}
 .cb{padding:14px;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;}
 
 /* ══ STAT GRID ══ */
 .sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;margin-bottom:16px;}
-.sc{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);padding:12px 13px;box-shadow:var(--sh1);display:flex;align-items:center;gap:10px;}
+.sc{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);padding:12px 13px;box-shadow:var(--sh1);display:flex;align-items:center;gap:10px;transition:transform .18s;}
+.sc:hover{transform:translateY(-1px);}
 .sc-ic{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
 .sc-inf p{font-size:11px;color:var(--mu);}
 .sc-inf strong{font-size:20px;font-weight:700;display:block;line-height:1.1;}
@@ -87,26 +81,26 @@ button{font-family:'Hind Siliguri',sans-serif;}
 .tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
 th{background:#f8fafc;padding:8px 10px;text-align:right;font-weight:600;color:var(--mu);border-bottom:1.5px solid var(--brd);white-space:nowrap;font-size:12px;}
-td{padding:7px 10px;border-bottom:1px solid #f1f5f9;color:var(--tx);vertical-align:middle;}
+td{padding:8px 10px;border-bottom:1px solid #f1f5f9;color:var(--tx);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:#fafbfd;}
 
 /* ══ FORM ══ */
 .fi,.fs,.fa{width:100%;padding:8px 11px;border:1.5px solid var(--brd);border-radius:8px;font-family:'Hind Siliguri',sans-serif;font-size:13px;color:var(--tx);background:#fff;outline:none;transition:border-color .2s;resize:vertical;-webkit-appearance:none;appearance:none;}
-.fs{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%235a6a80' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;background-size:16px;padding-right:28px;}
-.fi:focus,.fs:focus,.fa:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(37,99,235,.10);}
+.fs{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2364748b' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;background-size:16px;padding-right:28px;}
+.fi:focus,.fs:focus,.fa:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(15,52,96,.10);}
 .fl{font-size:12px;font-weight:600;color:var(--mu);margin-bottom:3px;display:block;}
 .fg{margin-bottom:10px;}.fg:last-child{margin-bottom:0;}
 .fg2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
 
 /* ══ BUTTONS ══ */
-.bp{display:inline-flex;align-items:center;gap:5px;background:var(--p);color:#fff;border:none;border-radius:8px;padding:8px 15px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s;white-space:nowrap;}
-.bp:hover{background:var(--pd);}
+.bp{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--p),var(--acc));color:#fff;border:none;border-radius:8px;padding:8px 16px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
+.bp:hover{opacity:.9;}
 .bp:disabled{opacity:.5;cursor:not-allowed;}
-.bs{display:inline-flex;align-items:center;gap:5px;background:#fff;color:var(--p);border:1.5px solid var(--p);border-radius:8px;padding:7px 14px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s;white-space:nowrap;}
-.bs:hover{background:rgba(37,99,235,.06);}
-.bd{display:inline-flex;align-items:center;gap:4px;background:#fff;color:#dc2626;border:1.5px solid #fca5a5;border-radius:7px;padding:5px 11px;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.bs{display:inline-flex;align-items:center;gap:5px;background:#fff;color:var(--p);border:1.5px solid var(--p);border-radius:8px;padding:7px 14px;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .2s;}
+.bs:hover{background:#f0f4ff;}
+.bd{display:inline-flex;align-items:center;gap:4px;background:#fff;color:#dc2626;border:1.5px solid #fca5a5;border-radius:7px;padding:5px 11px;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .18s;}
 .bd:hover{background:#fef2f2;border-color:#dc2626;}
 .be{display:inline-flex;align-items:center;gap:4px;background:#fff;color:var(--p);border:1.5px solid #bfdbfe;border-radius:7px;padding:5px 11px;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
 .be:hover{background:#eff6ff;}
@@ -114,45 +108,45 @@ tr:hover td{background:#fafbfd;}
 .br{display:inline-flex;align-items:center;gap:4px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:7px;padding:4px 10px;font-family:'Hind Siliguri',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
 
 /* ══ MODAL ══ */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:7000;display:flex;align-items:center;justify-content:center;padding:14px;}
-.mb{background:#fff;border-radius:14px;max-width:560px;width:100%;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,.22);max-height:92vh;overflow-y:auto;}
-.mt{font-family:'Noto Serif Bengali',serif;font-size:15px;font-weight:700;color:var(--p);margin-bottom:13px;display:flex;align-items:center;gap:7px;}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:7000;display:flex;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(3px);}
+.mb{background:#fff;border-radius:14px;max-width:600px;width:100%;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,.22);max-height:92vh;overflow-y:auto;}
+.mt{font-family:'Noto Serif Bengali',serif;font-size:15px;font-weight:700;color:var(--p);margin-bottom:14px;display:flex;align-items:center;gap:7px;}
 
-/* ══ TOGGLE ══ */
+/* ══ MISC ══ */
+.toast{position:fixed;bottom:18px;right:16px;left:16px;background:#1e293b;color:#fff;padding:11px 16px;border-radius:10px;font-size:13px;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.25);z-index:9999;animation:fup .3s ease;text-align:center;}
+@media(min-width:480px){.toast{left:auto;max-width:320px;}}
+@keyframes fup{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+.confirm-box{background:#fff;border-radius:13px;max-width:340px;width:100%;padding:20px;}
+.log-item{display:flex;align-items:flex-start;gap:9px;padding:8px 0;border-bottom:1px solid #f1f5f9;}
+.log-item:last-child{border-bottom:none;}
+.log-d{width:8px;height:8px;border-radius:50%;background:var(--acc);flex-shrink:0;margin-top:4px;}
+.prog{height:7px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-top:3px;}
+.prog-f{height:100%;border-radius:10px;transition:width .5s;}
+.sbar{display:flex;align-items:center;gap:7px;background:#f8fafc;border:1.5px solid var(--brd);border-radius:8px;padding:7px 11px;flex:1;min-width:120px;}
+.sbar input{border:none;background:transparent;outline:none;font-family:'Hind Siliguri',sans-serif;font-size:13px;color:var(--tx);width:100%;}
 .tgl{position:relative;width:40px;height:22px;flex-shrink:0;}
 .tgl input{opacity:0;width:0;height:0;}
 .tgl-s{position:absolute;inset:0;background:#cbd5e1;border-radius:22px;cursor:pointer;transition:.3s;}
 .tgl-s::before{content:"";position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s;}
 .tgl input:checked+.tgl-s{background:#22c55e;}
 .tgl input:checked+.tgl-s::before{transform:translateX(18px);}
-
-/* ══ MISC ══ */
-.toast{position:fixed;bottom:18px;right:16px;left:16px;background:#1a2639;color:#fff;padding:11px 16px;border-radius:10px;font-size:13px;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.28);z-index:9999;animation:fup .3s ease;text-align:center;}
-@media(min-width:480px){.toast{left:auto;max-width:320px;}}
-@keyframes fup{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
-.confirm-box{background:#fff;border-radius:13px;max-width:340px;width:100%;padding:20px;}
-.log-item{display:flex;align-items:flex-start;gap:9px;padding:8px 0;border-bottom:1px solid #f1f5f9;}
-.log-item:last-child{border-bottom:none;}
-.log-d{width:8px;height:8px;border-radius:50%;background:var(--p);flex-shrink:0;margin-top:4px;}
-.prog{height:7px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-top:3px;}
-.prog-f{height:100%;border-radius:10px;transition:width .5s;}
-.sbar{display:flex;align-items:center;gap:7px;background:#f8fafc;border:1.5px solid var(--brd);border-radius:8px;padding:7px 11px;flex:1;min-width:120px;}
-.sbar input{border:none;background:transparent;outline:none;font-family:'Hind Siliguri',sans-serif;font-size:13px;color:var(--tx);width:100%;}
-.code-b{background:#0d1b2e;color:#a5f3fc;padding:12px 14px;border-radius:8px;font-family:'Courier New',monospace;font-size:11px;overflow-x:auto;margin-top:8px;position:relative;white-space:pre-wrap;word-break:break-all;}
-.dis-panel-on{background:linear-gradient(135deg,#7f0000,#dc2626);color:#fff;border-radius:var(--r);padding:16px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
-.dis-panel-off{background:#f8fafc;border:2px dashed var(--brd);border-radius:var(--r);padding:16px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
 .al-item{background:#f8fafc;border:1px solid var(--brd);border-radius:9px;padding:11px 13px;margin-bottom:9px;display:flex;align-items:flex-start;gap:11px;}
 .al-item:last-child{margin-bottom:0;}
 .al-item.on{border-left:4px solid #dc2626;background:#fff5f5;}
+.dis-on{background:linear-gradient(135deg,#7f0000,#dc2626);color:#fff;border-radius:var(--r);padding:16px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.dis-off{background:#f8fafc;border:2px dashed var(--brd);border-radius:var(--r);padding:16px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
 .tab-nav{display:flex;gap:2px;border-bottom:2px solid var(--brd);margin-bottom:14px;overflow-x:auto;}
 .tab-btn{padding:7px 12px;border:none;background:transparent;font-family:'Hind Siliguri',sans-serif;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;}
 .tab-btn:hover{color:var(--p);}
-.tab-btn.act{color:var(--p);border-bottom-color:var(--p);font-weight:700;}
+.tab-btn.act{color:var(--acc);border-bottom-color:var(--acc);font-weight:700;}
+
+/* type badge */
+.type-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid;}
 
 /* ── Login ── */
-.login-wrap{min-height:100vh;background:linear-gradient(135deg,#0d1b2e,#0d5c9e);display:flex;align-items:center;justify-content:center;padding:16px;}
-.login-box{background:#fff;border-radius:18px;padding:30px;max-width:380px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,.35);}
-.login-logo{width:56px;height:56px;background:var(--sbh);border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;}
+.login-wrap{min-height:100vh;background:linear-gradient(135deg,#16213e,#e94560);display:flex;align-items:center;justify-content:center;padding:16px;}
+.login-box{background:#fff;border-radius:18px;padding:32px;max-width:380px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,.35);}
+.login-logo{width:58px;height:58px;background:var(--acc);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;}
 .login-title{font-family:'Noto Serif Bengali',serif;font-size:20px;font-weight:700;color:var(--tx);text-align:center;margin-bottom:5px;}
 .login-sub{font-size:13px;color:var(--mu);text-align:center;margin-bottom:20px;}
 .login-err{background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;border-radius:8px;padding:9px 12px;font-size:13px;margin-bottom:11px;}
@@ -166,14 +160,13 @@ tr:hover td{background:#fafbfd;}
   .ham{display:block;}
   .content{padding:12px;}
   .fg2,.fg3{grid-template-columns:1fr;}
-  .g2,.g3{grid-template-columns:1fr;}
+  .g2{grid-template-columns:1fr;}
   .sg{grid-template-columns:repeat(2,1fr);}
   .topbar-r .t-date{display:none;}
-  .dis-panel-on,.dis-panel-off{flex-direction:column;align-items:flex-start;}
+  .dis-on,.dis-off{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:420px){
   .sg{grid-template-columns:1fr 1fr;}
-  .topbar{padding:10px 12px;}
   .topbar-title{font-size:14px;}
 }
 </style>
@@ -181,95 +174,437 @@ tr:hover td{background:#fafbfd;}
 <body>
 <div id="root"></div>
 <script type="text/babel">
-/* ══ Admin v5.0.0 ══ */
-const VER="v5.0.0";
-const A_USER="admin", A_PASS="sylhet2025";
+/* ══ Admin v6.0.0 ══ */
+const VER="v6.0.0";
+const A_USER="admin",A_PASS="sylhet2025";
 const KS={
   services:"pub_services",donors:"pub_donors",alerts:"pub_alerts",
   reports:"pub_reports",volunteers:"pub_volunteers",
-  ratings:"pub_ratings",log:"admin_log",disaster:"disaster_mode"
+  log:"admin_log",disaster:"disaster_mode",svcTypes:"pub_svc_types"
 };
+const DEFAULT_SVC_TYPES_OBJ=[
+  {name:"হাসপাতাল",icon:"🏥",color:"#e74c3c"},
+  {name:"থানা",icon:"👮",color:"#3b82f6"},
+  {name:"ফায়ার সার্ভিস",icon:"🚒",color:"#f97316"},
+  {name:"অ্যাম্বুলেন্স",icon:"🚑",color:"#22c55e"},
+];
 
-function addLog(action,detail){
-  try{
-    const logs=loadData(KS.log,[]);
-    logs.unshift({id:Date.now(),action,detail,time:new Date().toLocaleString("bn-BD")});
-    if(logs.length>200)logs.splice(200);
-    saveData(KS.log,logs);
-  }catch(e){}
-}
+function addLog(a,d){try{const l=loadData(KS.log,[]);l.unshift({id:Date.now(),action:a,detail:d,time:new Date().toLocaleString("bn-BD")});if(l.length>200)l.splice(200);saveData(KS.log,l);}catch(e){}}
 
-function Toast({msg,onClose}){
-  React.useEffect(()=>{const t=setTimeout(onClose,3200);return()=>clearTimeout(t);},[]);
-  return <div className="toast">{msg}</div>;
-}
-
-function Confirm({msg,onYes,onNo}){
-  return(
-    <div className="ov">
-      <div className="confirm-box">
-        <p style={{fontSize:"16px",fontWeight:700,marginBottom:"8px"}}>⚠️ নিশ্চিত করুন</p>
-        <p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"18px",lineHeight:1.6}}>{msg}</p>
-        <div style={{display:"flex",gap:"8px",justifyContent:"flex-end"}}>
-          <button className="bs" onClick={onNo}>বাতিল</button>
-          <button className="bp" style={{background:"#dc2626"}} onClick={onYes}>হ্যাঁ, নিশ্চিত</button>
-        </div>
-      </div>
-    </div>
-  );
-}
+function Toast({msg,onClose}){React.useEffect(()=>{const t=setTimeout(onClose,3200);return()=>clearTimeout(t);},[]);return<div className="toast">{msg}</div>;}
+function Confirm({msg,onYes,onNo}){return(<div className="ov"><div className="confirm-box"><p style={{fontSize:"16px",fontWeight:700,marginBottom:"8px"}}>⚠️ নিশ্চিত করুন</p><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"18px",lineHeight:1.6}}>{msg}</p><div style={{display:"flex",gap:"8px",justifyContent:"flex-end"}}><button className="bs" onClick={onNo}>বাতিল</button><button className="bp" style={{background:"#dc2626"}} onClick={onYes}>হ্যাঁ, নিশ্চিত</button></div></div></div>);}
 
 /* ══ LOGIN ══ */
 function Login({onLogin}){
-  const[u,setU]=React.useState("");
-  const[p,setP]=React.useState("");
-  const[err,setErr]=React.useState("");
-  const[loading,setLoading]=React.useState(false);
-  const submit=(e)=>{
-    e.preventDefault();setLoading(true);
-    setTimeout(()=>{
-      if(u===A_USER&&p===A_PASS){sessionStorage.setItem("admin_auth","1");addLog("লগইন","Admin প্যানেলে প্রবেশ");onLogin();}
-      else{setErr("❌ ভুল ইউজারনেম বা পাসওয়ার্ড!");setLoading(false);}
-    },500);
+  const[u,setU]=React.useState("");const[p,setP]=React.useState("");const[err,setErr]=React.useState("");const[ld,setLd]=React.useState(false);
+  const submit=(e)=>{e.preventDefault();setLd(true);setTimeout(()=>{if(u===A_USER&&p===A_PASS){sessionStorage.setItem("admin_auth","1");addLog("লগইন","Admin প্যানেলে প্রবেশ");onLogin();}else{setErr("❌ ভুল ইউজারনেম বা পাসওয়ার্ড!");setLd(false);}},500);};
+  return(<div className="login-wrap"><div className="login-box"><div className="login-logo">🔐</div><p className="login-title">অ্যাডমিন প্যানেল</p><p className="login-sub">সিলেটসেবা {VER}</p>{err&&<div className="login-err">{err}</div>}<form onSubmit={submit}><div className="fg"><span className="fl">ইউজারনেম</span><input className="fi" placeholder="admin" value={u} onChange={e=>setU(e.target.value)} required autoFocus/></div><div className="fg"><span className="fl">পাসওয়ার্ড</span><input className="fi" type="password" placeholder="••••••••" value={p} onChange={e=>setP(e.target.value)} required/></div><button type="submit" className="bp" style={{width:"100%",justifyContent:"center",padding:"11px",marginTop:"8px"}} disabled={ld}>{ld?"⏳ যাচাই...":"🔓 লগইন"}</button></form><p style={{fontSize:"11px",color:"var(--mu)",textAlign:"center",marginTop:"13px"}}>admin / sylhet2025</p></div></div>);
+}
+
+/* ══ CUSTOM SERVICE TYPE MANAGER ══ */
+function SvcTypeMgr({svcTypes,setSvcTypes,showToast}){
+  const[showF,setShowF]=React.useState(false);
+  const[form,setForm]=React.useState({name:"",icon:"🔧",color:"#6366f1"});
+  const[confirmId,setConfirmId]=React.useState(null);
+
+  const save=(next,msg)=>{setSvcTypes(next);saveData(KS.svcTypes,next);if(msg)showToast(msg);};
+  const del=(name)=>{
+    if(["হাসপাতাল","থানা","ফায়ার সার্ভিস","অ্যাম্বুলেন্স"].includes(name)){showToast("❌ ডিফল্ট সেবার ধরন মুছা যাবে না।");setConfirmId(null);return;}
+    save(svcTypes.filter(t=>t.name!==name),"🗑️ সেবার ধরন মুছে ফেলা হয়েছে।");
+    addLog("সেবার ধরন মুছে ফেলা",name);setConfirmId(null);
   };
-  return(
-    <div className="login-wrap">
-      <div className="login-box">
-        <div className="login-logo">🔐</div>
-        <p className="login-title">অ্যাডমিন প্যানেল</p>
-        <p className="login-sub">সিলেটসেবা | Sylhet Sheba {VER}</p>
-        {err&&<div className="login-err">{err}</div>}
-        <form onSubmit={submit}>
-          <div className="fg"><span className="fl">ইউজারনেম</span><input className="fi" placeholder="admin" value={u} onChange={e=>setU(e.target.value)} required autoFocus/></div>
-          <div className="fg"><span className="fl">পাসওয়ার্ড</span><input className="fi" type="password" placeholder="••••••••" value={p} onChange={e=>setP(e.target.value)} required/></div>
-          <button type="submit" className="bp" style={{width:"100%",justifyContent:"center",padding:"11px",marginTop:"8px"}} disabled={loading}>
-            {loading?"⏳ যাচাই হচ্ছে...":"🔓 লগইন করুন"}
-          </button>
-        </form>
-        <p style={{fontSize:"11px",color:"var(--mu)",textAlign:"center",marginTop:"13px"}}>Demo: admin / sylhet2025</p>
+  const submit=(e)=>{
+    e.preventDefault();
+    if(!form.name.trim()){showToast("❌ নাম দিতে হবে।");return;}
+    if(svcTypes.find(t=>t.name===form.name)){showToast("❌ এই নামে ধরন ইতোমধ্যে আছে।");return;}
+    save([...svcTypes,{name:form.name.trim(),icon:form.icon||"🔧",color:form.color||"#6366f1"}],"✅ নতুন সেবার ধরন যোগ হয়েছে!");
+    addLog("নতুন সেবার ধরন",form.name);setShowF(false);setForm({name:"",icon:"🔧",color:"#6366f1"});
+  };
+
+  return(<div>
+    <div style={{display:"flex",gap:"8px",marginBottom:"12px",alignItems:"center",flexWrap:"wrap"}}>
+      <p style={{fontSize:"13px",color:"var(--mu)",flex:1}}>মোট {svcTypes.length}টি সেবার ধরন সংজ্ঞায়িত আছে।</p>
+      <button className="bp" onClick={()=>setShowF(true)}>➕ নতুন ধরন তৈরি</button>
+    </div>
+    <div className="card">
+      <div className="ch"><div className="ch-l">🏷️ সেবার ধরন তালিকা</div></div>
+      <div className="tbl">
+        <table>
+          <thead><tr><th>#</th><th>আইকন</th><th>নাম</th><th>রঙ</th><th>ডিফল্ট?</th><th>অ্যাকশন</th></tr></thead>
+          <tbody>
+            {svcTypes.map((t,i)=>{
+              const isDefault=["হাসপাতাল","থানা","ফায়ার সার্ভিস","অ্যাম্বুলেন্স"].includes(t.name);
+              return(<tr key={t.name}>
+                <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
+                <td style={{fontSize:"22px",textAlign:"center"}}>{t.icon||"🔧"}</td>
+                <td style={{fontWeight:600}}>{t.name}</td>
+                <td><span style={{display:"inline-block",width:22,height:22,borderRadius:"50%",background:t.color||"#888",border:"2px solid #fff",boxShadow:"0 1px 4px rgba(0,0,0,.15)"}}></span></td>
+                <td><span style={{fontSize:"11px",fontWeight:600,color:isDefault?"#15803d":"var(--mu)"}}>{isDefault?"✅ ডিফল্ট":"কাস্টম"}</span></td>
+                <td>{!isDefault&&<button className="bd" onClick={()=>setConfirmId(t.name)}>🗑️ মুছুন</button>}</td>
+              </tr>);
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
-  );
+    {showF&&(<div className="ov" onClick={e=>e.target===e.currentTarget&&setShowF(false)}>
+      <div className="mb" style={{maxWidth:420}}>
+        <div className="mt">➕ নতুন সেবার ধরন তৈরি করুন</div>
+        <form onSubmit={submit}>
+          <div className="fg"><span className="fl">সেবার ধরনের নাম (বাংলায়) *</span><input className="fi" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required placeholder="যেমন: ক্লিনিক, ব্যাংক, বিদ্যালয়"/></div>
+          <div className="fg2">
+            <div className="fg"><span className="fl">আইকন (ইমোজি)</span><input className="fi" value={form.icon} onChange={e=>setForm({...form,icon:e.target.value})} placeholder="🔧" maxLength={4}/></div>
+            <div className="fg"><span className="fl">রঙ (color)</span>
+              <div style={{display:"flex",gap:"8px",alignItems:"center"}}>
+                <input type="color" value={form.color||"#6366f1"} onChange={e=>setForm({...form,color:e.target.value})} style={{width:44,height:36,borderRadius:8,border:"1.5px solid var(--brd)",cursor:"pointer",padding:2}}/>
+                <input className="fi" value={form.color} onChange={e=>setForm({...form,color:e.target.value})} placeholder="#6366f1" style={{flex:1}}/>
+              </div>
+            </div>
+          </div>
+          <div style={{background:"#eff6ff",border:"1px solid #bfdbfe",borderRadius:"8px",padding:"10px 12px",marginBottom:"10px",fontSize:"12px",color:"#1e40af"}}>
+            💡 নতুন ধরন তৈরি করলে সেবা যোগ করার সময় এই ধরনটি দেখা যাবে।
+          </div>
+          <div style={{display:"flex",gap:"8px",justifyContent:"flex-end"}}>
+            <button type="button" className="bs" onClick={()=>setShowF(false)}>বাতিল</button>
+            <button type="submit" className="bp">➕ তৈরি করুন</button>
+          </div>
+        </form>
+      </div>
+    </div>)}
+    {confirmId&&<Confirm msg={`"${confirmId}" সেবার ধরনটি মুছে যাবে। নিশ্চিত?`} onYes={()=>del(confirmId)} onNo={()=>setConfirmId(null)}/>}
+  </div>);
+}
+
+/* ══ SERVICE MANAGER (type-aware fields) ══ */
+function ServiceMgr({services,setSvcs,showToast,svcTypes}){
+  const[q,setQ]=React.useState("");
+  const[fD,setFD]=React.useState("");const[fT,setFT]=React.useState("");const[fS,setFS]=React.useState("");
+  const[showF,setShowF]=React.useState(false);
+  const[editing,setEditing]=React.useState(null);
+  const[confirmId,setConfirmId]=React.useState(null);
+  const E={district:"",upazila:"",type:"হাসপাতাল",status:"open",lat:"",lng:"",emergency:false,
+    /* shared */name:"",address:"",mobilePhone:"",phone:"",email:"",dutyOfficer:"",
+    /* hospital */beds:"",
+    /* police */unitName:"",
+    /* fire */stationName:"",
+    /* ambulance */ambulanceName:"",currentLocation:"",driverPhone:""};
+  const[form,setForm]=React.useState({...E});
+  const ups=(DISTRICTS_DATA[form.district]||[]);
+  const allTypeNames=svcTypes.map(t=>t.name);
+
+  const filtered=services.filter(s=>{
+    const lo=q.toLowerCase();
+    const nm=s.name||s.unitName||s.stationName||s.ambulanceName||"";
+    const mq=!lo||[nm,s.upazila,s.district,s.type,s.mobilePhone,s.phone,s.dutyOfficer].some(v=>(v||"").toLowerCase().includes(lo));
+    return mq&&(!fD||s.district===fD)&&(!fT||s.type===fT)&&(!fS||s.status===fS);
+  });
+
+  const save=(next,msg)=>{setSvcs(next);saveData(KS.services,next);if(msg)showToast(msg);};
+  const del=(id)=>{const s=services.find(x=>x.id===id);save(services.filter(x=>x.id!==id),"🗑️ মুছে ফেলা হয়েছে।");addLog("সেবা মুছে ফেলা",s?.name||s?.unitName||s?.stationName||"");setConfirmId(null);};
+  const toggle=(id)=>{const next=services.map(s=>s.id===id?{...s,status:s.status==="open"?"closed":"open"}:s);save(next,"✅ স্ট্যাটাস পরিবর্তিত।");};
+
+  const openEdit=(s)=>{setEditing(s.id);setForm({...E,...s,lat:s.lat||"",lng:s.lng||""});setShowF(true);};
+  const openAdd=()=>{setEditing(null);setForm({...E});setShowF(true);};
+
+  const submit=(e)=>{
+    e.preventDefault();
+    const entry={...form,lat:parseFloat(form.lat)||0,lng:parseFloat(form.lng)||0,emergency:!!form.emergency,id:editing||Date.now()};
+    const next=editing?services.map(s=>s.id===editing?entry:s):[...services,entry];
+    save(next,editing?"✅ আপডেট হয়েছে!":"✅ নতুন সেবা যোগ হয়েছে!");
+    addLog(editing?"সেবা সম্পাদনা":"নতুন সেবা যোগ",entry.name||entry.unitName||entry.stationName||entry.ambulanceName||"");
+    setShowF(false);
+  };
+
+  /* Type-specific form fields */
+  const renderTypeFields=()=>{
+    const T=form.type;
+    const input=(key,label,placeholder="",type="text")=>(
+      <div className="fg" key={key}>
+        <span className="fl">{label}</span>
+        <input className="fi" type={type} value={form[key]||""} onChange={e=>setForm({...form,[key]:e.target.value})} placeholder={placeholder}/>
+      </div>
+    );
+    if(T==="হাসপাতাল")return(<>
+      {input("name","প্রতিষ্ঠানের নাম *","পূর্ণ নাম")}
+      {input("address","ঠিকানা *","মহল্লা, রোড, শহর")}
+      {input("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}
+      {input("phone","টেলিফোন নম্বর","০৮XX-XXXXXX","tel")}
+      {input("beds","শয্যা সংখ্যা","যেমন: ১০০")}
+      {input("dutyOfficer","দায়িত্বরত চিকিৎসক","ডা. নাম")}
+    </>);
+    if(T==="থানা")return(<>
+      {input("unitName","ইউনিট/থানার নাম *","থানার নাম")}
+      {input("dutyOfficer","দায়িত্বপ্রাপ্ত কর্মকর্তা","ওসি/ইন্সপেক্টর নাম")}
+      {input("address","ঠিকানা *","মহল্লা, রোড")}
+      {input("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}
+      {input("phone","টেলিফোন নম্বর","০৮XX-XXXXXX","tel")}
+      {input("email","ইমেইল","name@police.gov.bd","email")}
+    </>);
+    if(T==="ফায়ার সার্ভিস")return(<>
+      {input("stationName","স্টেশনের নাম *","ফায়ার স্টেশনের নাম")}
+      {input("address","ঠিকানা *","মহল্লা, রোড")}
+      {input("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}
+      {input("phone","টেলিফোন নম্বর","০৮XX-XXXXXX","tel")}
+      {input("email","ইমেইল","name@fireservice.gov.bd","email")}
+    </>);
+    if(T==="অ্যাম্বুলেন্স")return(<>
+      {input("ambulanceName","অ্যাম্বুলেন্সের নাম *","অ্যাম্বুলেন্স নাম/নম্বর")}
+      {input("currentLocation","বর্তমান স্থান","যেমন: ওসমানী হাসপাতাল")}
+      {input("driverPhone","চালকের মোবাইল নম্বর","০১XXXXXXXXX","tel")}
+    </>);
+    /* Custom type */
+    return(<>
+      {input("name","নাম *","সেবার নাম")}
+      {input("address","ঠিকানা","মহল্লা, রোড")}
+      {input("mobilePhone","মোবাইল নম্বর","০১XXXXXXXXX","tel")}
+      {input("phone","টেলিফোন","০৮XX-XXXXXX","tel")}
+      {input("email","ইমেইল","","email")}
+      {input("dutyOfficer","দায়িত্বরত","নাম")}
+    </>);
+  };
+
+  const getDisplayName=(s)=>s.name||s.unitName||s.stationName||s.ambulanceName||"—";
+
+  return(<div>
+    <div style={{display:"flex",gap:"7px",flexWrap:"wrap",marginBottom:"12px",alignItems:"center"}}>
+      <div className="sbar"><span style={{color:"var(--mu)"}}>🔍</span><input placeholder="নাম, উপজেলা, ফোন..." value={q} onChange={e=>setQ(e.target.value)}/>{q&&<button onClick={()=>setQ("")} style={{background:"none",border:"none",cursor:"pointer",color:"var(--mu)",fontSize:"16px",lineHeight:1}}>×</button>}</div>
+      <select className="fs" style={{width:"auto",minWidth:"115px"}} value={fD} onChange={e=>setFD(e.target.value)}><option value="">সব জেলা</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select>
+      <select className="fs" style={{width:"auto",minWidth:"130px"}} value={fT} onChange={e=>setFT(e.target.value)}><option value="">সব ধরন</option>{allTypeNames.map(t=><option key={t} value={t}>{t}</option>)}</select>
+      <select className="fs" style={{width:"auto",minWidth:"100px"}} value={fS} onChange={e=>setFS(e.target.value)}><option value="">সব স্ট্যাটাস</option><option value="open">খোলা</option><option value="closed">বন্ধ</option></select>
+      <button className="bp" onClick={openAdd}>➕ নতুন সেবা</button>
+    </div>
+    <div className="card">
+      <div className="ch"><div className="ch-l">🏢 সেবা তালিকা</div><span style={{fontSize:"11px",opacity:.85}}>{filtered.length}/{services.length}টি</span></div>
+      <div className="tbl">
+        {filtered.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>কোনো সেবা পাওয়া যায়নি।</div>:
+        <table><thead><tr><th>#</th><th>নাম</th><th>জেলা/উপজেলা</th><th>ধরন</th><th>ফোন</th><th>স্ট্যাটাস</th><th>অ্যাকশন</th></tr></thead>
+        <tbody>{filtered.map((s,i)=>{
+          const meta=svcTypes.find(t=>t.name===s.type)||{icon:"🔧",color:"#888"};
+          return(<tr key={s.id}>
+            <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
+            <td style={{fontWeight:600,maxWidth:160,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{getDisplayName(s)}</td>
+            <td style={{fontSize:"12px"}}>{s.district}<br/><span style={{color:"var(--mu)"}}>{s.upazila}</span></td>
+            <td><span className="type-chip" style={{background:`${meta.color}18`,color:meta.color,borderColor:`${meta.color}44`}}>{meta.icon||"🔧"} {s.type}</span></td>
+            <td style={{fontSize:"12px"}}>{s.mobilePhone||s.phone||s.driverPhone||"—"}</td>
+            <td><button className={s.status==="open"?"bg":"br"} onClick={()=>toggle(s.id)}>{s.status==="open"?"✓ খোলা":"✗ বন্ধ"}</button></td>
+            <td><div style={{display:"flex",gap:"4px"}}><button className="be" onClick={()=>openEdit(s)}>✏️</button><button className="bd" onClick={()=>setConfirmId(s.id)}>🗑️</button></div></td>
+          </tr>);
+        })}</tbody></table>}
+      </div>
+    </div>
+
+    {showF&&(<div className="ov" onClick={e=>e.target===e.currentTarget&&setShowF(false)}>
+      <div className="mb">
+        <div className="mt">{editing?"✏️ সেবা সম্পাদনা":"➕ নতুন সেবা যোগ"}</div>
+        <form onSubmit={submit}>
+          <div className="fg2">
+            <div className="fg"><span className="fl">জেলা *</span><select className="fs" value={form.district} onChange={e=>setForm({...form,district:e.target.value,upazila:""})} required><option value="">বেছে নিন</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div>
+            <div className="fg"><span className="fl">উপজেলা *</span><select className="fs" value={form.upazila} onChange={e=>setForm({...form,upazila:e.target.value})} required><option value="">বেছে নিন</option>{(DISTRICTS_DATA[form.district]||[]).map(u=><option key={u} value={u}>{u}</option>)}</select></div>
+          </div>
+          <div className="fg2">
+            <div className="fg"><span className="fl">সেবার ধরন *</span>
+              <select className="fs" value={form.type} onChange={e=>setForm({...form,type:e.target.value})}>
+                {allTypeNames.map(t=><option key={t} value={t}>{t}</option>)}
+              </select>
+            </div>
+            <div className="fg"><span className="fl">স্ট্যাটাস</span><select className="fs" value={form.status} onChange={e=>setForm({...form,status:e.target.value})}><option value="open">খোলা</option><option value="closed">বন্ধ</option></select></div>
+          </div>
+
+          {/* Type-specific fields */}
+          <div style={{background:"#f8fafc",border:"1px solid var(--brd)",borderRadius:"9px",padding:"12px",marginBottom:"10px"}}>
+            <p style={{fontSize:"11px",fontWeight:700,color:"var(--mu)",marginBottom:"10px",textTransform:"uppercase",letterSpacing:.5}}>📋 {form.type} সংক্রান্ত তথ্য</p>
+            {renderTypeFields()}
+          </div>
+
+          {/* Map coordinates */}
+          <div style={{background:"#f8fafc",border:"1px solid var(--brd)",borderRadius:"9px",padding:"12px",marginBottom:"10px"}}>
+            <p style={{fontSize:"11px",fontWeight:700,color:"var(--mu)",marginBottom:"10px",textTransform:"uppercase",letterSpacing:.5}}>🗺️ মানচিত্র অবস্থান</p>
+            <div className="fg2">
+              <div className="fg"><span className="fl">Latitude</span><input className="fi" type="number" step="any" value={form.lat} onChange={e=>setForm({...form,lat:e.target.value})} placeholder="24.8978"/></div>
+              <div className="fg"><span className="fl">Longitude</span><input className="fi" type="number" step="any" value={form.lng} onChange={e=>setForm({...form,lng:e.target.value})} placeholder="91.8688"/></div>
+            </div>
+            <p style={{fontSize:"11px",color:"var(--mu)"}}>💡 Google Maps-এ সার্চ করে Lat/Lng নিন: maps.google.com → ডান ক্লিক → "এই স্থান কী?"</p>
+          </div>
+
+          <div className="fg" style={{display:"flex",alignItems:"center",gap:"8px"}}>
+            <input type="checkbox" id="emg" checked={!!form.emergency} onChange={e=>setForm({...form,emergency:e.target.checked})} style={{width:15,height:15,cursor:"pointer"}}/>
+            <label htmlFor="emg" style={{fontSize:"13px",cursor:"pointer"}}>⚡ জরুরি সেবা (২৪/৭)</label>
+          </div>
+          <div style={{display:"flex",gap:"8px",justifyContent:"flex-end",marginTop:"12px",paddingTop:"12px",borderTop:"1px solid var(--brd)"}}>
+            <button type="button" className="bs" onClick={()=>setShowF(false)}>বাতিল</button>
+            <button type="submit" className="bp">{editing?"💾 সংরক্ষণ":"➕ যোগ করুন"}</button>
+          </div>
+        </form>
+      </div>
+    </div>)}
+    {confirmId&&<Confirm msg="এই সেবাটি স্থায়ীভাবে মুছে যাবে। নিশ্চিত?" onYes={()=>del(confirmId)} onNo={()=>setConfirmId(null)}/>}
+  </div>);
+}
+
+/* ══ DONOR MANAGER ══ */
+function DonorMgr({donors,setDonors,showToast}){
+  const[q,setQ]=React.useState("");const[fBG,setFBG]=React.useState("");const[fD,setFD]=React.useState("");
+  const[showF,setShowF]=React.useState(false);const[editing,setEditing]=React.useState(null);const[confirmId,setConfirmId]=React.useState(null);
+  const E={name:"",phone:"",bloodGroup:"A+",district:"",upazila:"",lastDonation:"",available:true};
+  const[form,setForm]=React.useState({...E});
+  const filtered=donors.filter(d=>{const lo=q.toLowerCase();const mq=!lo||[d.name,d.bloodGroup,d.phone,d.upazila,d.district].some(v=>(v||"").toLowerCase().includes(lo));return mq&&(!fBG||d.bloodGroup===fBG)&&(!fD||d.district===fD);});
+  const save=(next,msg)=>{setDonors(next);saveData(KS.donors,next);if(msg)showToast(msg);};
+  const del=(id)=>{const d=donors.find(x=>x.id===id);save(donors.filter(x=>x.id!==id),"🗑️ মুছে ফেলা হয়েছে।");addLog("দাতা মুছে ফেলা",d?.name||"");setConfirmId(null);};
+  const toggle=(id)=>{save(donors.map(d=>d.id===id?{...d,available:!d.available}:d),"✅ পরিবর্তিত।");};
+  const submit=(e)=>{e.preventDefault();if(editing){save(donors.map(d=>d.id===editing?{...form,id:editing}:d),"✅ আপডেট!");addLog("দাতা সম্পাদনা",form.name);}else{save([...donors,{...form,id:Date.now()}],"✅ যোগ হয়েছে!");addLog("নতুন দাতা",form.name);}setShowF(false);};
+  return(<div>
+    <div style={{display:"flex",gap:"7px",flexWrap:"wrap",marginBottom:"12px",alignItems:"center"}}>
+      <div className="sbar"><span>🔍</span><input placeholder="নাম, ফোন..." value={q} onChange={e=>setQ(e.target.value)}/>{q&&<button onClick={()=>setQ("")} style={{background:"none",border:"none",cursor:"pointer",color:"var(--mu)",fontSize:"16px",lineHeight:1}}>×</button>}</div>
+      <select className="fs" style={{width:"auto",minWidth:"110px"}} value={fBG} onChange={e=>setFBG(e.target.value)}><option value="">সব গ্রুপ</option>{BLOOD_GROUPS.map(b=><option key={b} value={b}>{b}</option>)}</select>
+      <select className="fs" style={{width:"auto",minWidth:"115px"}} value={fD} onChange={e=>setFD(e.target.value)}><option value="">সব জেলা</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select>
+      <button className="bp" onClick={()=>{setEditing(null);setForm({...E});setShowF(true);}}>➕ নতুন দাতা</button>
+    </div>
+    <div className="card"><div className="ch"><div className="ch-l">🩸 রক্তদাতা ({donors.length}জন)</div></div>
+      <div className="tbl">{filtered.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>কোনো দাতা নেই।</div>:
+      <table><thead><tr><th>#</th><th>নাম</th><th>গ্রুপ</th><th>জেলা/উপজেলা</th><th>ফোন</th><th>শেষ দান</th><th>উপলব্ধতা</th><th>অ্যাকশন</th></tr></thead>
+      <tbody>{filtered.map((d,i)=><tr key={d.id}>
+        <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
+        <td style={{fontWeight:600}}>{d.name}</td>
+        <td><span style={{background:"#fef2f2",color:"#dc2626",fontWeight:700,padding:"2px 9px",borderRadius:"20px",border:"1px solid #fca5a5",fontSize:"12px"}}>{d.bloodGroup}</span></td>
+        <td style={{fontSize:"12px"}}>{d.district}<br/><span style={{color:"var(--mu)"}}>{d.upazila}</span></td>
+        <td style={{fontSize:"12px"}}>{d.phone}</td>
+        <td style={{fontSize:"11px",color:"var(--mu)"}}>{d.lastDonation||"—"}</td>
+        <td><button className={d.available?"bg":"br"} onClick={()=>toggle(d.id)}>{d.available?"✓ উপলব্ধ":"✗ বিরতি"}</button></td>
+        <td><div style={{display:"flex",gap:"4px"}}><button className="be" onClick={()=>{setEditing(d.id);setForm({...d});setShowF(true);}}>✏️</button><button className="bd" onClick={()=>setConfirmId(d.id)}>🗑️</button></div></td>
+      </tr>)}</tbody></table>}</div>
+    </div>
+    {showF&&(<div className="ov" onClick={e=>e.target===e.currentTarget&&setShowF(false)}><div className="mb" style={{maxWidth:480}}>
+      <div className="mt">{editing?"✏️ দাতা সম্পাদনা":"➕ নতুন দাতা"}</div>
+      <form onSubmit={submit}>
+        <div className="fg2"><div className="fg"><span className="fl">নাম *</span><input className="fi" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required/></div><div className="fg"><span className="fl">মোবাইল *</span><input className="fi" type="tel" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required/></div></div>
+        <div className="fg2"><div className="fg"><span className="fl">রক্তের গ্রুপ *</span><select className="fs" value={form.bloodGroup} onChange={e=>setForm({...form,bloodGroup:e.target.value})} required>{BLOOD_GROUPS.map(b=><option key={b} value={b}>{b}</option>)}</select></div><div className="fg"><span className="fl">শেষ দানের তারিখ</span><input className="fi" value={form.lastDonation} onChange={e=>setForm({...form,lastDonation:e.target.value})} placeholder="১ মে ২০২৫"/></div></div>
+        <div className="fg2"><div className="fg"><span className="fl">জেলা *</span><select className="fs" value={form.district} onChange={e=>setForm({...form,district:e.target.value,upazila:""})} required><option value="">বেছে নিন</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div><div className="fg"><span className="fl">উপজেলা *</span><select className="fs" value={form.upazila} onChange={e=>setForm({...form,upazila:e.target.value})} required><option value="">বেছে নিন</option>{(DISTRICTS_DATA[form.district]||[]).map(u=><option key={u} value={u}>{u}</option>)}</select></div></div>
+        <div className="fg" style={{display:"flex",alignItems:"center",gap:"8px"}}><input type="checkbox" id="avail" checked={!!form.available} onChange={e=>setForm({...form,available:e.target.checked})} style={{width:15,height:15,cursor:"pointer"}}/><label htmlFor="avail" style={{fontSize:"13px",cursor:"pointer"}}>✅ এখন দান দিতে সক্ষম</label></div>
+        <div style={{display:"flex",gap:"8px",justifyContent:"flex-end",marginTop:"10px",paddingTop:"10px",borderTop:"1px solid var(--brd)"}}><button type="button" className="bs" onClick={()=>setShowF(false)}>বাতিল</button><button type="submit" className="bp">{editing?"💾 সংরক্ষণ":"➕ যোগ"}</button></div>
+      </form>
+    </div></div>)}
+    {confirmId&&<Confirm msg="এই দাতার তথ্য মুছে যাবে। নিশ্চিত?" onYes={()=>del(confirmId)} onNo={()=>setConfirmId(null)}/>}
+  </div>);
+}
+
+/* ══ ALERT & DISASTER ══ */
+function AlertMgr({alerts,setAlerts,showToast,disaster,setDisaster}){
+  const[newTxt,setNewTxt]=React.useState("");const[confirmId,setConfirmId]=React.useState(null);
+  const add=()=>{if(!newTxt.trim())return;const next=[...alerts,{id:Date.now(),text:newTxt.trim(),active:true,time:new Date().toLocaleString("bn-BD")}];setAlerts(next);saveData(KS.alerts,next);setNewTxt("");showToast("✅ সতর্কতা যোগ হয়েছে!");addLog("সতর্কতা যোগ",newTxt.slice(0,50));};
+  const toggle=(id)=>{const next=alerts.map(a=>a.id===id?{...a,active:!a.active}:a);setAlerts(next);saveData(KS.alerts,next);showToast("✅ পরিবর্তিত।");};
+  const del=(id)=>{const a=alerts.find(x=>x.id===id);const next=alerts.filter(x=>x.id!==id);setAlerts(next);saveData(KS.alerts,next);showToast("🗑️ মুছে ফেলা হয়েছে।");addLog("সতর্কতা মুছে ফেলা",a?.text?.slice(0,50)||"");setConfirmId(null);};
+  const toggleDis=()=>{const next=!disaster;setDisaster(next);saveData(KS.disaster,next);showToast(next?"🚨 দুর্যোগ মোড চালু!":"✅ দুর্যোগ মোড বন্ধ।");addLog(next?"দুর্যোগ মোড চালু":"দুর্যোগ মোড বন্ধ","Admin");};
+  return(<div>
+    <div className={disaster?"dis-on":"dis-off"}>
+      <div><p style={{fontWeight:700,fontSize:"15px",marginBottom:"5px"}}>{disaster?"🔴 দুর্যোগ মোড সক্রিয়":"⚪ দুর্যোগ মোড নিষ্ক্রিয়"}</p><p style={{fontSize:"13px",opacity:.85,lineHeight:1.5}}>{disaster?"পাবলিক সাইটে লাল ব্যানার দেখাচ্ছে।":"চালু করলে পাবলিক সাইটে জরুরি ব্যানার দেখাবে।"}</p></div>
+      <button onClick={toggleDis} style={{background:disaster?"rgba(255,255,255,.2)":"#dc2626",color:"#fff",border:disaster?"1px solid rgba(255,255,255,.4)":"none",borderRadius:"8px",padding:"9px 16px",font:"600 13px 'Hind Siliguri',sans-serif",cursor:"pointer",flexShrink:0,whiteSpace:"nowrap"}}>{disaster?"✅ স্বাভাবিক মোড":"🚨 দুর্যোগ মোড চালু"}</button>
+    </div>
+    <div className="card"><div className="ch"><div className="ch-l">➕ নতুন জরুরি বার্তা</div></div><div className="cb">
+      <textarea className="fa" rows={3} value={newTxt} onChange={e=>setNewTxt(e.target.value)} placeholder="⚠️ বন্যা সতর্কতা..." style={{marginBottom:10}}/>
+      <button className="bp" onClick={add} disabled={!newTxt.trim()}>📢 প্রকাশ করুন</button>
+    </div></div>
+    <div className="card"><div className="ch"><div className="ch-l">🚨 বিদ্যমান সতর্কতা ({alerts.length}টি)</div></div><div className="cb">
+      {alerts.length===0&&<p style={{fontSize:"13px",color:"var(--mu)",textAlign:"center",padding:"14px 0"}}>কোনো সতর্কতা নেই।</p>}
+      {alerts.map(a=><div key={a.id} className={`al-item${a.active?" on":""}`}>
+        <div style={{flex:1}}><p style={{fontSize:"13px",marginBottom:"5px",lineHeight:1.5}}>{a.text}</p><span style={{fontSize:"11px",fontWeight:600,color:a.active?"#dc2626":"var(--mu)"}}>{a.active?"🔴 সক্রিয়":"⚪ নিষ্ক্রিয়"}</span></div>
+        <div style={{display:"flex",flexDirection:"column",gap:"6px",alignItems:"flex-end",flexShrink:0}}>
+          <label className="tgl"><input type="checkbox" checked={!!a.active} onChange={()=>toggle(a.id)}/><span className="tgl-s"></span></label>
+          <button className="bd" style={{fontSize:"11px",padding:"3px 9px"}} onClick={()=>setConfirmId(a.id)}>🗑️</button>
+        </div>
+      </div>)}
+    </div></div>
+    {confirmId&&<Confirm msg="এই সতর্কতাটি মুছে যাবে। নিশ্চিত?" onYes={()=>del(confirmId)} onNo={()=>setConfirmId(null)}/>}
+  </div>);
+}
+
+/* ══ REPORTS ══ */
+function ReportsMgr({reports,setReports,showToast}){
+  const[ca,setCa]=React.useState(false);
+  const del=(id)=>{const next=reports.filter(r=>r.id!==id);setReports(next);saveData(KS.reports,next);showToast("🗑️ মুছে ফেলা হয়েছে।");};
+  const clearAll=()=>{setReports([]);saveData(KS.reports,[]);showToast("✅ সব মুছে ফেলা হয়েছে।");addLog("সব রিপোর্ট মুছে ফেলা",`${reports.length}টি`);setCa(false);};
+  return(<div>
+    {reports.length>0&&<div style={{marginBottom:"12px"}}><button className="bd" onClick={()=>setCa(true)}>🗑️ সব মুছুন ({reports.length}টি)</button></div>}
+    <div className="card"><div className="ch"><div className="ch-l">📨 রিপোর্ট ({reports.length}টি)</div></div>
+      <div className="tbl">{reports.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>📭 কোনো রিপোর্ট নেই।</div>:
+      <table><thead><tr><th>#</th><th>সেবার নাম</th><th>সমস্যা</th><th>যোগাযোগ</th><th>সময়</th><th>অ্যাকশন</th></tr></thead>
+      <tbody>{reports.map((r,i)=><tr key={r.id}><td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td><td style={{fontWeight:500}}>{r.service||"—"}</td><td style={{maxWidth:180,fontSize:"12px"}}>{r.issue||"—"}</td><td style={{fontSize:"12px"}}>{r.contact||"—"}</td><td style={{fontSize:"11px",color:"var(--mu)",whiteSpace:"nowrap"}}>{r.time}</td><td><button className="bd" onClick={()=>del(r.id)}>🗑️</button></td></tr>)}</tbody></table>}
+      </div>
+    </div>
+    {ca&&<Confirm msg={`সব ${reports.length}টি রিপোর্ট মুছে যাবে। নিশ্চিত?`} onYes={clearAll} onNo={()=>setCa(false)}/>}
+  </div>);
+}
+
+/* ══ ACTIVITY LOG ══ */
+function LogMgr({actLogs,setActLogs,showToast}){
+  return(<div className="card"><div className="ch"><div className="ch-l">📋 কার্যক্রমের ইতিহাস ({actLogs.length}টি)</div>{actLogs.length>0&&<button className="bd" style={{border:"none",background:"rgba(255,255,255,.18)",color:"#fff",fontSize:"12px"}} onClick={()=>{setActLogs([]);saveData(KS.log,[]);showToast("✅ লগ মুছে ফেলা হয়েছে।");}}>🗑️</button>}</div>
+    <div className="cb" style={{maxHeight:500,overflowY:"auto"}}>
+      {actLogs.length===0&&<p style={{fontSize:"13px",color:"var(--mu)",textAlign:"center",padding:"16px 0"}}>কোনো কার্যক্রম নেই।</p>}
+      {actLogs.map(l=><div key={l.id} className="log-item"><div className="log-d"></div><div style={{flex:1}}><p style={{fontSize:"13px",fontWeight:600}}>{l.action}</p><p style={{fontSize:"12px",color:"var(--mu)"}}>{l.detail}</p><p style={{fontSize:"10px",color:"#94a3b8",marginTop:"2px"}}>🕐 {l.time}</p></div></div>)}
+    </div>
+  </div>);
+}
+
+/* ══ BULK IMPORT ══ */
+function BulkImport({services,setSvcs,donors,setDonors,showToast,svcTypes}){
+  const[tab,setTab]=React.useState("services");
+  const[csv,setCsv]=React.useState("");const[preview,setPreview]=React.useState([]);const[err,setErr]=React.useState("");
+  const TMPL={services:"district,upazila,type,name,address,mobilePhone,phone,dutyOfficer,status,lat,lng,beds,emergency\nসিলেট,সিলেট সদর,হাসপাতাল,উদাহরণ হাসপাতাল,হাসপাতাল রোড,০১৭১১-১২৩৪৫৬,০৮২১-১২৩৪৫৬,ডা. করিম,open,24.8978,91.8688,100,true",donors:"name,phone,bloodGroup,district,upazila,lastDonation,available\nমো. রাহেল,০১৭১১-৪৪৫৫৬৬,A+,সিলেট,সিলেট সদর,১ মে ২০২৫,true"};
+  const parse=()=>{setErr("");setPreview([]);const lines=csv.trim().split("\n").filter(l=>l.trim());if(lines.length<2){setErr("কমপক্ষে ১টি ডেটা সারি থাকতে হবে।");return;}const headers=lines[0].split(",").map(h=>h.trim());const req=tab==="services"?["district","upazila","type","name"]:["name","phone","bloodGroup","district"];const miss=req.filter(r=>!headers.includes(r));if(miss.length){setErr(`এই কলামগুলো নেই: ${miss.join(", ")}`);return;}const rows=lines.slice(1).map((line,i)=>{const vals=line.split(",");const obj={};headers.forEach((h,j)=>{obj[h]=(vals[j]||"").trim();});if(tab==="services")return{...obj,id:Date.now()+i,lat:parseFloat(obj.lat)||0,lng:parseFloat(obj.lng)||0,emergency:obj.emergency==="true"};return{...obj,id:Date.now()+i,available:obj.available!=="false"};}).filter(r=>r.name);if(!rows.length){setErr("কোনো বৈধ ডেটা পাওয়া যায়নি।");return;}setPreview(rows);};
+  const doImport=()=>{if(tab==="services"){const next=[...services,...preview];setSvcs(next);saveData(KS.services,next);}else{const next=[...donors,...preview];setDonors(next);saveData(KS.donors,next);}showToast(`✅ ${preview.length}টি ডেটা ইম্পোর্ট হয়েছে!`);addLog(`বাল্ক ইম্পোর্ট`,`${tab}: ${preview.length}টি`);setCsv("");setPreview([]);};
+  const dl=()=>{const blob=new Blob([TMPL[tab]],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`${tab}_template.csv`;a.click();URL.revokeObjectURL(url);};
+  return(<div>
+    <div className="tab-nav"><button className={`tab-btn${tab==="services"?" act":""}`} onClick={()=>{setTab("services");setPreview([]);setCsv("");setErr("");}}>🏢 সেবা ইম্পোর্ট</button><button className={`tab-btn${tab==="donors"?" act":""}`} onClick={()=>{setTab("donors");setPreview([]);setCsv("");setErr("");}}>🩸 দাতা ইম্পোর্ট</button></div>
+    <div className="card"><div className="ch"><div className="ch-l">📥 CSV টেমপ্লেট</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"10px"}}>টেমপ্লেট ডাউনলোড করুন, পূরণ করুন, তারপর নিচে পেস্ট করুন।</p><button className="bs" onClick={dl}>📥 Template.csv ডাউনলোড</button></div></div>
+    <div className="card"><div className="ch"><div className="ch-l">📤 CSV পেস্ট করুন</div></div><div className="cb"><textarea className="fa" rows={6} value={csv} onChange={e=>setCsv(e.target.value)} placeholder={TMPL[tab]} style={{marginBottom:8,fontFamily:"monospace",fontSize:"12px"}}/>{err&&<p style={{color:"#dc2626",fontSize:"12px",marginBottom:"8px"}}>❌ {err}</p>}<div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}><button className="bp" onClick={parse} disabled={!csv.trim()}>🔍 যাচাই</button>{preview.length>0&&<button className="bp" style={{background:"#16a34a"}} onClick={doImport}>✅ {preview.length}টি ইম্পোর্ট</button>}</div></div></div>
+    {preview.length>0&&<div className="card"><div className="ch"><div className="ch-l">👁️ প্রিভিউ</div></div><div className="tbl"><table><thead><tr><th>নাম</th><th>জেলা</th><th>{tab==="services"?"ধরন":"গ্রুপ"}</th></tr></thead><tbody>{preview.slice(0,6).map((r,i)=><tr key={i}><td style={{fontWeight:500}}>{r.name}</td><td style={{fontSize:"12px"}}>{r.district}</td><td>{tab==="services"?r.type:r.bloodGroup}</td></tr>)}</tbody></table>{preview.length>6&&<p style={{padding:"7px 10px",fontSize:"12px",color:"var(--mu)"}}>...এবং আরও {preview.length-6}টি।</p>}</div></div>}
+  </div>);
+}
+
+/* ══ REPORT GENERATOR ══ */
+function ReportGen({services,reports,volunteers,donors}){
+  const[rType,setRType]=React.useState("daily");const[dist,setDist]=React.useState("");
+  const gen=()=>{
+    const now=new Date();const filtered=dist?services.filter(s=>s.district===dist):services;const open=filtered.filter(s=>s.status==="open").length;
+    const content=["সিলেটসেবা — "+(rType==="daily"?"দৈনিক":"সাপ্তাহিক")+" প্রতিবেদন","তারিখ: "+now.toLocaleDateString("bn-BD",{weekday:"long",year:"numeric",month:"long",day:"numeric"}),"তৈরি: "+now.toLocaleTimeString("bn-BD"),dist?"জেলা: "+dist:"জেলা: সকল","=".repeat(55),"","📊 সেবা: মোট "+filtered.length+"টি | চালু "+open+"টি | বন্ধ "+(filtered.length-open)+"টি","👥 রক্তদাতা: "+donors.length+"জন | রিপোর্ট: "+reports.length+"টি | স্বেচ্ছাসেবক: "+volunteers.length+"জন","","=".repeat(55),"এই প্রতিবেদন সিলেটসেবা Admin থেকে তৈরি।"].join("\n");
+    const blob=new Blob([content],{type:"text/plain;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`sylhetsheba_${rType}_${now.toISOString().slice(0,10)}.txt`;a.click();URL.revokeObjectURL(url);addLog("প্রতিবেদন তৈরি",rType+" — "+(dist||"সকল"));
+  };
+  return(<div className="card"><div className="ch"><div className="ch-l">📄 প্রতিবেদন তৈরি</div></div><div className="cb">
+    <div className="fg2" style={{maxWidth:400,marginBottom:12}}><div className="fg"><span className="fl">ধরন</span><select className="fs" value={rType} onChange={e=>setRType(e.target.value)}><option value="daily">দৈনিক</option><option value="weekly">সাপ্তাহিক</option></select></div><div className="fg"><span className="fl">জেলা (ঐচ্ছিক)</span><select className="fs" value={dist} onChange={e=>setDist(e.target.value)}><option value="">সকল জেলা</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div></div>
+    <button className="bp" onClick={gen}>📥 প্রতিবেদন ডাউনলোড (.txt)</button>
+  </div></div>);
+}
+
+/* ══ DATA MANAGER ══ */
+function DataMgr({showToast}){
+  const[cr,setCr]=React.useState(false);
+  const exp=()=>{const data={exportedAt:new Date().toISOString(),version:VER,services:loadData(KS.services,DEFAULT_SERVICES),donors:loadData(KS.donors,DEFAULT_DONORS),alerts:loadData(KS.alerts,DEFAULT_ALERTS),reports:loadData(KS.reports,[]),svcTypes:loadData(KS.svcTypes,[])};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`sylhetsheba_backup_${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url);showToast("✅ এক্সপোর্ট হয়েছে!");addLog("ডেটা এক্সপোর্ট","JSON");};
+  const imp=(e)=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=(ev)=>{try{const data=JSON.parse(ev.target.result);if(data.services)saveData(KS.services,data.services);if(data.donors)saveData(KS.donors,data.donors);if(data.alerts)saveData(KS.alerts,data.alerts);if(data.svcTypes)saveData(KS.svcTypes,data.svcTypes);showToast("✅ ইম্পোর্ট সফল! লোড হচ্ছে...");addLog("ডেটা ইম্পোর্ট","JSON");setTimeout(()=>window.location.reload(),1300);}catch{showToast("❌ ভুল JSON ফাইল!");}};reader.readAsText(file);e.target.value="";};
+  const reset=()=>{Object.values(KS).forEach(k=>localStorage.removeItem(k));showToast("✅ রিসেট সম্পন্ন। লোড হচ্ছে...");setTimeout(()=>window.location.reload(),1300);setCr(false);};
+  return(<div>
+    <div className="g2"><div className="card"><div className="ch"><div className="ch-l">📤 এক্সপোর্ট</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px"}}>সমস্ত ডেটা JSON-এ ডাউনলোড করুন।</p><button className="bp" onClick={exp}>📥 JSON ব্যাকআপ</button></div></div>
+    <div className="card"><div className="ch"><div className="ch-l">📥 ইম্পোর্ট</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px"}}>ব্যাকআপ থেকে পুনরুদ্ধার।</p><label className="bs" style={{cursor:"pointer",display:"inline-flex"}}>📂 JSON ফাইল নির্বাচন<input type="file" accept=".json" style={{display:"none"}} onChange={imp}/></label></div></div></div>
+    <div className="card" style={{marginTop:"14px"}}><div className="ch" style={{background:"#dc2626"}}><div className="ch-l">⚠️ রিসেট</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px"}}>সমস্ত কাস্টম ডেটা মুছে ডিফল্টে ফিরে যাবে।</p><button className="bd" style={{background:"#fef2f2"}} onClick={()=>setCr(true)}>🔄 রিসেট করুন</button></div></div>
+    <div className="card" style={{marginTop:"14px"}}><div className="ch"><div className="ch-l">ℹ️ সিস্টেম তথ্য</div></div><div className="cb">{[["ভার্সন",VER],["মোট জেলা",`${Object.keys(DISTRICTS_DATA).length}টি`],["মোট উপজেলা",`${Object.values(DISTRICTS_DATA).flat().length}টি`],["LocalStorage",`${(JSON.stringify(localStorage).length/1024).toFixed(1)} KB`]].map(([k,v])=><div key={k} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:"1px solid #f1f5f9",fontSize:"13px"}}><span style={{color:"var(--mu)"}}>🔹 {k}</span><strong>{v}</strong></div>)}</div></div>
+    {cr&&<Confirm msg="সব কাস্টম ডেটা মুছে ডিফল্টে ফিরে যাবে। নিশ্চিত?" onYes={reset} onNo={()=>setCr(false)}/>}
+  </div>);
+}
+
+/* ══ SETTINGS ══ */
+function Settings(){
+  const copy=(t)=>{navigator.clipboard.writeText(t).catch(()=>{});};
+  const ifc=`<iframe src="./index.html" width="100%" height="950" frameborder="0" style="border:none;border-radius:12px" loading="lazy"></iframe>`;
+  return(<div>
+    <div className="card"><div className="ch"><div className="ch-l">🔐 Admin URL</div></div><div className="cb"><div style={{background:"#f0fdf4",border:"1px solid #86efac",borderRadius:"8px",padding:"11px 13px",fontSize:"13px",color:"#15803d",fontWeight:600,marginBottom:"8px"}}>📌 Admin URL: <code style={{background:"rgba(0,0,0,.07)",padding:"1px 6px",borderRadius:"4px"}}>yoursite.com/sylhetsheba/admin.html</code></div><p style={{fontSize:"12px",color:"var(--mu)"}}>এই URL শুধুমাত্র বিশ্বস্ত ব্যক্তিদের শেয়ার করুন।</p></div></div>
+    <div className="card"><div className="ch"><div className="ch-l">🌐 iframe কোড</div></div><div className="cb"><div style={{background:"#0d1b2e",color:"#a5f3fc",padding:"12px 14px",borderRadius:"8px",fontFamily:"monospace",fontSize:"11px",marginBottom:"8px",wordBreak:"break-all"}}>{ifc}</div><button className="bs" style={{fontSize:"12px"}} onClick={()=>copy(ifc)}>📋 কপি করুন</button></div></div>
+    <div className="card"><div className="ch"><div className="ch-l">🗺️ Google Maps API সুরক্ষা</div></div><div className="cb"><div style={{background:"#0d1b2e",color:"#a5f3fc",padding:"12px 14px",borderRadius:"8px",fontFamily:"monospace",fontSize:"11px",marginBottom:"8px"}}>{"yoursite.com/*\nwww.yoursite.com/*\n*.netlify.app/*"}</div><p style={{fontSize:"12px",color:"#dc2626",fontWeight:600}}>⚠️ API key পাবলিকলি শেয়ার করবেন না।</p></div></div>
+  </div>);
 }
 
 /* ══ OVERVIEW ══ */
-function Overview({services,donors,alerts,reports,volunteers,actLogs,ratings}){
+function Overview({services,donors,alerts,reports,volunteers,actLogs,svcTypes}){
   const open=services.filter(s=>s.status==="open").length;
-  const totalR=Object.values(ratings).reduce((s,r)=>s+r.count,0);
   const byDist=Object.keys(DISTRICTS_DATA).map(d=>({d,c:services.filter(s=>s.district===d).length}));
   const maxC=Math.max(...byDist.map(x=>x.c),1);
-  const chartRef=React.useRef(null);
-  const chartInst=React.useRef(null);
-  React.useEffect(()=>{
-    if(!chartRef.current)return;
-    if(chartInst.current)chartInst.current.destroy();
-    chartInst.current=new Chart(chartRef.current,{
-      type:"doughnut",
-      data:{labels:SERVICE_TYPES,datasets:[{data:SERVICE_TYPES.map(t=>services.filter(s=>s.type===t).length),backgroundColor:["#ef4444","#3b82f6","#f97316","#22c55e"],borderWidth:2,borderColor:"#fff"}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{font:{family:"Hind Siliguri",size:11},padding:10}}}}
-    });
-  },[services]);
-
   const stats=[
     {ic:"🏥",l:"হাসপাতাল",v:services.filter(s=>s.type==="হাসপাতাল").length,bg:"#fef2f2",clr:"#dc2626"},
     {ic:"👮",l:"থানা",v:services.filter(s=>s.type==="থানা").length,bg:"#eff6ff",clr:"#2563eb"},
@@ -278,610 +613,18 @@ function Overview({services,donors,alerts,reports,volunteers,actLogs,ratings}){
     {ic:"✅",l:"চালু সেবা",v:open,bg:"#f0fdf4",clr:"#15803d"},
     {ic:"❌",l:"বন্ধ সেবা",v:services.length-open,bg:"#fef2f2",clr:"#dc2626"},
     {ic:"🩸",l:"রক্তদাতা",v:donors.length,bg:"#fdf4ff",clr:"#9333ea"},
-    {ic:"⭐",l:"মোট রেটিং",v:totalR,bg:"#fefce8",clr:"#a16207"},
     {ic:"📨",l:"রিপোর্ট",v:reports.length,bg:"#fef9c3",clr:"#a16207"},
     {ic:"🤝",l:"স্বেচ্ছাসেবক",v:volunteers.length,bg:"#eff6ff",clr:"#1d4ed8"},
+    {ic:"🏷️",l:"সেবার ধরন",v:svcTypes.length,bg:"#f5f3ff",clr:"#7c3aed"},
   ];
-
-  return(
-    <div>
-      <div className="sg">
-        {stats.map(s=>(
-          <div key={s.l} className="sc">
-            <div className="sc-ic" style={{background:s.bg}}>{s.ic}</div>
-            <div className="sc-inf"><p>{s.l}</p><strong style={{color:s.clr}}>{s.v}</strong></div>
-          </div>
-        ))}
-      </div>
-      <div className="g2">
-        <div className="card">
-          <div className="ch"><div className="ch-l">📊 জেলাভিত্তিক সেবা</div></div>
-          <div className="cb">
-            {byDist.map(({d,c})=>(
-              <div key={d} style={{marginBottom:"11px"}}>
-                <div style={{display:"flex",justifyContent:"space-between",fontSize:"12px",marginBottom:"3px"}}>
-                  <span style={{fontWeight:500}}>{d}</span>
-                  <span style={{color:"var(--mu)"}}>{c}টি ({services.length?Math.round(c/services.length*100):0}%)</span>
-                </div>
-                <div className="prog"><div className="prog-f" style={{width:`${Math.round(c/maxC*100)}%`,background:"var(--p)"}}></div></div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="card">
-          <div className="ch"><div className="ch-l">🥧 সেবার ধরন</div></div>
-          <div className="cb"><div style={{height:210}}><canvas ref={chartRef}></canvas></div></div>
-        </div>
-      </div>
-      <div className="card" style={{marginTop:"14px"}}>
-        <div className="ch"><div className="ch-l">📋 সাম্প্রতিক কার্যক্রম</div></div>
-        <div className="cb" style={{maxHeight:230,overflowY:"auto"}}>
-          {actLogs.length===0&&<p style={{fontSize:"13px",color:"var(--mu)",textAlign:"center",padding:"14px 0"}}>কোনো কার্যক্রম নেই।</p>}
-          {actLogs.slice(0,10).map(l=>(
-            <div key={l.id} className="log-item">
-              <div className="log-d"></div>
-              <div style={{flex:1}}>
-                <p style={{fontSize:"13px",fontWeight:600}}>{l.action}</p>
-                <p style={{fontSize:"12px",color:"var(--mu)"}}>{l.detail}</p>
-                <p style={{fontSize:"10px",color:"#94a3b8",marginTop:"2px"}}>🕐 {l.time}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      {reports.length>0&&(
-        <div className="card" style={{marginTop:"14px"}}>
-          <div className="ch"><div className="ch-l">📨 সাম্প্রতিক রিপোর্ট</div></div>
-          <div className="tbl"><table>
-            <thead><tr><th>সেবার নাম</th><th>সমস্যা</th><th>যোগাযোগ</th><th>সময়</th></tr></thead>
-            <tbody>{reports.slice(-5).reverse().map(r=>(
-              <tr key={r.id}>
-                <td style={{fontWeight:500}}>{r.service||"—"}</td>
-                <td style={{maxWidth:180,fontSize:"12px"}}>{r.issue||"—"}</td>
-                <td style={{fontSize:"12px"}}>{r.contact||"—"}</td>
-                <td style={{fontSize:"11px",color:"var(--mu)",whiteSpace:"nowrap"}}>{r.time}</td>
-              </tr>
-            ))}</tbody>
-          </table></div>
-        </div>
-      )}
+  return(<div>
+    <div className="sg">{stats.map(s=><div key={s.l} className="sc"><div className="sc-ic" style={{background:s.bg}}>{s.ic}</div><div className="sc-inf"><p>{s.l}</p><strong style={{color:s.clr}}>{s.v}</strong></div></div>)}</div>
+    <div className="g2">
+      <div className="card"><div className="ch"><div className="ch-l">📊 জেলাভিত্তিক</div></div><div className="cb">{byDist.map(({d,c})=><div key={d} style={{marginBottom:"11px"}}><div style={{display:"flex",justifyContent:"space-between",fontSize:"12px",marginBottom:"3px"}}><span style={{fontWeight:500}}>{d}</span><span style={{color:"var(--mu)"}}>{c}টি</span></div><div className="prog"><div className="prog-f" style={{width:`${Math.round(c/maxC*100)}%`,background:c>0?"linear-gradient(90deg,#0f3460,#e94560)":"#e2e8f0"}}></div></div></div>)}</div></div>
+      <div className="card"><div className="ch"><div className="ch-l">📋 সাম্প্রতিক লগ</div></div><div className="cb" style={{maxHeight:230,overflowY:"auto"}}>{actLogs.length===0&&<p style={{fontSize:"13px",color:"var(--mu)"}}>কোনো কার্যক্রম নেই।</p>}{actLogs.slice(0,10).map(l=><div key={l.id} className="log-item"><div className="log-d"></div><div style={{flex:1}}><p style={{fontSize:"13px",fontWeight:600}}>{l.action}</p><p style={{fontSize:"12px",color:"var(--mu)"}}>{l.detail}</p><p style={{fontSize:"10px",color:"#94a3b8",marginTop:"2px"}}>🕐 {l.time}</p></div></div>)}</div></div>
     </div>
-  );
-}
-
-/* ══ SERVICE MANAGER ══ */
-function ServiceMgr({services,setSvcs,showToast}){
-  const[q,setQ]=React.useState("");
-  const[fD,setFD]=React.useState("");const[fT,setFT]=React.useState("");const[fS,setFS]=React.useState("");
-  const[showF,setShowF]=React.useState(false);
-  const[editing,setEditing]=React.useState(null);
-  const[confirmId,setConfirmId]=React.useState(null);
-  const E={district:"",upazila:"",type:"হাসপাতাল",name:"",address:"",phone:"",dutyOfficer:"",status:"open",lat:"",lng:"",beds:"",emergency:false};
-  const[form,setForm]=React.useState({...E});
-  const ups=(DISTRICTS_DATA[form.district]||[]);
-  const TM={"হাসপাতাল":{bg:"#fef2f2",clr:"#dc2626",brd:"#fca5a5"},"থানা":{bg:"#eff6ff",clr:"#2563eb",brd:"#93c5fd"},"ফায়ার সার্ভিস":{bg:"#fff7ed",clr:"#ea580c",brd:"#fdba74"},"অ্যাম্বুলেন্স":{bg:"#f0fdf4",clr:"#16a34a",brd:"#86efac"}};
-  const filtered=services.filter(s=>{
-    const lo=q.toLowerCase();
-    const mq=!lo||[s.name,s.upazila,s.district,s.phone,s.type,s.dutyOfficer].some(v=>(v||"").toLowerCase().includes(lo));
-    return mq&&(!fD||s.district===fD)&&(!fT||s.type===fT)&&(!fS||s.status===fS);
-  });
-  const save=(next,msg)=>{setSvcs(next);saveData(KS.services,next);if(msg)showToast(msg);};
-  const del=(id)=>{const s=services.find(x=>x.id===id);save(services.filter(x=>x.id!==id),"🗑️ সেবা মুছে ফেলা হয়েছে।");addLog("সেবা মুছে ফেলা",s?.name||"");setConfirmId(null);};
-  const toggle=(id)=>{const next=services.map(s=>s.id===id?{...s,status:s.status==="open"?"closed":"open"}:s);save(next,"✅ স্ট্যাটাস পরিবর্তিত।");addLog("স্ট্যাটাস পরিবর্তন",services.find(s=>s.id===id)?.name||"");};
-  const submit=(e)=>{
-    e.preventDefault();
-    const entry={...form,lat:parseFloat(form.lat)||0,lng:parseFloat(form.lng)||0,beds:form.beds||null,emergency:!!form.emergency};
-    if(editing){save(services.map(s=>s.id===editing?{...entry,id:editing}:s),"✅ আপডেট হয়েছে!");addLog("সেবা সম্পাদনা",entry.name);}
-    else{entry.id=Date.now();save([...services,entry],"✅ নতুন সেবা যোগ হয়েছে!");addLog("নতুন সেবা যোগ",entry.name);}
-    setShowF(false);
-  };
-  return(
-    <div>
-      <div style={{display:"flex",gap:"7px",flexWrap:"wrap",marginBottom:"12px",alignItems:"center"}}>
-        <div className="sbar"><span style={{color:"var(--mu)"}}>🔍</span><input placeholder="নাম, উপজেলা, ফোন..." value={q} onChange={e=>setQ(e.target.value)}/>{q&&<button onClick={()=>setQ("")} style={{background:"none",border:"none",cursor:"pointer",color:"var(--mu)",fontSize:"16px",lineHeight:1}}>×</button>}</div>
-        <select className="fs" style={{width:"auto",minWidth:"115px"}} value={fD} onChange={e=>setFD(e.target.value)}><option value="">সব জেলা</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select>
-        <select className="fs" style={{width:"auto",minWidth:"125px"}} value={fT} onChange={e=>setFT(e.target.value)}><option value="">সব ধরন</option>{SERVICE_TYPES.map(t=><option key={t} value={t}>{t}</option>)}</select>
-        <select className="fs" style={{width:"auto",minWidth:"100px"}} value={fS} onChange={e=>setFS(e.target.value)}><option value="">সব স্ট্যাটাস</option><option value="open">খোলা</option><option value="closed">বন্ধ</option></select>
-        <button className="bp" onClick={()=>{setEditing(null);setForm({...E});setShowF(true);}}>➕ নতুন সেবা</button>
-      </div>
-      <div className="card">
-        <div className="ch"><div className="ch-l">🏢 সেবা তালিকা</div><span style={{fontSize:"11px",opacity:.85}}>{filtered.length}/{services.length}টি</span></div>
-        <div className="tbl">
-          {filtered.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>কোনো সেবা পাওয়া যায়নি।</div>:
-          <table><thead><tr><th>#</th><th>নাম</th><th>জেলা/উপজেলা</th><th>ধরন</th><th>ফোন</th><th>অফিসার</th><th>স্ট্যাটাস</th><th>অ্যাকশন</th></tr></thead>
-          <tbody>{filtered.map((s,i)=>{const tm=TM[s.type]||{bg:"#f5f5f5",clr:"#555",brd:"#ccc"};return(
-            <tr key={s.id}>
-              <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
-              <td style={{fontWeight:600,maxWidth:150,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{s.name}</td>
-              <td style={{fontSize:"12px"}}>{s.district}<br/><span style={{color:"var(--mu)"}}>{s.upazila}</span></td>
-              <td><span style={{background:tm.bg,color:tm.clr,border:`1px solid ${tm.brd}`,fontSize:"11px",fontWeight:600,padding:"2px 8px",borderRadius:"20px"}}>{s.type}</span></td>
-              <td style={{fontSize:"12px"}}>{s.phone}</td>
-              <td style={{fontSize:"11px",color:"var(--mu)",maxWidth:100,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{s.dutyOfficer}</td>
-              <td><button className={s.status==="open"?"bg":"br"} onClick={()=>toggle(s.id)}>{s.status==="open"?"✓ খোলা":"✗ বন্ধ"}</button></td>
-              <td><div style={{display:"flex",gap:"4px"}}><button className="be" onClick={()=>{setEditing(s.id);setForm({...s,lat:s.lat||"",lng:s.lng||"",beds:s.beds||""});setShowF(true);}}>✏️</button><button className="bd" onClick={()=>setConfirmId(s.id)}>🗑️</button></div></td>
-            </tr>);
-          })}</tbody></table>}
-        </div>
-      </div>
-      {showF&&(
-        <div className="ov" onClick={e=>e.target===e.currentTarget&&setShowF(false)}>
-          <div className="mb">
-            <div className="mt">{editing?"✏️ সেবা সম্পাদনা":"➕ নতুন সেবা যোগ"}</div>
-            <form onSubmit={submit}>
-              <div className="fg2">
-                <div className="fg"><span className="fl">জেলা *</span><select className="fs" value={form.district} onChange={e=>setForm({...form,district:e.target.value,upazila:""})} required><option value="">বেছে নিন</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div>
-                <div className="fg"><span className="fl">উপজেলা *</span><select className="fs" value={form.upazila} onChange={e=>setForm({...form,upazila:e.target.value})} required><option value="">বেছে নিন</option>{ups.map(u=><option key={u} value={u}>{u}</option>)}</select></div>
-              </div>
-              <div className="fg2">
-                <div className="fg"><span className="fl">ধরন</span><select className="fs" value={form.type} onChange={e=>setForm({...form,type:e.target.value})}>{SERVICE_TYPES.map(t=><option key={t} value={t}>{t}</option>)}</select></div>
-                <div className="fg"><span className="fl">স্ট্যাটাস</span><select className="fs" value={form.status} onChange={e=>setForm({...form,status:e.target.value})}><option value="open">খোলা</option><option value="closed">বন্ধ</option></select></div>
-              </div>
-              <div className="fg"><span className="fl">প্রতিষ্ঠানের নাম *</span><input className="fi" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required placeholder="পূর্ণ নাম"/></div>
-              <div className="fg"><span className="fl">ঠিকানা *</span><input className="fi" value={form.address} onChange={e=>setForm({...form,address:e.target.value})} required/></div>
-              <div className="fg2">
-                <div className="fg"><span className="fl">ফোন *</span><input className="fi" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required/></div>
-                <div className="fg"><span className="fl">দায়িত্বরত অফিসার *</span><input className="fi" value={form.dutyOfficer} onChange={e=>setForm({...form,dutyOfficer:e.target.value})} required/></div>
-              </div>
-              <div className="fg3">
-                <div className="fg"><span className="fl">Latitude</span><input className="fi" type="number" step="any" value={form.lat} onChange={e=>setForm({...form,lat:e.target.value})} placeholder="24.8978"/></div>
-                <div className="fg"><span className="fl">Longitude</span><input className="fi" type="number" step="any" value={form.lng} onChange={e=>setForm({...form,lng:e.target.value})} placeholder="91.8688"/></div>
-                <div className="fg"><span className="fl">শয্যা</span><input className="fi" value={form.beds||""} onChange={e=>setForm({...form,beds:e.target.value})} placeholder="৫০"/></div>
-              </div>
-              <div className="fg" style={{display:"flex",alignItems:"center",gap:"8px"}}>
-                <input type="checkbox" id="emg" checked={!!form.emergency} onChange={e=>setForm({...form,emergency:e.target.checked})} style={{width:15,height:15,cursor:"pointer"}}/>
-                <label htmlFor="emg" style={{fontSize:"13px",cursor:"pointer"}}>⚡ জরুরি সেবা (২৪/৭)</label>
-              </div>
-              <div style={{display:"flex",gap:"8px",justifyContent:"flex-end",marginTop:"10px",paddingTop:"10px",borderTop:"1px solid var(--brd)"}}>
-                <button type="button" className="bs" onClick={()=>setShowF(false)}>বাতিল</button>
-                <button type="submit" className="bp">{editing?"💾 সংরক্ষণ":"➕ যোগ করুন"}</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-      {confirmId&&<Confirm msg="এই সেবাটি স্থায়ীভাবে মুছে যাবে। নিশ্চিত?" onYes={()=>del(confirmId)} onNo={()=>setConfirmId(null)}/>}
-    </div>
-  );
-}
-
-/* ══ DONOR MANAGER ══ */
-function DonorMgr({donors,setDonors,showToast}){
-  const[q,setQ]=React.useState("");
-  const[fBG,setFBG]=React.useState("");const[fD,setFD]=React.useState("");
-  const[showF,setShowF]=React.useState(false);
-  const[editing,setEditing]=React.useState(null);
-  const[confirmId,setConfirmId]=React.useState(null);
-  const E={name:"",phone:"",bloodGroup:"A+",district:"",upazila:"",lastDonation:"",available:true};
-  const[form,setForm]=React.useState({...E});
-  const ups=(DISTRICTS_DATA[form.district]||[]);
-  const filtered=donors.filter(d=>{
-    const lo=q.toLowerCase();
-    const mq=!lo||[d.name,d.bloodGroup,d.phone,d.upazila,d.district].some(v=>(v||"").toLowerCase().includes(lo));
-    return mq&&(!fBG||d.bloodGroup===fBG)&&(!fD||d.district===fD);
-  });
-  const save=(next,msg)=>{setDonors(next);saveData(KS.donors,next);if(msg)showToast(msg);};
-  const del=(id)=>{const d=donors.find(x=>x.id===id);save(donors.filter(x=>x.id!==id),"🗑️ দাতার তথ্য মুছে ফেলা হয়েছে।");addLog("দাতা মুছে ফেলা",d?.name||"");setConfirmId(null);};
-  const toggle=(id)=>{const next=donors.map(d=>d.id===id?{...d,available:!d.available}:d);save(next,"✅ উপলব্ধতা পরিবর্তিত।");};
-  const submit=(e)=>{
-    e.preventDefault();
-    if(editing){save(donors.map(d=>d.id===editing?{...form,id:editing}:d),"✅ আপডেট হয়েছে!");addLog("দাতা সম্পাদনা",form.name);}
-    else{save([...donors,{...form,id:Date.now()}],"✅ নতুন দাতা যোগ হয়েছে!");addLog("নতুন দাতা যোগ",form.name);}
-    setShowF(false);
-  };
-  return(
-    <div>
-      <div style={{display:"flex",gap:"7px",flexWrap:"wrap",marginBottom:"12px",alignItems:"center"}}>
-        <div className="sbar"><span style={{color:"var(--mu)"}}>🔍</span><input placeholder="নাম, ফোন, রক্তের গ্রুপ..." value={q} onChange={e=>setQ(e.target.value)}/>{q&&<button onClick={()=>setQ("")} style={{background:"none",border:"none",cursor:"pointer",color:"var(--mu)",fontSize:"16px",lineHeight:1}}>×</button>}</div>
-        <select className="fs" style={{width:"auto",minWidth:"110px"}} value={fBG} onChange={e=>setFBG(e.target.value)}><option value="">সব গ্রুপ</option>{BLOOD_GROUPS.map(b=><option key={b} value={b}>{b}</option>)}</select>
-        <select className="fs" style={{width:"auto",minWidth:"115px"}} value={fD} onChange={e=>setFD(e.target.value)}><option value="">সব জেলা</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select>
-        <button className="bp" onClick={()=>{setEditing(null);setForm({...E});setShowF(true);}}>➕ নতুন দাতা</button>
-      </div>
-      <div className="card">
-        <div className="ch"><div className="ch-l">🩸 রক্তদাতা তালিকা</div><span style={{fontSize:"11px",opacity:.85}}>{filtered.length}/{donors.length}জন</span></div>
-        <div className="tbl">
-          {filtered.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>কোনো দাতা পাওয়া যায়নি।</div>:
-          <table><thead><tr><th>#</th><th>নাম</th><th>গ্রুপ</th><th>জেলা/উপজেলা</th><th>ফোন</th><th>শেষ দান</th><th>উপলব্ধতা</th><th>অ্যাকশন</th></tr></thead>
-          <tbody>{filtered.map((d,i)=>(
-            <tr key={d.id}>
-              <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
-              <td style={{fontWeight:600}}>{d.name}</td>
-              <td><span style={{background:"#fef2f2",color:"#dc2626",fontWeight:700,padding:"2px 9px",borderRadius:"20px",border:"1px solid #fca5a5",fontSize:"12px"}}>{d.bloodGroup}</span></td>
-              <td style={{fontSize:"12px"}}>{d.district}<br/><span style={{color:"var(--mu)"}}>{d.upazila}</span></td>
-              <td style={{fontSize:"12px"}}>{d.phone}</td>
-              <td style={{fontSize:"11px",color:"var(--mu)"}}>{d.lastDonation||"—"}</td>
-              <td><button className={d.available?"bg":"br"} onClick={()=>toggle(d.id)}>{d.available?"✓ উপলব্ধ":"✗ বিরতি"}</button></td>
-              <td><div style={{display:"flex",gap:"4px"}}><button className="be" onClick={()=>{setEditing(d.id);setForm({...d});setShowF(true);}}>✏️</button><button className="bd" onClick={()=>setConfirmId(d.id)}>🗑️</button></div></td>
-            </tr>
-          ))}</tbody></table>}
-        </div>
-      </div>
-      {showF&&(
-        <div className="ov" onClick={e=>e.target===e.currentTarget&&setShowF(false)}>
-          <div className="mb">
-            <div className="mt">{editing?"✏️ দাতা সম্পাদনা":"➕ নতুন দাতা যোগ"}</div>
-            <form onSubmit={submit}>
-              <div className="fg2">
-                <div className="fg"><span className="fl">পূর্ণ নাম *</span><input className="fi" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required/></div>
-                <div className="fg"><span className="fl">মোবাইল *</span><input className="fi" type="tel" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required/></div>
-              </div>
-              <div className="fg2">
-                <div className="fg"><span className="fl">রক্তের গ্রুপ *</span><select className="fs" value={form.bloodGroup} onChange={e=>setForm({...form,bloodGroup:e.target.value})} required>{BLOOD_GROUPS.map(b=><option key={b} value={b}>{b}</option>)}</select></div>
-                <div className="fg"><span className="fl">শেষ দানের তারিখ</span><input className="fi" value={form.lastDonation} onChange={e=>setForm({...form,lastDonation:e.target.value})} placeholder="১ মে ২০২৫"/></div>
-              </div>
-              <div className="fg2">
-                <div className="fg"><span className="fl">জেলা *</span><select className="fs" value={form.district} onChange={e=>setForm({...form,district:e.target.value,upazila:""})} required><option value="">জেলা বেছে নিন</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div>
-                <div className="fg"><span className="fl">উপজেলা *</span><select className="fs" value={form.upazila} onChange={e=>setForm({...form,upazila:e.target.value})} required><option value="">উপজেলা বেছে নিন</option>{ups.map(u=><option key={u} value={u}>{u}</option>)}</select></div>
-              </div>
-              <div className="fg" style={{display:"flex",alignItems:"center",gap:"8px"}}>
-                <input type="checkbox" id="avail" checked={!!form.available} onChange={e=>setForm({...form,available:e.target.checked})} style={{width:15,height:15,cursor:"pointer"}}/>
-                <label htmlFor="avail" style={{fontSize:"13px",cursor:"pointer"}}>✅ এখন দান দিতে সক্ষম</label>
-              </div>
-              <div style={{display:"flex",gap:"8px",justifyContent:"flex-end",marginTop:"10px",paddingTop:"10px",borderTop:"1px solid var(--brd)"}}>
-                <button type="button" className="bs" onClick={()=>setShowF(false)}>বাতিল</button>
-                <button type="submit" className="bp">{editing?"💾 সংরক্ষণ":"➕ যোগ করুন"}</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-      {confirmId&&<Confirm msg="এই দাতার তথ্য স্থায়ীভাবে মুছে যাবে। নিশ্চিত?" onYes={()=>del(confirmId)} onNo={()=>setConfirmId(null)}/>}
-    </div>
-  );
-}
-
-/* ══ ALERT & DISASTER ══ */
-function AlertMgr({alerts,setAlerts,showToast,disaster,setDisaster}){
-  const[newTxt,setNewTxt]=React.useState("");
-  const[confirmId,setConfirmId]=React.useState(null);
-  const addAlert=()=>{if(!newTxt.trim())return;const next=[...alerts,{id:Date.now(),text:newTxt.trim(),active:true,time:new Date().toLocaleString("bn-BD")}];setAlerts(next);saveData(KS.alerts,next);setNewTxt("");showToast("✅ সতর্কতা যোগ হয়েছে!");addLog("সতর্কতা যোগ",newTxt.slice(0,50));};
-  const toggle=(id)=>{const next=alerts.map(a=>a.id===id?{...a,active:!a.active}:a);setAlerts(next);saveData(KS.alerts,next);showToast("✅ স্ট্যাটাস পরিবর্তিত।");};
-  const del=(id)=>{const a=alerts.find(x=>x.id===id);const next=alerts.filter(x=>x.id!==id);setAlerts(next);saveData(KS.alerts,next);showToast("🗑️ মুছে ফেলা হয়েছে।");addLog("সতর্কতা মুছে ফেলা",a?.text?.slice(0,50)||"");setConfirmId(null);};
-  const toggleDis=()=>{const next=!disaster;setDisaster(next);saveData(KS.disaster,next);showToast(next?"🚨 দুর্যোগ মোড চালু হয়েছে!":"✅ দুর্যোগ মোড বন্ধ হয়েছে।");addLog(next?"দুর্যোগ মোড চালু":"দুর্যোগ মোড বন্ধ","Admin কর্তৃক");};
-  return(
-    <div>
-      <div className={disaster?"dis-panel-on":"dis-panel-off"}>
-        <div>
-          <p style={{fontWeight:700,fontSize:"15px",marginBottom:"5px"}}>{disaster?"🔴 দুর্যোগ মোড সক্রিয়":"⚪ দুর্যোগ মোড নিষ্ক্রিয়"}</p>
-          <p style={{fontSize:"13px",opacity:.85,lineHeight:1.5}}>{disaster?"পাবলিক সাইটে লাল ব্যানার দেখাচ্ছে। বন্ধ করতে নিচের বাটনে ক্লিক করুন।":"চালু করলে পাবলিক সাইটে জরুরি ব্যানার দেখাবে এবং সাইটের রঙ পরিবর্তিত হবে।"}</p>
-        </div>
-        <button onClick={toggleDis} style={{background:disaster?"rgba(255,255,255,.2)":"#dc2626",color:"#fff",border:disaster?"1px solid rgba(255,255,255,.4)":"none",borderRadius:"8px",padding:"9px 16px",font:"600 13px 'Hind Siliguri',sans-serif",cursor:"pointer",flexShrink:0,whiteSpace:"nowrap"}}>
-          {disaster?"✅ স্বাভাবিক মোডে ফিরুন":"🚨 দুর্যোগ মোড চালু করুন"}
-        </button>
-      </div>
-      <div className="card">
-        <div className="ch"><div className="ch-l">➕ নতুন জরুরি বার্তা</div></div>
-        <div className="cb">
-          <span className="fl">বার্তার টেক্সট</span>
-          <textarea className="fa" rows={3} value={newTxt} onChange={e=>setNewTxt(e.target.value)} placeholder="⚠️ বন্যা সতর্কতা: সুরমা নদীতে পানি বিপদসীমার উপরে..." style={{marginBottom:10}}/>
-          <button className="bp" onClick={addAlert} disabled={!newTxt.trim()}>📢 প্রকাশ করুন</button>
-        </div>
-      </div>
-      <div className="card">
-        <div className="ch"><div className="ch-l">🚨 বিদ্যমান সতর্কতা ({alerts.length}টি)</div><span style={{fontSize:"11px",opacity:.85}}>{alerts.filter(a=>a.active).length}টি সক্রিয়</span></div>
-        <div className="cb">
-          {alerts.length===0&&<p style={{fontSize:"13px",color:"var(--mu)",textAlign:"center",padding:"14px 0"}}>কোনো সতর্কতা নেই।</p>}
-          {alerts.map(a=>(
-            <div key={a.id} className={`al-item${a.active?" on":""}`}>
-              <div style={{flex:1}}>
-                <p style={{fontSize:"13px",marginBottom:"5px",lineHeight:1.5}}>{a.text}</p>
-                <span style={{fontSize:"11px",fontWeight:600,color:a.active?"#dc2626":"var(--mu)"}}>{a.active?"🔴 সক্রিয়":"⚪ নিষ্ক্রিয়"}</span>
-              </div>
-              <div style={{display:"flex",flexDirection:"column",gap:"6px",alignItems:"flex-end",flexShrink:0}}>
-                <label className="tgl"><input type="checkbox" checked={!!a.active} onChange={()=>toggle(a.id)}/><span className="tgl-s"></span></label>
-                <button className="bd" style={{fontSize:"11px",padding:"3px 9px"}} onClick={()=>setConfirmId(a.id)}>🗑️ মুছুন</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      {confirmId&&<Confirm msg="এই সতর্কতাটি স্থায়ীভাবে মুছে যাবে। নিশ্চিত?" onYes={()=>del(confirmId)} onNo={()=>setConfirmId(null)}/>}
-    </div>
-  );
-}
-
-/* ══ REPORTS ══ */
-function ReportsMgr({reports,setReports,showToast}){
-  const[confirmAll,setConfirmAll]=React.useState(false);
-  const del=(id)=>{const next=reports.filter(r=>r.id!==id);setReports(next);saveData(KS.reports,next);showToast("🗑️ মুছে ফেলা হয়েছে।");};
-  const clearAll=()=>{setReports([]);saveData(KS.reports,[]);showToast("✅ সব রিপোর্ট মুছে ফেলা হয়েছে।");addLog("সব রিপোর্ট মুছে ফেলা",`${reports.length}টি`);setConfirmAll(false);};
-  return(
-    <div>
-      <div style={{display:"flex",gap:"8px",marginBottom:"12px",alignItems:"center",flexWrap:"wrap"}}>
-        {reports.length>0&&<button className="bd" onClick={()=>setConfirmAll(true)}>🗑️ সব মুছুন ({reports.length}টি)</button>}
-      </div>
-      <div className="card">
-        <div className="ch"><div className="ch-l">📨 রিপোর্ট তালিকা ({reports.length}টি)</div></div>
-        <div className="tbl">
-          {reports.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>📭 কোনো রিপোর্ট নেই।</div>:
-          <table><thead><tr><th>#</th><th>সেবার নাম</th><th>সমস্যা</th><th>যোগাযোগ</th><th>সময়</th><th>অ্যাকশন</th></tr></thead>
-          <tbody>{reports.map((r,i)=>(
-            <tr key={r.id}>
-              <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
-              <td style={{fontWeight:500}}>{r.service||"—"}</td>
-              <td style={{maxWidth:180,fontSize:"12px",lineHeight:1.4}}>{r.issue||"—"}</td>
-              <td style={{fontSize:"12px"}}>{r.contact||"—"}</td>
-              <td style={{fontSize:"11px",color:"var(--mu)",whiteSpace:"nowrap"}}>{r.time}</td>
-              <td><button className="bd" onClick={()=>del(r.id)}>🗑️</button></td>
-            </tr>
-          ))}</tbody></table>}
-        </div>
-      </div>
-      {confirmAll&&<Confirm msg={`সব ${reports.length}টি রিপোর্ট মুছে যাবে। নিশ্চিত?`} onYes={clearAll} onNo={()=>setConfirmAll(false)}/>}
-    </div>
-  );
-}
-
-/* ══ VOLUNTEERS ══ */
-function VolMgr({volunteers,setVolunteers,showToast}){
-  const del=(id)=>{const v=volunteers.find(x=>x.id===id);const next=volunteers.filter(x=>x.id!==id);setVolunteers(next);saveData(KS.volunteers,next);showToast("🗑️ মুছে ফেলা হয়েছে।");addLog("স্বেচ্ছাসেবক মুছে ফেলা",v?.name||"");};
-  return(
-    <div className="card">
-      <div className="ch"><div className="ch-l">🤝 স্বেচ্ছাসেবক তালিকা ({volunteers.length}জন)</div></div>
-      <div className="tbl">
-        {volunteers.length===0?<div style={{padding:"30px",textAlign:"center",color:"var(--mu)"}}>কোনো নিবন্ধন নেই।</div>:
-        <table><thead><tr><th>#</th><th>নাম</th><th>ফোন</th><th>জেলা/উপজেলা</th><th>দক্ষতা</th><th>সময়</th><th>অ্যাকশন</th></tr></thead>
-        <tbody>{volunteers.map((v,i)=>(
-          <tr key={v.id}>
-            <td style={{color:"var(--mu)",fontSize:"12px"}}>{i+1}</td>
-            <td style={{fontWeight:600}}>{v.name}</td>
-            <td style={{fontSize:"12px"}}>{v.phone}</td>
-            <td style={{fontSize:"12px"}}>{v.district}<br/><span style={{color:"var(--mu)"}}>{v.upazila}</span></td>
-            <td style={{fontSize:"12px",maxWidth:140,lineHeight:1.4}}>{v.skill}</td>
-            <td style={{fontSize:"11px",color:"var(--mu)",whiteSpace:"nowrap"}}>{v.time}</td>
-            <td><button className="bd" onClick={()=>del(v.id)}>🗑️</button></td>
-          </tr>
-        ))}</tbody></table>}
-      </div>
-    </div>
-  );
-}
-
-/* ══ ACTIVITY LOG ══ */
-function LogMgr({actLogs,setActLogs,showToast}){
-  return(
-    <div className="card">
-      <div className="ch">
-        <div className="ch-l">📋 কার্যক্রমের ইতিহাস ({actLogs.length}টি)</div>
-        {actLogs.length>0&&<button className="bd" style={{border:"none",background:"rgba(255,255,255,.18)",color:"#fff",fontSize:"12px"}} onClick={()=>{setActLogs([]);saveData(KS.log,[]);showToast("✅ লগ মুছে ফেলা হয়েছে।");}}>🗑️</button>}
-      </div>
-      <div className="cb" style={{maxHeight:500,overflowY:"auto"}}>
-        {actLogs.length===0&&<p style={{fontSize:"13px",color:"var(--mu)",textAlign:"center",padding:"16px 0"}}>কোনো কার্যক্রম নেই।</p>}
-        {actLogs.map(l=>(
-          <div key={l.id} className="log-item">
-            <div className="log-d"></div>
-            <div style={{flex:1}}>
-              <p style={{fontSize:"13px",fontWeight:600}}>{l.action}</p>
-              <p style={{fontSize:"12px",color:"var(--mu)"}}>{l.detail}</p>
-              <p style={{fontSize:"10px",color:"#94a3b8",marginTop:"2px"}}>🕐 {l.time}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ══ BULK IMPORT ══ */
-function BulkImport({services,setSvcs,donors,setDonors,showToast}){
-  const[tab,setTab]=React.useState("services");
-  const[csv,setCsv]=React.useState("");
-  const[preview,setPreview]=React.useState([]);
-  const[err,setErr]=React.useState("");
-  const TMPL={services:"district,upazila,type,name,address,phone,dutyOfficer,status,lat,lng,beds,emergency\nসিলেট,সিলেট সদর,হাসপাতাল,উদাহরণ হাসপাতাল,হাসপাতাল রোড,০৮২১-১২৩৪৫৬,ডা. করিম,open,24.8978,91.8688,100,true",donors:"name,phone,bloodGroup,district,upazila,lastDonation,available\nমো. রাহেল,০১৭১১-৪৪৫৫৬৬,A+,সিলেট,সিলেট সদর,১ মে ২০২৫,true"};
-  const parse=()=>{
-    setErr("");setPreview([]);
-    const lines=csv.trim().split("\n").filter(l=>l.trim());
-    if(lines.length<2){setErr("কমপক্ষে ১টি ডেটা সারি থাকতে হবে।");return;}
-    const headers=lines[0].split(",").map(h=>h.trim());
-    const req=tab==="services"?["district","upazila","type","name","phone"]:["name","phone","bloodGroup","district"];
-    const miss=req.filter(r=>!headers.includes(r));
-    if(miss.length){setErr(`এই কলামগুলো নেই: ${miss.join(", ")}`);return;}
-    const rows=lines.slice(1).map((line,i)=>{
-      const vals=line.split(",");const obj={};
-      headers.forEach((h,j)=>{obj[h]=(vals[j]||"").trim();});
-      if(tab==="services")return{...obj,id:Date.now()+i,lat:parseFloat(obj.lat)||0,lng:parseFloat(obj.lng)||0,emergency:obj.emergency==="true"};
-      return{...obj,id:Date.now()+i,available:obj.available!=="false"};
-    }).filter(r=>r.name&&r.phone);
-    if(!rows.length){setErr("কোনো বৈধ ডেটা পাওয়া যায়নি।");return;}
-    setPreview(rows);
-  };
-  const doImport=()=>{
-    if(tab==="services"){const next=[...services,...preview];setSvcs(next);saveData(KS.services,next);}
-    else{const next=[...donors,...preview];setDonors(next);saveData(KS.donors,next);}
-    showToast(`✅ ${preview.length}টি ডেটা ইম্পোর্ট হয়েছে!`);
-    addLog(`বাল্ক ইম্পোর্ট (${tab})`,`${preview.length}টি ডেটা`);
-    setCsv("");setPreview([]);
-  };
-  const dlTmpl=()=>{const blob=new Blob([TMPL[tab]],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`${tab}_template.csv`;a.click();URL.revokeObjectURL(url);};
-  return(
-    <div>
-      <div className="tab-nav">
-        <button className={`tab-btn${tab==="services"?" act":""}`} onClick={()=>{setTab("services");setPreview([]);setCsv("");setErr("");}}>🏢 সেবা ইম্পোর্ট</button>
-        <button className={`tab-btn${tab==="donors"?" act":""}`} onClick={()=>{setTab("donors");setPreview([]);setCsv("");setErr("");}}>🩸 দাতা ইম্পোর্ট</button>
-      </div>
-      <div className="card">
-        <div className="ch"><div className="ch-l">📥 CSV টেমপ্লেট</div></div>
-        <div className="cb">
-          <p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"10px"}}>টেমপ্লেট ডাউনলোড করুন, পূরণ করুন, তারপর নিচে পেস্ট করুন।</p>
-          <button className="bs" onClick={dlTmpl}>📥 Template.csv ডাউনলোড</button>
-        </div>
-      </div>
-      <div className="card">
-        <div className="ch"><div className="ch-l">📤 CSV ডেটা পেস্ট করুন</div></div>
-        <div className="cb">
-          <textarea className="fa" rows={6} value={csv} onChange={e=>setCsv(e.target.value)} placeholder={TMPL[tab]} style={{marginBottom:8,fontFamily:"monospace",fontSize:"12px"}}/>
-          {err&&<p style={{color:"#dc2626",fontSize:"12px",marginBottom:"8px"}}>❌ {err}</p>}
-          <div style={{display:"flex",gap:"8px",flexWrap:"wrap",alignItems:"center"}}>
-            <button className="bp" onClick={parse} disabled={!csv.trim()}>🔍 যাচাই করুন</button>
-            {preview.length>0&&<button className="bp" style={{background:"#16a34a"}} onClick={doImport}>✅ {preview.length}টি ইম্পোর্ট করুন</button>}
-          </div>
-        </div>
-      </div>
-      {preview.length>0&&(
-        <div className="card">
-          <div className="ch"><div className="ch-l">👁️ প্রিভিউ ({Math.min(preview.length,8)}টি)</div></div>
-          <div className="tbl"><table>
-            <thead><tr><th>নাম</th><th>জেলা/উপজেলা</th><th>{tab==="services"?"ধরন":"গ্রুপ"}</th><th>ফোন</th></tr></thead>
-            <tbody>{preview.slice(0,8).map((r,i)=><tr key={i}><td style={{fontWeight:500}}>{r.name}</td><td style={{fontSize:"12px"}}>{r.district}/{r.upazila}</td><td>{tab==="services"?r.type:r.bloodGroup}</td><td style={{fontSize:"12px"}}>{r.phone}</td></tr>)}</tbody>
-          </table>{preview.length>8&&<p style={{padding:"7px 10px",fontSize:"12px",color:"var(--mu)"}}>...এবং আরও {preview.length-8}টি সারি।</p>}</div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-/* ══ REPORT GENERATOR ══ */
-function ReportGen({services,reports,volunteers,donors}){
-  const[rType,setRType]=React.useState("daily");
-  const[dist,setDist]=React.useState("");
-  const gen=()=>{
-    const now=new Date();
-    const filtered=dist?services.filter(s=>s.district===dist):services;
-    const open=filtered.filter(s=>s.status==="open").length;
-    const byType=SERVICE_TYPES.map(t=>({type:t,count:filtered.filter(s=>s.type===t).length}));
-    const byDist=Object.keys(DISTRICTS_DATA).map(d=>({d,count:services.filter(s=>s.district===d).length}));
-    const content=[
-      `সিলেটসেবা — ${rType==="daily"?"দৈনিক":"সাপ্তাহিক"} প্রতিবেদন`,
-      `তারিখ: ${now.toLocaleDateString("bn-BD",{weekday:"long",year:"numeric",month:"long",day:"numeric"})}`,
-      `তৈরি: ${now.toLocaleTimeString("bn-BD")}`,
-      dist?`জেলা: ${dist}`:"জেলা: সকল (সিলেট বিভাগ)",
-      "=".repeat(55),``,
-      "📊 সেবা সারসংক্ষেপ:",
-      `  মোট সেবা কেন্দ্র  : ${filtered.length}টি`,
-      `  চালু সেবা         : ${open}টি`,
-      `  বন্ধ সেবা         : ${filtered.length-open}টি`,``  ,
-      "🏢 সেবার ধরনভিত্তিক:",
-      ...byType.map(t=>`  ${t.type.padEnd(14)}: ${t.count}টি`),``,
-      "📍 জেলাভিত্তিক:",
-      ...byDist.map(d=>`  ${d.d.padEnd(14)}: ${d.count}টি`),``,
-      "👥 অন্যান্য:",
-      `  রক্তদাতা         : ${donors.length}জন`,
-      `  ব্যবহারকারী রিপোর্ট: ${reports.length}টি`,
-      `  স্বেচ্ছাসেবক      : ${volunteers.length}জন`,``,
-      "=".repeat(55),
-      "এই প্রতিবেদন সিলেটসেবা Admin থেকে তৈরি হয়েছে।",
-    ].join("\n");
-    const blob=new Blob([content],{type:"text/plain;charset=utf-8"});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");a.href=url;a.download=`sylhetsheba_${rType}_${now.toISOString().slice(0,10)}.txt`;a.click();URL.revokeObjectURL(url);
-    addLog("প্রতিবেদন তৈরি",`${rType} — ${dist||"সকল জেলা"}`);
-  };
-  return(
-    <div className="card">
-      <div className="ch"><div className="ch-l">📄 প্রতিবেদন তৈরি করুন</div></div>
-      <div className="cb">
-        <div className="fg2" style={{maxWidth:420,marginBottom:13}}>
-          <div className="fg"><span className="fl">প্রতিবেদনের ধরন</span><select className="fs" value={rType} onChange={e=>setRType(e.target.value)}><option value="daily">দৈনিক</option><option value="weekly">সাপ্তাহিক</option></select></div>
-          <div className="fg"><span className="fl">জেলা (ঐচ্ছিক)</span><select className="fs" value={dist} onChange={e=>setDist(e.target.value)}><option value="">সকল জেলা</option>{Object.keys(DISTRICTS_DATA).map(d=><option key={d} value={d}>{d}</option>)}</select></div>
-        </div>
-        <div style={{background:"#f8fafc",border:"1px solid var(--brd)",borderRadius:"9px",padding:"12px",marginBottom:"13px"}}>
-          {["মোট চালু ও বন্ধ সেবার সংখ্যা","সেবার ধরন ও জেলাভিত্তিক বিশ্লেষণ","রক্তদাতা, রিপোর্ট ও স্বেচ্ছাসেবক সংখ্যা"].map(i=>(
-            <p key={i} style={{fontSize:"12px",color:"var(--mu)",marginBottom:"4px"}}>✓ {i}</p>
-          ))}
-        </div>
-        <div style={{background:"#fef9c3",border:"1px solid #fde68a",borderRadius:"8px",padding:"10px 12px",marginBottom:"13px",fontSize:"12px",color:"#92400e"}}>
-          <strong>📌 ইমেইল ও Google Drive-এ অটো-পাঠানো সম্পর্কে:</strong><br/>
-          এই ফিচারটি server-side কোড ছাড়া সম্ভব নয়। Netlify-এ এটি করতে <strong>Netlify Scheduled Functions + Gmail API</strong> ব্যবহার করতে হবে। আলাদা ধাপে এই সেটআপ প্রদান করা হবে।
-        </div>
-        <button className="bp" onClick={gen}>📥 প্রতিবেদন ডাউনলোড করুন (.txt)</button>
-      </div>
-    </div>
-  );
-}
-
-/* ══ DATA MANAGER ══ */
-function DataMgr({showToast}){
-  const[confirmReset,setConfirmReset]=React.useState(false);
-  const exportAll=()=>{
-    const data={exportedAt:new Date().toISOString(),version:VER,services:loadData(KS.services,DEFAULT_SERVICES),donors:loadData(KS.donors,DEFAULT_DONORS),alerts:loadData(KS.alerts,DEFAULT_ALERTS),reports:loadData(KS.reports,[]),volunteers:loadData(KS.volunteers,[])};
-    const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");a.href=url;a.download=`sylhetsheba_backup_${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url);
-    showToast("✅ ডেটা এক্সপোর্ট হয়েছে!");addLog("ডেটা এক্সপোর্ট","সম্পূর্ণ JSON");
-  };
-  const importJSON=(e)=>{
-    const file=e.target.files[0];if(!file)return;
-    const reader=new FileReader();
-    reader.onload=(ev)=>{
-      try{
-        const data=JSON.parse(ev.target.result);
-        if(data.services)saveData(KS.services,data.services);
-        if(data.donors)saveData(KS.donors,data.donors);
-        if(data.alerts)saveData(KS.alerts,data.alerts);
-        showToast("✅ ইম্পোর্ট সফল! পেজ লোড হচ্ছে...");addLog("ডেটা ইম্পোর্ট","JSON ব্যাকআপ থেকে");
-        setTimeout(()=>window.location.reload(),1300);
-      }catch{showToast("❌ ভুল JSON ফাইল!");}
-    };
-    reader.readAsText(file);e.target.value="";
-  };
-  const resetAll=()=>{Object.values(KS).forEach(k=>localStorage.removeItem(k));showToast("✅ রিসেট সম্পন্ন। লোড হচ্ছে...");setTimeout(()=>window.location.reload(),1300);setConfirmReset(false);};
-  return(
-    <div>
-      <div className="g2">
-        <div className="card"><div className="ch"><div className="ch-l">📤 ডেটা এক্সপোর্ট</div></div>
-          <div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px",lineHeight:1.6}}>সমস্ত ডেটা JSON ফাইলে ডাউনলোড করুন।</p><button className="bp" onClick={exportAll}>📥 JSON ব্যাকআপ</button></div>
-        </div>
-        <div className="card"><div className="ch"><div className="ch-l">📥 ডেটা ইম্পোর্ট</div></div>
-          <div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px",lineHeight:1.6}}>আগের ব্যাকআপ থেকে পুনরুদ্ধার করুন।</p>
-            <label className="bs" style={{cursor:"pointer",display:"inline-flex"}}>📂 JSON ফাইল নির্বাচন<input type="file" accept=".json" style={{display:"none"}} onChange={importJSON}/></label>
-          </div>
-        </div>
-      </div>
-      <div className="card" style={{marginTop:"14px"}}><div className="ch" style={{background:"#dc2626"}}><div className="ch-l">⚠️ ডেটা রিসেট</div></div>
-        <div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"11px",lineHeight:1.6}}>সমস্ত কাস্টম ডেটা মুছে ডিফল্টে ফিরে যাবে।</p><button className="bd" style={{background:"#fef2f2"}} onClick={()=>setConfirmReset(true)}>🔄 সব রিসেট করুন</button></div>
-      </div>
-      <div className="card" style={{marginTop:"14px"}}><div className="ch"><div className="ch-l">ℹ️ সিস্টেম তথ্য</div></div>
-        <div className="cb">
-          {[["ভার্সন",VER],["বিভাগ","সিলেট"],["মোট জেলা",`${Object.keys(DISTRICTS_DATA).length}টি`],["মোট উপজেলা",`${Object.values(DISTRICTS_DATA).flat().length}টি`],["সেবার ধরন",`${SERVICE_TYPES.length}টি`],["LocalStorage ব্যবহার",`${(JSON.stringify(localStorage).length/1024).toFixed(1)} KB`]].map(([k,v])=>(
-            <div key={k} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:"1px solid #f1f5f9",fontSize:"13px"}}>
-              <span style={{color:"var(--mu)"}}>🔹 {k}</span><strong>{v}</strong>
-            </div>
-          ))}
-        </div>
-      </div>
-      {confirmReset&&<Confirm msg="সব কাস্টম ডেটা মুছে ডিফল্টে ফিরে যাবে। এটি পূর্বাবস্থায় ফেরানো যাবে না। নিশ্চিত?" onYes={resetAll} onNo={()=>setConfirmReset(false)}/>}
-    </div>
-  );
-}
-
-/* ══ SETTINGS ══ */
-function Settings(){
-  const copy=(txt)=>{navigator.clipboard.writeText(txt).then(()=>{}).catch(()=>{});};
-  const iframeCode=`<iframe src="./index.html" width="100%" height="950" frameborder="0" style="border:none;border-radius:12px;overflow:hidden" loading="lazy"></iframe>`;
-  return(
-    <div>
-      <div className="card"><div className="ch"><div className="ch-l">🔐 Admin URL তথ্য</div></div>
-        <div className="cb">
-          <div style={{background:"#f0fdf4",border:"1px solid #86efac",borderRadius:"8px",padding:"11px 13px",fontSize:"13px",color:"#15803d",fontWeight:600}}>
-            📌 Admin URL: <code style={{background:"rgba(0,0,0,.07)",padding:"1px 6px",borderRadius:"4px"}}>yoursite.com/sylhetsheba/admin.html</code>
-          </div>
-          <p style={{fontSize:"12px",color:"var(--mu)",marginTop:"8px"}}>এই URL টি শুধুমাত্র বিশ্বস্ত ব্যক্তিদের সাথে শেয়ার করুন। পাবলিক সাইটে কোনো লিংক নেই।</p>
-        </div>
-      </div>
-      <div className="card"><div className="ch"><div className="ch-l">🌐 Netlify হোস্টিং নির্দেশিকা</div></div>
-        <div className="cb">
-          <p style={{fontSize:"13px",fontWeight:600,marginBottom:"6px"}}>GitHub → Netlify Deploy পদ্ধতি:</p>
-          <div style={{background:"#f0fdf4",border:"1px solid #86efac",borderRadius:"8px",padding:"11px 13px",fontSize:"12px",color:"#15803d",lineHeight:1.8,marginBottom:"12px"}}>
-            ১. GitHub-এ repository তৈরি করুন<br/>
-            ২. সব ফাইল (index.html, admin.html, data.js, sw.js, manifest.json) আপলোড করুন<br/>
-            ৩. Netlify-এ যান → "Import from Git" → আপনার repo সিলেক্ট করুন<br/>
-            ৪. Build settings: কোনো কিছু লাগবে না (static site)<br/>
-            ৫. Deploy করুন — সম্পন্ন!
-          </div>
-          <p style={{fontSize:"13px",fontWeight:600,marginBottom:"6px"}}>Iframe হিসেবে ব্যবহার করুন:</p>
-          <div className="code-b">{iframeCode}</div>
-          <button className="bs" style={{marginTop:"8px",fontSize:"12px"}} onClick={()=>copy(iframeCode)}>📋 কপি করুন</button>
-        </div>
-      </div>
-      <div className="card"><div className="ch"><div className="ch-l">🗺️ Google Maps API সুরক্ষা</div></div>
-        <div className="cb">
-          <p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"10px",lineHeight:1.6}}>Google Cloud Console → APIs & Services → Credentials → আপনার API Key → Application restrictions → HTTP referrers:</p>
-          <div className="code-b">yoursite.com/*{"\n"}www.yoursite.com/*{"\n"}*.netlify.app/*</div>
-          <p style={{fontSize:"12px",color:"#dc2626",marginTop:"8px",fontWeight:600}}>⚠️ API key পাবলিকলি কখনো শেয়ার করবেন না।</p>
-        </div>
-      </div>
-    </div>
-  );
+    {reports.length>0&&<div className="card" style={{marginTop:"14px"}}><div className="ch"><div className="ch-l">📨 সাম্প্রতিক রিপোর্ট</div></div><div className="tbl"><table><thead><tr><th>সেবার নাম</th><th>সমস্যা</th><th>সময়</th></tr></thead><tbody>{reports.slice(-5).reverse().map(r=><tr key={r.id}><td style={{fontWeight:500}}>{r.service||"—"}</td><td style={{fontSize:"12px",maxWidth:200}}>{r.issue||"—"}</td><td style={{fontSize:"11px",color:"var(--mu)",whiteSpace:"nowrap"}}>{r.time}</td></tr>)}</tbody></table></div></div>}
+  </div>);
 }
 
 /* ══ MAIN ADMIN APP ══ */
@@ -897,97 +640,68 @@ function AdminApp(){
   const[reports,setReports]=React.useState(()=>loadData(KS.reports,[]));
   const[volunteers,setVols]=React.useState(()=>loadData(KS.volunteers,[]));
   const[actLogs,setActLogs]=React.useState(()=>loadData(KS.log,[]));
-  const[ratings]=React.useState(()=>loadData(KS.ratings,{}));
   const[disaster,setDisaster]=React.useState(()=>loadData(KS.disaster,false));
+  const[svcTypes,setSvcTypes]=React.useState(()=>loadData(KS.svcTypes,DEFAULT_SVC_TYPES_OBJ));
 
-  React.useEffect(()=>{
-    const id=setInterval(()=>{setActLogs(loadData(KS.log,[]));setReports(loadData(KS.reports,[]));setVols(loadData(KS.volunteers,[]));},3000);
-    return()=>clearInterval(id);
-  },[]);
+  React.useEffect(()=>{const id=setInterval(()=>{setActLogs(loadData(KS.log,[]));setReports(loadData(KS.reports,[]));setVols(loadData(KS.volunteers,[]));},3000);return()=>clearInterval(id);},[]);
 
   const showToast=(m)=>{setToast(m);setTimeout(()=>setToast(null),3400);};
-  const logout=()=>{sessionStorage.removeItem("admin_auth");addLog("লগআউট","Admin প্যানেল থেকে বের");setAuthed(false);};
+  const logout=()=>{sessionStorage.removeItem("admin_auth");addLog("লগআউট","বের");setAuthed(false);};
   const navTo=(p)=>{setPage(p);setMobSb(false);};
 
-  if(!authed) return <Login onLogin={()=>setAuthed(true)}/>;
+  if(!authed)return<Login onLogin={()=>setAuthed(true)}/>;
 
   const MENU=[
-    {sec:"প্রধান মেনু",items:[{id:"overview",ic:"📊",lbl:"ওভারভিউ"},{id:"services",ic:"🏢",lbl:"সেবা ব্যবস্থাপনা"},{id:"donors",ic:"🩸",lbl:"রক্তদাতা"}]},
-    {sec:"বিজ্ঞপ্তি",items:[
-      {id:"alerts",ic:"🚨",lbl:"সতর্কতা ও দুর্যোগ",badge:disaster?"🔴":null,bc:"r"},
-      {id:"reports",ic:"📨",lbl:"রিপোর্ট",badge:reports.length||null},
-      {id:"volunteers",ic:"🤝",lbl:"স্বেচ্ছাসেবক",badge:volunteers.length||null,bc:"b"},
-    ]},
-    {sec:"টুলস",items:[
-      {id:"log",ic:"📋",lbl:"কার্যক্রম লগ",badge:actLogs.length||null,bc:"g"},
-      {id:"bulk",ic:"📥",lbl:"বাল্ক ইম্পোর্ট"},
-      {id:"reportgen",ic:"📄",lbl:"প্রতিবেদন তৈরি"},
-    ]},
+    {sec:"প্রধান",items:[{id:"overview",ic:"📊",lbl:"ওভারভিউ"},{id:"services",ic:"🏢",lbl:"সেবা ব্যবস্থাপনা"},{id:"svctypes",ic:"🏷️",lbl:"সেবার ধরন",badge:svcTypes.length,bc:"y"},{id:"donors",ic:"🩸",lbl:"রক্তদাতা"}]},
+    {sec:"বিজ্ঞপ্তি",items:[{id:"alerts",ic:"🚨",lbl:"সতর্কতা ও দুর্যোগ",badge:disaster?"🔴":null,bc:"r"},{id:"reports",ic:"📨",lbl:"রিপোর্ট",badge:reports.length||null}]},
+    {sec:"টুলস",items:[{id:"log",ic:"📋",lbl:"কার্যক্রম লগ",badge:actLogs.length||null,bc:"g"},{id:"bulk",ic:"📥",lbl:"বাল্ক ইম্পোর্ট"},{id:"reportgen",ic:"📄",lbl:"প্রতিবেদন"}]},
     {sec:"সিস্টেম",items:[{id:"data",ic:"💾",lbl:"ডেটা ম্যানেজমেন্ট"},{id:"settings",ic:"⚙️",lbl:"সেটিংস"}]},
   ];
-  const TITLES={overview:"ওভারভিউ",services:"সেবা ব্যবস্থাপনা",donors:"রক্তদাতা",alerts:"সতর্কতা ও দুর্যোগ",reports:"রিপোর্ট",volunteers:"স্বেচ্ছাসেবক",log:"কার্যক্রম লগ",bulk:"বাল্ক ইম্পোর্ট",reportgen:"প্রতিবেদন",data:"ডেটা ম্যানেজমেন্ট",settings:"সেটিংস"};
-  const ICONS={overview:"📊",services:"🏢",donors:"🩸",alerts:"🚨",reports:"📨",volunteers:"🤝",log:"📋",bulk:"📥",reportgen:"📄",data:"💾",settings:"⚙️"};
+  const TITLES={overview:"ওভারভিউ",services:"সেবা ব্যবস্থাপনা",svctypes:"সেবার ধরন",donors:"রক্তদাতা",alerts:"সতর্কতা ও দুর্যোগ",reports:"রিপোর্ট",log:"কার্যক্রম লগ",bulk:"বাল্ক ইম্পোর্ট",reportgen:"প্রতিবেদন",data:"ডেটা ম্যানেজমেন্ট",settings:"সেটিংস"};
+  const ICONS={overview:"📊",services:"🏢",svctypes:"🏷️",donors:"🩸",alerts:"🚨",reports:"📨",log:"📋",bulk:"📥",reportgen:"📄",data:"💾",settings:"⚙️"};
 
-  return(
-    <div style={{display:"flex",minHeight:"100vh"}}>
-      {/* Overlay */}
-      <div className={`sb-overlay${mobSb?" open":""}`} onClick={()=>setMobSb(false)}></div>
-
-      {/* Sidebar */}
-      <div className={`admin-sb${mobSb?" open":""}`}>
-        <div className="sb-brand">
-          <div className="sb-logo">🏛️</div>
-          <div><h2>সিলেটসেবা</h2><p>Admin {VER}</p></div>
-        </div>
-        {MENU.map(({sec,items})=>(
-          <React.Fragment key={sec}>
-            <div className="sb-sec">{sec}</div>
-            {items.map(({id,ic,lbl,badge,bc})=>(
-              <div key={id} className={`sb-item${page===id?" act":""}`} onClick={()=>navTo(id)}>
-                <span className="ic">{ic}</span>
-                <span style={{flex:1}}>{lbl}</span>
-                {badge&&<span className={`sb-bdg${bc?" "+bc:""}`}>{badge}</span>}
-              </div>
-            ))}
-          </React.Fragment>
-        ))}
-        <div className="sb-footer">
-          <a href="index.html" target="_blank" className="sb-flink">🌐 পাবলিক সাইট দেখুন ↗</a>
-          <div className="sb-flink" onClick={logout}>🚪 লগআউট</div>
-        </div>
+  return(<div style={{display:"flex",minHeight:"100vh"}}>
+    <div className={`sb-overlay${mobSb?" open":""}`} onClick={()=>setMobSb(false)}></div>
+    <div className={`admin-sb${mobSb?" open":""}`}>
+      <div className="sb-brand"><div className="sb-logo">🏛️</div><div><h2>সিলেটসেবা</h2><p>Admin {VER}</p></div></div>
+      {MENU.map(({sec,items})=><React.Fragment key={sec}>
+        <div className="sb-sec">{sec}</div>
+        {items.map(({id,ic,lbl,badge,bc})=><div key={id} className={`sb-item${page===id?" act":""}`} onClick={()=>navTo(id)}>
+          <span className="ic">{ic}</span><span style={{flex:1}}>{lbl}</span>
+          {badge&&<span className={`sb-bdg${bc?" "+bc:""}`}>{badge}</span>}
+        </div>)}
+      </React.Fragment>)}
+      <div className="sb-footer">
+        <a href="index.html" target="_blank" className="sb-flink">🌐 পাবলিক সাইট দেখুন ↗</a>
+        <div className="sb-flink" onClick={logout}>🚪 লগআউট</div>
       </div>
-
-      {/* Main */}
-      <div className="admin-main">
-        <div className="topbar">
-          <div className="topbar-l">
-            <button className="ham" onClick={()=>setMobSb(o=>!o)} aria-label="মেনু">☰</button>
-            <p className="topbar-title">{ICONS[page]} {TITLES[page]}</p>
-          </div>
-          <div className="topbar-r">
-            {disaster&&<span style={{background:"#dc2626",color:"#fff",fontSize:"11px",fontWeight:700,padding:"3px 10px",borderRadius:"20px",animation:"pulse 1.5s infinite"}}>🚨 দুর্যোগ মোড</span>}
-            <span className="t-bdg">🔐 Admin</span>
-            <span className="t-date" style={{fontSize:"11px",color:"var(--mu)"}}>📅 {new Date().toLocaleDateString("bn-BD",{day:"numeric",month:"short"})}</span>
-          </div>
-        </div>
-        <div className="content">
-          {page==="overview"  &&<Overview services={services} donors={donors} alerts={alerts} reports={reports} volunteers={volunteers} actLogs={actLogs} ratings={ratings}/>}
-          {page==="services"  &&<ServiceMgr services={services} setSvcs={setSvcs} showToast={showToast}/>}
-          {page==="donors"    &&<DonorMgr donors={donors} setDonors={setDonors} showToast={showToast}/>}
-          {page==="alerts"    &&<AlertMgr alerts={alerts} setAlerts={setAlerts} showToast={showToast} disaster={disaster} setDisaster={setDisaster}/>}
-          {page==="reports"   &&<ReportsMgr reports={reports} setReports={setReports} showToast={showToast}/>}
-          {page==="volunteers"&&<VolMgr volunteers={volunteers} setVolunteers={setVols} showToast={showToast}/>}
-          {page==="log"       &&<LogMgr actLogs={actLogs} setActLogs={setActLogs} showToast={showToast}/>}
-          {page==="bulk"      &&<BulkImport services={services} setSvcs={setSvcs} donors={donors} setDonors={setDonors} showToast={showToast}/>}
-          {page==="reportgen" &&<ReportGen services={services} reports={reports} volunteers={volunteers} donors={donors}/>}
-          {page==="data"      &&<DataMgr showToast={showToast}/>}
-          {page==="settings"  &&<Settings/>}
-        </div>
-      </div>
-
-      {toast&&<Toast msg={toast} onClose={()=>setToast(null)}/>}
     </div>
-  );
+
+    <div className="admin-main">
+      <div className="topbar">
+        <div className="topbar-l"><button className="ham" onClick={()=>setMobSb(o=>!o)}>☰</button><p className="topbar-title">{ICONS[page]} {TITLES[page]}</p></div>
+        <div className="topbar-r">
+          {disaster&&<span style={{background:"#dc2626",color:"#fff",fontSize:"11px",fontWeight:700,padding:"3px 10px",borderRadius:"20px",animation:"pulse 1.5s infinite"}}>🚨 দুর্যোগ</span>}
+          <span className="t-bdg">🔐 Admin</span>
+          <span className="t-date" style={{fontSize:"11px",color:"var(--mu)"}}>📅 {new Date().toLocaleDateString("bn-BD",{day:"numeric",month:"short"})}</span>
+        </div>
+      </div>
+      <div className="content">
+        {page==="overview"  &&<Overview services={services} donors={donors} alerts={alerts} reports={reports} volunteers={volunteers} actLogs={actLogs} svcTypes={svcTypes}/>}
+        {page==="services"  &&<ServiceMgr services={services} setSvcs={setSvcs} showToast={showToast} svcTypes={svcTypes}/>}
+        {page==="svctypes"  &&<SvcTypeMgr svcTypes={svcTypes} setSvcTypes={setSvcTypes} showToast={showToast}/>}
+        {page==="donors"    &&<DonorMgr donors={donors} setDonors={setDonors} showToast={showToast}/>}
+        {page==="alerts"    &&<AlertMgr alerts={alerts} setAlerts={setAlerts} showToast={showToast} disaster={disaster} setDisaster={setDisaster}/>}
+        {page==="reports"   &&<ReportsMgr reports={reports} setReports={setReports} showToast={showToast}/>}
+        {page==="log"       &&<LogMgr actLogs={actLogs} setActLogs={setActLogs} showToast={showToast}/>}
+        {page==="bulk"      &&<BulkImport services={services} setSvcs={setSvcs} donors={donors} setDonors={setDonors} showToast={showToast} svcTypes={svcTypes}/>}
+        {page==="reportgen" &&<ReportGen services={services} reports={reports} volunteers={volunteers} donors={donors}/>}
+        {page==="data"      &&<DataMgr showToast={showToast}/>}
+        {page==="settings"  &&<Settings/>}
+      </div>
+    </div>
+    {toast&&<Toast msg={toast} onClose={()=>setToast(null)}/>}
+  </div>);
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<AdminApp/>);
