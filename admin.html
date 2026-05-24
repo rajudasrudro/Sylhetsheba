@@ -548,7 +548,7 @@ function ReportsMgr({reports,setReports,services,setSvcs,showToast}){
         ))}
       </div>
 
-      {filteredReports.length===0&&<div style={{background:"#fff",border:"1px solid var(--brd)",borderRadius:var(--r),padding:"36px",textAlign:"center",color:"var(--mu)",fontSize:"13px"}}>কোনো রিপোর্ট নেই।</div>}
+      {filteredReports.length===0&&<div style={{background:"#fff",border:"1px solid var(--brd)",borderRadius:"12px",padding:"36px",textAlign:"center",color:"var(--mu)",fontSize:"13px"}}>কোনো রিপোর্ট নেই।</div>}
 
       {filteredReports.map(r=>{
         const st=r.status||"pending";
