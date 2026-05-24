@@ -195,7 +195,7 @@ tr:hover td{background:#fafbfd;}
 <div id="root"></div>
 <script type="text/babel">
 /* ══ Admin v8.0.0 ══ */
-const VER="v8.0.0";
+const VER="v8.1.0";
 const KS={
   services:"pub_services",donors:"pub_donors",alerts:"pub_alerts",
   reports:"pub_reports",volunteers:"pub_volunteers",
@@ -386,7 +386,7 @@ function DoctorManager({doctors,onChange,showToast}){
 function ServiceMgr({services,setSvcs,showToast,svcTypes}){
   const[q,setQ]=React.useState("");const[fD,setFD]=React.useState("");const[fT,setFT]=React.useState("");const[fS,setFS]=React.useState("");
   const[showF,setShowF]=React.useState(false);const[editing,setEditing]=React.useState(null);const[confirmId,setConfirmId]=React.useState(null);
-  const E={district:"",upazila:"",type:"হাসপাতাল",status:"open",lat:"",lng:"",emergency:false,imageUrl:"",name:"",address:"",mobilePhone:"",phone:"",email:"",dutyOfficer:"",beds:"",unitName:"",stationName:"",ambulanceName:"",currentLocation:"",driverPhone:"",openTime:"",closeTime:"",doctors:[]};
+  const E={district:"",upazila:"",type:"হাসপাতাল",status:"open",lat:"",lng:"",emergency:false,imageUrl:"",name:"",address:"",mobilePhone:"",phone:"",email:"",dutyOfficer:"",beds:"",unitName:"",stationName:"",ambulanceName:"",currentLocation:"",driverPhone:"",openTime:"",closeTime:"",services:"",doctors:[]};
   const[form,setForm]=React.useState({...E});
   const allTypeNames=svcTypes.map(t=>t.name);
   const isTimeBased=!["হাসপাতাল","থানা","ফায়ার সার্ভিস","অ্যাম্বুলেন্স"].includes(form.type);
@@ -483,15 +483,38 @@ function ServiceMgr({services,setSvcs,showToast,svcTypes}){
           )}
           <div className="field-section">
             <div className="field-section-title">🗺️ মানচিত্র অবস্থান</div>
-            <div className="fg2">
+            <p style={{fontSize:"12px",color:"var(--mu)",marginBottom:"10px"}}>Google Maps থেকে লোকেশন বেছে নিতে নিচের বাটনে ক্লিক করুন, অথবা সরাসরি লিংক পেস্ট করুন।</p>
+            <div className="fg2" style={{marginBottom:"8px"}}>
               <div className="fg"><span className="fl">Latitude</span><input className="fi" type="number" step="any" value={form.lat} onChange={e=>setForm({...form,lat:e.target.value})} placeholder="24.8978"/></div>
               <div className="fg"><span className="fl">Longitude</span><input className="fi" type="number" step="any" value={form.lng} onChange={e=>setForm({...form,lng:e.target.value})} placeholder="91.8688"/></div>
             </div>
+            <div style={{display:"flex",gap:"8px",flexWrap:"wrap",alignItems:"center"}}>
+              <a href="https://maps.google.com" target="_blank" rel="noopener" className="upload-btn" style={{textDecoration:"none"}}>
+                🗺️ Google Maps খুলুন
+              </a>
+              <span style={{fontSize:"12px",color:"var(--mu)"}}>→ লোকেশনে ডান ক্লিক → "এই স্থান কী?" → কোঅর্ডিনেট কপি করুন</span>
+            </div>
+            <div className="fg" style={{marginTop:"8px"}}>
+              <span className="fl">অথবা Google Maps লিংক পেস্ট করুন</span>
+              <input className="fi" placeholder="https://maps.google.com/?q=24.8978,91.8688" onBlur={e=>{
+                const url=e.target.value;
+                const m=url.match(/[-\d.]+,[-\d.]+/);
+                if(m){const[la,lo]=m[0].split(",");setForm({...form,lat:la,lng:lo});showToast("✅ লোকেশন সেট হয়েছে!");}
+              }}/>
+            </div>
+            {form.lat&&form.lng&&<div style={{background:"#f0fdf4",border:"1px solid #86efac",borderRadius:"8px",padding:"7px 11px",fontSize:"12px",color:"#15803d",marginTop:"6px"}}>✅ লোকেশন সেট: {form.lat}, {form.lng}</div>}
           </div>
           <div className="field-section">
             <div className="field-section-title">🖼️ প্রতিষ্ঠানের ছবি</div>
             <ImageUploadField value={form.imageUrl} onChange={v=>setForm({...form,imageUrl:v})} label="ছবি আপলোড করুন"/>
           </div>
+          {isDiagnostic&&(
+            <div className="field-section" style={{borderLeft:"3px solid #8b5cf6"}}>
+              <div className="field-section-title">🩺 প্রদত্ত সেবাসমূহ</div>
+              <span className="fl">সেবার তালিকা (প্রতিটি সেবা আলাদা লাইনে লিখুন)</span>
+              <textarea className="fa" rows={5} value={form.services||""} onChange={e=>setForm({...form,services:e.target.value})} placeholder={"ECG\nX-Ray\nUltrasound\nBlood Test\nUrine Test"}/>
+            </div>
+          )}
           {isDiagnostic&&(
             <div className="field-section" style={{borderLeft:"3px solid #8b5cf6"}}>
               <div className="field-section-title">👨‍⚕️ চেম্বাররত ডাক্তারগণ</div>
@@ -695,16 +718,8 @@ function Settings({showToast,onLogout}){
         <button type="submit" className="bp" style={{marginTop:"6px"}}>🔐 পাসওয়ার্ড পরিবর্তন</button>
       </form>
     </div></div>
-    <div className="card"><div className="ch"><div className="ch-l">📤 Cloudinary সেটআপ</div></div><div className="cb">
-      <p style={{fontSize:"13px",marginBottom:"10px",lineHeight:1.7}}>ছবি আপলোড করতে Cloudinary free account তৈরি করুন:</p>
-      <div style={{background:"#f0fdf4",border:"1px solid #86efac",borderRadius:"9px",padding:"12px",fontSize:"12px",color:"#15803d",lineHeight:1.8}}>
-        ১. <a href="https://cloudinary.com/users/register/free" target="_blank" rel="noopener" style={{color:"var(--p)",fontWeight:600}}>cloudinary.com</a>-এ free account তৈরি করুন<br/>
-        ২. Dashboard থেকে <strong>Cloud Name</strong> কপি করুন<br/>
-        ৩. Settings → Upload → "Add upload preset" → Unsigned preset তৈরি করুন<br/>
-        ৪. admin.html-এর উপরে <code style={{background:"rgba(0,0,0,.07)",padding:"1px 5px",borderRadius:"3px"}}>CLOUDINARY_CLOUD</code> ও <code style={{background:"rgba(0,0,0,.07)",padding:"1px 5px",borderRadius:"3px"}}>CLOUDINARY_PRESET</code> পরিবর্তন করুন
-      </div>
-    </div></div>
     <div className="card"><div className="ch"><div className="ch-l">🚪 সেশন</div></div><div className="cb"><p style={{fontSize:"13px",color:"var(--mu)",marginBottom:"12px"}}>বর্তমান ব্রাউজার সেশন থেকে লগআউট করুন।</p><button className="bd" style={{background:"#fef2f2"}} onClick={onLogout}>🚪 লগআউট</button></div></div>
+    <div className="card"><div className="ch"><div className="ch-l">ℹ️ সিস্টেম তথ্য</div></div><div className="cb">{[["ভার্সন",VER],["মোট জেলা",`${Object.keys(DISTRICTS_DATA).length}টি`],["মোট উপজেলা",`${Object.values(DISTRICTS_DATA).flat().length}টি`],["LocalStorage",`${(JSON.stringify(localStorage).length/1024).toFixed(1)} KB`]].map(([k,v])=><div key={k} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:"1px solid #f1f5f9",fontSize:"13px"}}><span style={{color:"var(--mu)"}}>🔹 {k}</span><strong>{v}</strong></div>)}</div></div>
   </div>);
 }
 
@@ -758,13 +773,13 @@ function AdminApp(){
 
   const pendingReports=reports.filter(r=>!r.status||r.status==="pending").length;
   const MENU=[
-    {sec:"প্রধান",items:[{id:"overview",ic:"📊",lbl:"ওভারভিউ"},{id:"services",ic:"🏢",lbl:"সেবা ব্যবস্থাপনা"},{id:"svctypes",ic:"🏷️",lbl:"সেবার ধরন",badge:svcTypes.length,bc:"y"},{id:"donors",ic:"🩸",lbl:"রক্তদাতা"}]},
+    {sec:"প্রধান",items:[{id:"overview",ic:"📊",lbl:"ওভারভিউ"},{id:"services",ic:"🏢",lbl:"সেবা ব্যবস্থাপনা"},{id:"svctypes",ic:"🏷️",lbl:"সেবার ধরন",badge:svcTypes.length,bc:"y"}]},
     {sec:"বিজ্ঞপ্তি",items:[{id:"alerts",ic:"🚨",lbl:"সতর্কতা ও দুর্যোগ",badge:disaster?"🔴":null,bc:"r"},{id:"reports",ic:"📨",lbl:"রিপোর্ট ও অনুমোদন",badge:pendingReports||null,bc:"y"}]},
     {sec:"টুলস",items:[{id:"log",ic:"📋",lbl:"কার্যক্রম লগ",badge:actLogs.length||null,bc:"g"}]},
     {sec:"সিস্টেম",items:[{id:"data",ic:"💾",lbl:"ডেটা ম্যানেজমেন্ট"},{id:"settings",ic:"⚙️",lbl:"সেটিংস"}]},
   ];
-  const TITLES={overview:"ওভারভিউ",services:"সেবা ব্যবস্থাপনা",svctypes:"সেবার ধরন",donors:"রক্তদাতা",alerts:"সতর্কতা ও দুর্যোগ",reports:"রিপোর্ট ও অনুমোদন",log:"কার্যক্রম লগ",data:"ডেটা ম্যানেজমেন্ট",settings:"সেটিংস"};
-  const ICONS={overview:"📊",services:"🏢",svctypes:"🏷️",donors:"🩸",alerts:"🚨",reports:"📨",log:"📋",data:"💾",settings:"⚙️"};
+  const TITLES={overview:"ওভারভিউ",services:"সেবা ব্যবস্থাপনা",svctypes:"সেবার ধরন",alerts:"সতর্কতা ও দুর্যোগ",reports:"রিপোর্ট ও অনুমোদন",log:"কার্যক্রম লগ",data:"ডেটা ম্যানেজমেন্ট",settings:"সেটিংস"};
+  const ICONS={overview:"📊",services:"🏢",svctypes:"🏷️",alerts:"🚨",reports:"📨",log:"📋",data:"💾",settings:"⚙️"};
 
   return(<div style={{display:"flex",minHeight:"100vh"}}>
     <div className={`sb-overlay${mobSb?" open":""}`} onClick={()=>setMobSb(false)}></div>
@@ -796,7 +811,6 @@ function AdminApp(){
         {page==="overview"  &&<Overview services={services} donors={donors} alerts={alerts} reports={reports} actLogs={actLogs} svcTypes={svcTypes}/>}
         {page==="services"  &&<ServiceMgr services={services} setSvcs={setSvcs} showToast={showToast} svcTypes={svcTypes}/>}
         {page==="svctypes"  &&<SvcTypeMgr svcTypes={svcTypes} setSvcTypes={setSvcTypes} showToast={showToast}/>}
-        {page==="donors"    &&<DonorMgr donors={donors} setDonors={setDonors} showToast={showToast}/>}
         {page==="alerts"    &&<AlertMgr alerts={alerts} setAlerts={setAlerts} showToast={showToast} disaster={disaster} setDisaster={setDisaster}/>}
         {page==="reports"   &&<ReportsMgr reports={reports} setReports={setReports} services={services} setSvcs={setSvcs} showToast={showToast}/>}
         {page==="log"       &&<LogMgr actLogs={actLogs} setActLogs={setActLogs} showToast={showToast}/>}

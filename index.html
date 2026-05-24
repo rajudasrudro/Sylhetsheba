@@ -290,7 +290,7 @@ img{display:block;max-width:100%;}
 <div id="root"></div>
 <script type="text/babel">
 /* ══ সিলেটসেবা v8.0.0 ══ */
-const VER="v8.0.0";
+const VER="v8.1.0";
 const KEYS={services:"pub_services",alerts:"pub_alerts",reports:"pub_reports",svcTypes:"pub_svc_types",disaster:"disaster_mode"};
 const DEFAULT_SVC_TYPES_OBJ=[
   {name:"হাসপাতাল",icon:"🏥",color:"#e74c3c"},
@@ -549,11 +549,12 @@ function SvcPopup({s,onClose,svcTypes,onReport}){
             {s.emergency&&<span style={{background:"#fef2f2",color:"#dc2626",fontSize:"11px",fontWeight:600,padding:"3px 10px",borderRadius:"20px",border:"1px solid #fca5a5"}}>⚡ জরুরি</span>}
           </div>
 
-          {/* Tabs — show doctor tab for diagnostic */}
+          {/* Tabs */}
           <div className="popup-tabs">
             <button className={`ptab${activeTab==="info"?" act":""}`} onClick={()=>setActiveTab("info")}>📋 বিস্তারিত</button>
+            {isDiagnostic&&<button className={`ptab${activeTab==="doctors"?" act":""}`} onClick={()=>setActiveTab("doctors")}>👨‍⚕️ ডাক্তারগণ{hasDoctors?` (${s.doctors.length})`:""}</button>}
+            {isDiagnostic&&s.services&&s.services.trim()&&<button className={`ptab${activeTab==="svclist"?" act":""}`} onClick={()=>setActiveTab("svclist")}>🩺 তাদের সেবাসমূহ</button>}
             {s.lat&&s.lng&&<button className={`ptab${activeTab==="map"?" act":""}`} onClick={()=>setActiveTab("map")}>🗺️ মানচিত্র</button>}
-            {hasDoctors&&<button className={`ptab${activeTab==="doctors"?" act":""}`} onClick={()=>setActiveTab("doctors")}>👨‍⚕️ ডাক্তারগণ ({s.doctors.length})</button>}
           </div>
 
           {/* Info tab */}
@@ -564,9 +565,52 @@ function SvcPopup({s,onClose,svcTypes,onReport}){
               <div className="info-row"><span className="info-label">উপজেলা</span><span className="info-val">{s.upazila}</span></div>
               <div className="info-row"><span className="info-label">সেবার ধরন</span><span className="info-val">{s.type}</span></div>
               {renderFields()}
-              <div className="popup-actions" style={{marginTop:"14px"}}>
+              {/* Diagnostic serial scrolling notice */}
+              {isDiagnostic&&callPhone&&(
+                <div style={{background:"linear-gradient(135deg,#f5f3ff,#ede9fe)",border:"1px solid #c4b5fd",borderRadius:"12px",padding:"12px 14px",marginTop:"14px",textAlign:"center"}}>
+                  <div style={{fontSize:"13px",color:"#7c3aed",fontWeight:600,marginBottom:"6px"}}>📋 সিরিয়ালের জন্য যোগাযোগ করুন</div>
+                  <a href={`tel:${callPhone}`} style={{display:"inline-flex",alignItems:"center",gap:"6px",background:"#7c3aed",color:"#fff",borderRadius:"10px",padding:"10px 20px",fontSize:"14px",fontWeight:700,textDecoration:"none"}}>
+                    📞 {callPhone}
+                  </a>
+                </div>
+              )}
+              <div className="popup-actions" style={{marginTop:"12px"}}>
                 {callPhone&&<a href={`tel:${callPhone}`} className="pact-call">📞 কল করুন</a>}
                 {s.lat&&s.lng&&<a href={`https://www.google.com/maps?q=${s.lat},${s.lng}`} target="_blank" rel="noopener" className="pact-dir">🗺️ দিকনির্দেশনা</a>}
+              </div>
+            </div>
+          )}
+
+          {/* Doctors tab */}
+          {activeTab==="doctors"&&isDiagnostic&&(
+            <div>
+              {hasDoctors?(
+                <>
+                  <div className="ps-title">👨‍⚕️ চেম্বাররত ডাক্তারগণ</div>
+                  <div className="doc-grid">
+                    {s.doctors.map((doc,i)=><DoctorCard key={i} doc={doc}/>)}
+                  </div>
+                </>
+              ):(
+                <div style={{textAlign:"center",padding:"30px 20px",color:"var(--mu)"}}>
+                  <div style={{fontSize:"40px",marginBottom:"8px"}}>👨‍⚕️</div>
+                  <p style={{fontSize:"13px"}}>এখনো কোনো ডাক্তারের তথ্য যোগ করা হয়নি।</p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Services list tab */}
+          {activeTab==="svclist"&&isDiagnostic&&(
+            <div>
+              <div className="ps-title">🩺 প্রদত্ত সেবাসমূহ</div>
+              <div style={{background:"#f5f3ff",border:"1px solid #c4b5fd",borderRadius:"12px",padding:"14px"}}>
+                {(s.services||"").split("\n").filter(Boolean).map((line,i)=>(
+                  <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"8px",marginBottom:"8px",fontSize:"13px",color:"var(--tx)"}}>
+                    <span style={{color:"#7c3aed",fontWeight:700,flexShrink:0}}>✓</span>
+                    <span>{line.trim()}</span>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -578,16 +622,6 @@ function SvcPopup({s,onClose,svcTypes,onReport}){
               <div ref={mapRef} className="popup-map"></div>
               <div style={{marginTop:"10px"}}>
                 <a href={`https://www.google.com/maps?q=${s.lat},${s.lng}`} target="_blank" rel="noopener" className="pact-dir">🗺️ Google Maps-এ দেখুন</a>
-              </div>
-            </div>
-          )}
-
-          {/* Doctors tab */}
-          {activeTab==="doctors"&&hasDoctors&&(
-            <div>
-              <div className="ps-title">👨‍⚕️ চেম্বাররত ডাক্তারগণ</div>
-              <div className="doc-grid">
-                {s.doctors.map((doc,i)=><DoctorCard key={i} doc={doc}/>)}
               </div>
             </div>
           )}
